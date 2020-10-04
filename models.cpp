@@ -7,7 +7,7 @@
 // TODO: (8) implementar el menu de guardado, (9) crear la pantalla acerca de.
 // TODO: (10) crear el menu de configurarion, (11) agregar un timer.
 // TODO: (12) agregar mensaje personalizados de error, (13) agregar robustes.
-// TODO: (14) agregar un inteligencia ramdon, (15) agregar un random para los colores.
+// TODO: (14) agregar un teligencia ramdon, (15) agregar un random para los colores.
 // TODO: (16) actualizar las tareas...
 
 // NOTE: Zona de metodos implementados
