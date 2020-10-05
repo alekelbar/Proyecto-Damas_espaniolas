@@ -55,16 +55,16 @@ private:
     string crownB = "[ N ]";
 
     // tablero de juegos
-    Tablero T = {{Black, blank, Black, blank, blank, blank, white, blank},
-                 {blank, blank, blank, Black, blank, white, blank, white},
-                 {Black, blank, Black, blank, white, blank, blank, blank},
+    Tablero T = {{Black, blank, blank, blank, blank, blank, white, blank},
+                 {blank, white, blank, white, blank, white, blank, white},
+                 {blank, blank, Black, blank, blank, blank, blank, blank},
                  {blank, Black, blank, blank, blank, blank, blank, white},
                  {Black, blank, Black, blank, Black, blank, white, blank},
                  {blank, Black, blank, white, blank, white, blank, blank},
-                 {Black, blank, Black, blank, blank, blank, white, blank},
-                 {blank, Black, blank, blank, blank, white, blank, white}};
+                 {Black, blank, Black, white, blank, white, white, blank},
+                 {blank, Black, blank, blank, crownB, white, blank, white}};
 
-    // coordenadas (altura(v) y largo(h))
+    // coordenadas (horizontal(filas) y verticales(columnas))
     int filas1, colums1, filas2, colums2;
 
     // logica del juego
@@ -76,17 +76,29 @@ public:
     void toCrown();
 
     // logica de movimiento de fichas negras
-    bool blackMovement(int, int, int, int);
+    bool blackMovement();
 
     // administra las repeticiones de turno negra.
     void blackTurn();
 
     // logica de movimiento de fichas blancas
-    bool whiteMovement(int, int, int, int);
+    bool whiteMovement();
 
     // administra las repeticiones de turno blancas
     void whiteTurn();
 
     // logica del movimiento de una reina negra
-    bool crownBMovement(int, int, int, int);
+    bool crownBMovement();
+
+    // valida los limites del arreglo
+    bool validateLimits();
+
+    // se encarga de comer fichas negras y si se puede comer otra repetir
+    void canEatBlacks();
+
+    // se encarga de comer fichas blancas y si es posible comer otra repetir
+    void canEatWhites();
+
+    // se encarga de comer fichas blancas y de administrar un posible repeticion de turno
+    void cronwCanEatWhites();
 };
