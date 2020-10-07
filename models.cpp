@@ -1,4 +1,5 @@
 #include "Structure.h"
+#include <cctype>
 
 // NOTE: tareas
 // TODO: (1) movimiento de reinas blancas/negras, (2) agregar el modo dificil con reglas.
@@ -7,7 +8,7 @@
 // TODO: (8) implementar el menu de guardado, (9) crear la pantalla acerca de.
 // TODO: (10) crear el menu de configurarion, (11) agregar un timer.
 // TODO: (12) agregar mensaje personalizados de error, (13) agregar robustes.
-// TODO: (14) agregar un teligencia ramdon, (15) agregar un random para los colores.
+// TODO: (14) agregar un inteligencia ramdon, (15) agregar un random para los colores.
 // TODO: (16) aplicar optimizaciones, (17) actualizar las tareas...
 
 // NOTE: Zona de metodos implementados
@@ -15,7 +16,17 @@
 // muestra el tablero
 void Table::toShow()
 {
-	cout << "     0     1     2     3     4     5     6     7 \n\n";
+	cout << data;
+	if (isWhite)
+	{
+		cout << "Fichas blancas comidas: " << whites << endl;
+	}
+	else
+	{
+		cout << "Fichas negras comidas: " << blacks << endl;
+	}
+
+	cout << "     0     1     2     3     4     5     6     7 \n";
 	for (int i = 0; i < 8; i++)
 	{
 		cout << i << " ";
@@ -60,10 +71,11 @@ bool Table::blackMovement()
 	// despejar la probabilidad de que se salga de la matriz.
 	if (!validateLimits())
 	{
-
 		// si la coordenada objetivo es invalida, entonces
 		// el movimiento no es valido
 		cout << badMovement;
+		cin.ignore(256, '\n');
+		getchar();
 		return false;
 	}
 	//necesito mover una ficha negra, que se mueva en diagonal, y que se mueva de manera frontal y
@@ -75,6 +87,7 @@ bool Table::blackMovement()
 	else
 	{
 		cout << badMovement;
+		getchar();
 	}
 	return true;
 }
@@ -82,20 +95,44 @@ bool Table::blackMovement()
 // administra el turno de fichas negras.
 void Table::blackTurn()
 {
-	system("clear");
+	isWhite = false; //cambia de turno
 	toCrown();
-	cout << data;
 	// apartir de aca se muestran datos del juego
-	cout << "Fichas blancas comidas: " << whites << endl;
 	toShow();
-	cout << "¿Que ficha ** NEGRA ** movera? Coordenadas--> ";
-	cin >> filas1 >> colums1;
-	cin.ignore(256, '\n');
-	cout << " ¿A donde movera? Coordenadas--> ";
-	cin >> filas2 >> colums2;
 
-	cout << " filas1 y colums1: " << filas1 << "," << colums1 << endl; //DEBUG
-	cout << " filas2 y colums2: " << filas2 << "," << colums2 << endl; //DEBUG
+	cout << "¿Que ficha ** NEGRA ** movera? Coordenadas--> ";
+
+	cin >> filas1 >> colums1;
+	aux1 = T[filas1][colums1];
+	T[filas1][colums1] = "[i'm]";
+
+	system("clear");
+	toShow();
+
+	cout << " ¿A donde movera? Coordenadas--> ";
+
+	cin >> filas2 >> colums2;
+	if (filas1 == filas2 && colums1 == colums2)
+	{
+		T[filas1][colums1] = aux1;
+		cout << badMovement;
+		cin.ignore(256, '\n');
+		getchar();
+		return;
+	}
+	aux2 = T[filas2][colums2];
+	T[filas2][colums2] = "[Igo]";
+
+	system("clear");
+	toShow();
+
+	cout << contin;
+	cin.ignore(256, '\n');
+	getchar();
+
+	T[filas1][colums1] = aux1;
+	T[filas2][colums2] = aux2;
+
 	if (T[filas1][colums1] == Black)
 	{
 		blackMovement();
@@ -106,7 +143,8 @@ void Table::blackTurn()
 	}
 	else
 	{
-		cout << "Esta moviendo la pieza incorrecta." << endl;
+		system("clear");
+		cout << lossTurn << endl;
 	}
 
 	toShow();
@@ -124,8 +162,9 @@ bool Table::whiteMovement()
 	{
 		// si la coordenada objetivo es invalida, entonces
 		// el movimiento no es valido
-		cout << "entro al primero";
 		cout << badMovement;
+		cin.ignore(256, '\n');
+		getchar();
 		return false;
 	}
 	// donde estoy: debe ser una ficha blanca, debe moverse en diagonal y hacia su frente.
@@ -139,8 +178,8 @@ bool Table::whiteMovement()
 	}
 	else
 	{
-		cout << "entro al ultimo";
 		cout << badMovement;
+		getchar();
 	}
 	return true;
 }
@@ -148,22 +187,57 @@ bool Table::whiteMovement()
 //administra el turno de fichas blancas.
 void Table::whiteTurn()
 {
-	system("clear");
+	isWhite = true;
+
 	toCrown();
-	cout << data;
-	// apartir de aca se muestran estadisticas.
-	cout << "Fichas negras comidas: " << whites << endl;
+	// apartir de aca se muestran datos.
 	toShow();
+
 	cout << "¿Que ficha ** BLANCA ** movera? Coordenadas--> ";
 	cin >> filas1 >> colums1;
-	cin.ignore(256, '\n');
-	cout << " ¿A donde movera? Coordenadas--> ";
-	cin >> filas2 >> colums2;
 
-	cout << " filas1 y colums1: " << filas1 << "," << colums1 << endl; //DEBUG
-	cout << " filas2 y colums2: " << filas2 << "," << colums2 << endl; //DEBUG
-	whiteMovement();
+	aux1 = T[filas1][colums1];
+	T[filas1][colums1] = "[i'm]";
+
+	system("clear");
 	toShow();
+
+	cout << " ¿A donde movera? Coordenadas--> ";
+
+	cin >> filas2 >> colums2;
+	if (filas1 == filas2 && colums1 == colums2)
+	{
+		T[filas1][colums1] = aux1;
+		cout << badMovement;
+		cin.ignore(256, '\n');
+		getchar();
+		return;
+	}
+	aux2 = T[filas2][colums2];
+	T[filas2][colums2] = "[Igo]";
+
+	system("clear");
+	toShow();
+
+	cout << contin;
+	cin.ignore(256, '\n');
+	getchar();
+
+	T[filas1][colums1] = aux1;
+	T[filas2][colums2] = aux2;
+
+	if (T[filas1][colums1] == white)
+	{
+		whiteMovement();
+	}
+	else if (T[filas1][colums1] == crownW)
+	{
+		crownWMovement();
+	}
+	else
+	{
+		cout << lossTurn << endl;
+	}
 }
 
 // administra el movimiento y comidas basicas de reinas negras
@@ -190,6 +264,32 @@ bool Table::crownBMovement()
 		cout << "entro al primer if" << endl;
 
 		cronwCanEatWhites();
+	}
+	return false;
+}
+
+bool Table::crownWMovement()
+{
+	toCrown();
+	// filas1,colums1 cual muevo
+	// filas2,colums2 donde la muevo
+
+	// despejar la probabilidad de que se salga de la matriz.
+	if (!validateLimits())
+	{
+		cout << "Entro al area de limites" << endl;
+		// si la coordenada objetivo es invalida, entonces
+		// el movimiento no es valido
+		cout << badMovement;
+		return false;
+	}
+	/* debe ser una reina blanca, moverse en diagonal, y donde se mueva, 
+	debe de esta vacio, siempre.*/
+	if (T[filas1][colums1] == crownW && filas2 != filas1 && T[filas2][colums2] == blank)
+	{ //formas de movimiento
+		cout << "entro al primer if" << endl;
+
+		cronwCanEatBlacks();
 	}
 	return false;
 }
@@ -233,7 +333,6 @@ void Table::canEatBlacks()
 	bool band = false;
 	if (colums2 + 1 != colums1)
 	{
-
 		// la coordenada aciende
 
 		if (filas2 < filas1)
@@ -279,8 +378,134 @@ void Table::canEatBlacks()
 
 			if (hardmode)
 			{
+				int superior = 0, inferior = 0;
 				// TODO: poner a comer automaticamente
-				whiteTurn();
+				cout << "HARMODE: Activo, turno automatico.\n";
+
+				// diagonal superior izquierda
+				for (int i = 1; i <= 3; i += 2)
+				{
+
+					if ((T[filas2 - i][colums2 - i] == Black || T[filas2 - i][colums2 - i] == crownB) &&
+						(T[filas2 - (i + 1)][colums2 - (i + 1)] == blank))
+					{
+						superior++;
+						//ZONA DE DEBUG
+						cout << "Filas y columnas: " << filas2 << "," << colums2 << endl;
+						cout << "valor del iterador: " << i << endl;
+						cout << "primera condicion: " << (T[filas2 - i][colums2 - i] == Black) << endl;
+						cout << "segunda condicion: " << (T[filas2 - (i + 1)][colums2 - (i + 1)] == blank) << endl;
+
+						cout << "primera condicion grafica: " << (T[filas2 - i][colums2 - i]) << endl;
+						cout << "segunda condicion grafica: " << (T[filas2 - (i + 1)][colums2 - (i + 1)]) << endl;
+						cout << "se les va restar: " << (i + 1) << endl;
+
+						cout << "valor de superior: " << superior << endl;
+						//ZONA DE DEBUG
+					}
+				}
+				//diagonal inferior izquierda
+				for (int i = 1; i <= 3; i += 2)
+				{
+					if ((T[filas2 + i][colums2 - i] == Black || T[filas2 + i][colums2 - i] == crownB) &&
+						T[filas2 + (i + 1)][colums2 - (i + 1)] == blank)
+					{
+						inferior++;
+						//ZONA DE DEBUG
+						cout << "Filas y columnas: " << filas2 << "," << colums2 << endl;
+						cout << "valor del iterador: " << i << endl;
+						cout << "primera condicion: " << (T[filas2 + i][colums2 - i] == Black) << endl;
+						cout << "segunda condicion: " << (T[filas2 + (i + 1)][colums2 - (i + 1)] == blank) << endl;
+
+						cout << "primera condicion grafica: " << (T[filas2 + i][colums2 - i]) << endl;
+						cout << "segunda condicion grafica: " << (T[filas2 + (i + 1)][colums2 - (i + 1)]) << endl;
+						cout << "se les va restar: " << (i + 1) << endl;
+
+						cout << "valor de superior: " << inferior << endl;
+						//ZONA DE DEBUG
+					}
+				}
+				if (inferior == superior)
+				{
+					cout << "las opciones a comer son identicas, eliga usted.\n";
+					whiteTurn();
+				}
+				else if (superior > inferior)
+				{
+					int opc;
+					cout << hardmodeMsj;
+					cin >> opc;
+
+					if (opc)
+					{
+						if (superior < 2)
+						{
+							// una diagonal en blanco, dos es donde cae mi ficha, y de
+							// donde partio, en blanco.
+							T[filas2 - 1][colums2 - 1] = blank;
+							T[filas2 - 2][colums2 - 2] = white;
+							T[filas2][colums2] = blank;
+						}
+						else
+						{
+							// una diagonal en blanco, dos es donde cae mi ficha, y de
+							// donde partio, en blanco.
+							T[filas2 - 1][colums2 - 1] = blank;
+							T[filas2 - 2][colums2 - 2] = white;
+							T[filas2][colums2] = blank;
+
+							// tres diagonales arriba, en blanco, 4 es donde cae mi ficha, y 2
+							// (donde cayo antes) en blanco.
+							T[filas2 - 3][colums2 - 3] = blank;
+							T[filas2 - 4][colums2 - 4] = white;
+							T[filas2 - 2][colums2 - 2] = blank;
+						}
+					}
+					else
+					{
+						cout << penalty;
+						T[filas2][colums2] = blank;
+						whites++;
+					}
+				}
+				else
+				{
+					int opc;
+					cout << hardmodeMsj;
+					cin >> opc;
+
+					if (opc)
+					{
+						if (inferior < 2)
+						{
+							// una diagonal en blanco, dos es donde cae mi ficha, y de
+							// donde partio, en blanco.
+							T[filas2 + 1][colums2 - 1] = blank;
+							T[filas2 + 2][colums2 - 2] = white;
+							T[filas2][colums2] = blank;
+						}
+						else
+						{
+							// una diagonal en blanco, dos es donde cae mi ficha, y de
+							// donde partio, en blanco.
+							T[filas2 + 1][colums2 - 1] = blank;
+							T[filas2 + 2][colums2 - 2] = white;
+							T[filas2][colums2] = blank;
+
+							// tres diagonales arriba, en blanco, 4 es donde cae mi ficha, y 2
+							// (donde cayo antes) en blanco.
+							T[filas2 + 3][colums2 - 3] = blank;
+							T[filas2 + 4][colums2 - 4] = white;
+							T[filas2 + 2][colums2 - 2] = blank;
+						}
+					}
+					else
+					{
+						cout << penalty;
+						T[filas2][colums2] = blank;
+						whites++;
+					}
+				}
 			}
 			else
 			{
@@ -296,8 +521,9 @@ void Table::canEatBlacks()
 		}
 		if (!band)
 		{
-			cout << "no entro aca";
 			cout << badMovement;
+			cin.ignore(256, '\n');
+			getchar();
 		}
 	}
 	else
@@ -377,6 +603,8 @@ void Table::canEatWhites()
 		if (!band)
 		{
 			cout << badMovement;
+			cin.ignore(256, '\n');
+			getchar();
 		}
 	}
 	else
@@ -386,7 +614,7 @@ void Table::canEatWhites()
 	}
 }
 
-// aplica la logica necesaria para que la reina coma TODO: que repita comida
+// aplica la logica necesaria para la comida de la reina TODO: que repita comida
 void Table::cronwCanEatWhites()
 {
 	bool band = false;
@@ -448,16 +676,97 @@ void Table::cronwCanEatWhites()
 	}
 	else
 	{
+		T[filas1][colums1] = blank;
+		T[filas2][colums2] = crownB;
 	}
 }
 
+// aplica la logica necesaria para la comida de la reinas TODO: que repita comida
+void Table::cronwCanEatBlacks()
+{
+	bool band = false;
+
+	if (colums2 - 1 != colums1 || colums2 + 1 != colums1)
+	{
+		// NOTE: CONDICIONAL REVISADO
+		// diagonal, superior derecha
+		//TODO: agregar tambien las reinas en el condicional
+		if (filas2 != filas1 && colums2 > colums1 && !(T[filas1 - 1][colums1 + 1] == Black && colums2 - colums2 > 2))
+		{
+			if (T[filas2 + 1][colums2 - 1] == Black || T[filas2 + 1][colums2 - 1] == crownB)
+			{
+				T[filas2 + 1][colums2 - 1] = blank;
+				T[filas2][colums2] = crownW;
+				T[filas1][colums1] = blank;
+				band = true;
+			}
+		}
+		// NOTE: CONDICIONAL REVISADO
+		// diagonal superior izquierda
+		if (filas2 != filas1 && colums2 > colums1 && !(T[filas1 - 1][colums1 + 1] == Black && colums1 - colums2 > 2))
+		{
+			cout << colums2 - colums1 << endl;
+			if (T[filas2 + 1][colums2 + 1] == Black || T[filas2 + 1][colums2 + 1] == crownB)
+			{
+				T[filas2 + 1][colums2 + 1] = blank;
+				T[filas2][colums2] = crownW;
+				T[filas1][colums1] = blank;
+				band = true;
+			}
+		}
+		// NOTE: CONDICIONAL REVISADO
+		//diagonal inferior derecha
+		if (filas2 != filas1 && colums2 < colums1 && !(T[filas1 - 1][colums1 + 1] == Black && colums2 - colums1 > 2))
+		{
+			if (T[filas2 - 1][colums2 - 1] == Black || T[filas2 - 1][colums2 - 1] == crownB)
+			{
+				T[filas2 - 1][colums2 - 1] = blank;
+				T[filas2][colums2] = crownW;
+				T[filas1][colums1] = blank;
+				band = true;
+			}
+		}
+		// NOTE: CONDICIONAL REVISADO
+		// diagonal inferior izquierda
+		if (filas2 != filas1 && colums2 < colums1 && !(T[filas1 + 1][colums1 - 1] == Black && colums1 - colums2 > 2))
+		{
+			if (T[filas2 - 1][colums2 + 1] == Black || T[filas2 - 1][colums2 + 1] == crownB)
+			{
+				T[filas2 - 1][colums2 + 1] = blank;
+				T[filas2][colums2] = crownW;
+				T[filas1][colums1] = blank;
+				band = true;
+			}
+		}
+		if (!band)
+		{
+			cout << badMovement;
+		}
+	}
+	else
+	{
+		cout << "entro al condicional" << endl;
+		T[filas1][colums1] = blank;
+		T[filas2][colums2] = crownW;
+	}
+}
+
+// bucle principal del juego
+void Table::play()
+{
+	while (true)
+	{
+		system("clear");
+		whiteTurn();
+		blackTurn();
+	}
+}
 // NOTE: zona de metodos no implementados.
 
 // NOTE: main de pruebas
 int main(int argc, char const *argv[])
 {
 	Table t;
-	t.blackTurn();
-
+	t.play();
 	return 0;
 }
