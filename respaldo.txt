@@ -1,0 +1,98 @@
+Este documento respalda distintas formas de probar la movilidad del juego
+
+    movilidad ordinaria:
+
+    prueba libre
+    Tablero T = {{Black, blank, Black, blank, blank, blank, white, blank},
+                {blank, Black, blank, blank, blank, white, blank, white},
+                {Black, blank, Black, blank, blank, blank, white, blank},
+                {blank, Black, blank, blank, blank, white, blank, white},
+                {Black, blank, Black, blank, blank, blank, white, blank},
+                {blank, Black, blank, blank, blank, white, blank, white},
+                {Black, blank, Black, blank, blank, blank, white, blank},
+                {blank, Black, blank, blank, blank, white, blank, white}};
+
+    movilidad automatica de fichas negras:
+    
+    probar apartir de 0,0 y 2,2
+    Tablero T = {{Black, crownW, Black, blank, blank, Black, blank, blank},
+                 {blank, white, Black, white, white, white, white, white},
+                 {Black, blank, blank, blank, blank, blank, blank, blank},
+                 {blank, Black, white, Black, white, white, blank, white},
+                 {Black, blank, crownB, blank, blank, blank, blank, blank},
+                 {blank, blank, blank, blank, blank, blank, blank, white},
+                 {Black, white, Black, blank, Black, blank, Black, blank},
+                 {crownB, Black, blank, blank, blank, white, blank, white}};
+
+    movilidad automatica de fichas blancas:
+    
+    probar apartir de 0,7 y 2,5
+    Tablero T = {{Black, crownW, Black, blank, blank, Black, blank, white},
+                 {Black, white, Black, white, Black, white, Black, white},
+                 {Black, blank, blank, blank, blank, blank, blank, blank},
+                 {blank, Black, white, white, white, white, blank, white},
+                 {Black, blank, crownB, blank, blank, blank, blank, blank},
+                 {blank, blank, blank, blank, blank, blank, blank, white},
+                 {Black, white, Black, blank, Black, blank, Black, blank},
+                 {crownB, Black, blank, blank, blank, white, blank, white}};
+
+    movilidad automatica de reinas negras(derecha a izquierda):
+
+    probar apartir de 7,0 y 5,2
+    Tablero T = {{Black, crownW, blank, Black, blank, Black, blank, Black},
+                 {Black, white, blank, white, Black, white, blank, white},
+                 {Black, white, blank, white, Black, white, blank, Black},
+                 {blank, Black, white, white, blank, white, blank, white},
+                 {Black, white, crownB, Black, blank, Black, blank, blank},
+                 {blank, blank, blank, blank, Black, blank, blank, white},
+                 {Black, white, Black, Black, Black, blank, Black, blank},
+                 {crownB, Black, blank, blank, blank, white, blank, white}};
+
+    movilidad automatica de reinas negras(izquierda a derecha):
+
+    probar apartir de 7,7 a 5,5
+    Tablero T = {{Black, crownW, blank, blank, Black, Black, blank, white},
+                 {Black, white, Black, white, Black, blank, Black, white},
+                 {Black, blank, blank, blank, Black, blank, white, blank},
+                 {blank, Black, white, white, Black, white, blank, blank},
+                 {Black, blank, crownB, blank, Black, blank, white, blank},
+                 {blank, blank, white, blank, Black, blank, blank, white},
+                 {Black, blank, Black, blank, Black, blank, white, blank},
+                 {crownB, Black, blank, blank, blank, white, blank, crownB}};
+
+    movilidad automatica de reinas blancas(derecha a izquierda):
+
+    probar apartir de 7,0 a 5,2
+     Tablero T = {{Black, crownW, blank, white, white, Black, blank, white},
+                 {Black, white, blank, white, white, blank, Black, white},
+                 {Black, Black, blank, white, white, blank, Black, blank},
+                 {blank, Black, white, white, Black, white, blank, blank},
+                 {Black, Black, crownB, white, white, blank, Black, blank},
+                 {blank, blank, blank, white, white, blank, blank, white},
+                 {Black, Black, Black, white, white, blank, Black, blank},
+                 {crownW, Black, blank, blank, blank, white, blank, crownW}};
+
+    movilidad automatica de reinas blancas(izquierda a derecha):
+
+    probar apartir de 7,7 a 5,5
+    Tablero T = {{Black, crownW, blank, blank, white, Black, blank, white},
+                 {Black, white, Black, white, white, blank, Black, white},
+                 {Black, blank, blank, blank, white, blank, Black, blank},
+                 {blank, Black, white, white, Black, white, blank, blank},
+                 {Black, blank, crownB, blank, white, blank, Black, blank},
+                 {blank, blank, white, blank, white, blank, blank, white},
+                 {Black, blank, Black, blank, white, blank, Black, blank},
+                 {crownB, Black, blank, blank, blank, white, blank, crownW}};
+
+    fin de partida por imposibilidad de mover fichas:
+
+    probar apartir de ninguna lado, no va poder mover es el chiste:
+    Tablero T = {{white, blank, blank, blank, Black, blank, Black, blank},
+                 {blank, white, blank, Black, blank, Black, blank, Black},
+                 {white, blank, Black, blank, Black, blank, Black, blank},
+                 {blank, blank, blank, crownW, blank, Black, blank, Black},
+                 {white, blank, Black, blank, Black, blank, Black, blank},
+                 {blank, white, blank, Black, blank, Black, blank, Black},
+                 {white, blank, blank, blank, Black, blank, Black, blank},
+                 {blank, blank, blank, blank, blank, Black, blank, Black}};
+
