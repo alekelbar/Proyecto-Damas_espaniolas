@@ -41,8 +41,10 @@ void Table::cronwCanEatBlacks()
                 T[filas2 + 1][colums2 - 1] = blank;
                 band = true;
                 MessageToCpuWIsMovement();
-                automaticPlayCronwWMovement();
+                cleanToShow();
                 blacks--;
+                if (!automaticPlayCronwWMovement())
+                    return;
             }
         }
         else
@@ -64,6 +66,7 @@ void Table::cronwCanEatBlacks()
                 T[filas2][colums2] = crownW;
                 band = true;
                 MessageToCpuWIsMovement();
+                cleanToShow();
             }
         }
     }
@@ -93,8 +96,10 @@ void Table::cronwCanEatBlacks()
                 T[filas2 - 1][colums2 - 1] = blank;
                 band = true;
                 MessageToCpuWIsMovement();
-                automaticPlayCronwWMovement();
+                cleanToShow();
                 blacks--;
+                if (!automaticPlayCronwWMovement())
+                    return;
             }
         }
         else
@@ -116,6 +121,7 @@ void Table::cronwCanEatBlacks()
                 T[filas2][colums2] = crownW;
                 band = true;
                 MessageToCpuWIsMovement();
+                cleanToShow();
             }
         }
     }
@@ -145,8 +151,10 @@ void Table::cronwCanEatBlacks()
                 T[filas2 + 1][colums2 + 1] = blank;
                 band = true;
                 MessageToCpuWIsMovement();
-                automaticPlayCronwWMovement();
+                cleanToShow();
                 blacks--;
+                if (!automaticPlayCronwWMovement())
+                    return;
             }
         }
         else
@@ -168,6 +176,7 @@ void Table::cronwCanEatBlacks()
                 T[filas2][colums2] = crownW;
                 band = true;
                 MessageToCpuWIsMovement();
+                cleanToShow();
             }
         }
     }
@@ -197,8 +206,10 @@ void Table::cronwCanEatBlacks()
                 T[filas2 - c][colums2 + c] = blank;
                 band = true;
                 MessageToCpuWIsMovement();
-                automaticPlayCronwWMovement();
+                cleanToShow();
                 blacks--;
+                if (!automaticPlayCronwWMovement())
+                    return;
             }
         }
         else
@@ -220,6 +231,7 @@ void Table::cronwCanEatBlacks()
                 T[filas2][colums2] = crownW;
                 band = true;
                 MessageToCpuWIsMovement();
+                cleanToShow();
             }
         }
     }
@@ -230,7 +242,7 @@ void Table::cronwCanEatBlacks()
 }
 
 // se encarga del movimiento automatico de las fichas blancas
-void Table::automaticPlayCronwWMovement()
+bool Table::automaticPlayCronwWMovement()
 {
     int c = 1;
     // despues de 20 minutos de analis se concluye que la maxima cantidad de fichas consecutivas que se pueden comer son 2
@@ -363,8 +375,9 @@ void Table::automaticPlayCronwWMovement()
         if (hardmode || cpu == "blancas")
         {
             int opc;
-            cout << hardmodeMsj;
-            cin >> opc;
+
+            opc = validateANumber(hardmodeMsj, configureError);
+
             if (opc)
             {
 
@@ -522,7 +535,8 @@ void Table::automaticPlayCronwWMovement()
             {
                 cout << penalty;
                 T[filas2][colums2] = blank;
-                return;
+                cleanToShow();
+                return 0;
             }
 
             // si no esta activo el hardmode
@@ -535,9 +549,13 @@ void Table::automaticPlayCronwWMovement()
             {
                 whiteTurn();
             }
+            else
+            {
+                return 0;
+            }
         }
     }
-    return;
+    return 1;
 }
 
 // logica necesaria para comer fichas negras
@@ -563,8 +581,10 @@ void Table::canEatBlacks()
                 MessageToCpuWIsMovement();
                 band = true;
                 blacks--;
+                cleanToShow();
 
-                AutomaticPlayWhite();
+                if (!AutomaticPlayWhite())
+                    return;
             }
             // si esta bajando
         }
@@ -579,8 +599,10 @@ void Table::canEatBlacks()
                 MessageToCpuWIsMovement();
                 band = true;
                 blacks--;
+                cleanToShow();
 
-                AutomaticPlayWhite();
+                if (!AutomaticPlayWhite())
+                    return;
             }
         }
         if (!band)
@@ -597,6 +619,7 @@ void Table::canEatBlacks()
         T[filas2][colums2] = white;
         T[filas1][colums1] = blank;
         MessageToCpuWIsMovement();
+        cleanToShow();
     }
     else
     {
@@ -608,7 +631,7 @@ void Table::canEatBlacks()
 }
 
 //administra el turno automatico de las fichas blancas
-void Table::AutomaticPlayWhite()
+bool Table::AutomaticPlayWhite()
 {
     int opc;
     // existe otra ficha que comer?
@@ -703,29 +726,7 @@ void Table::AutomaticPlayWhite()
                     filas1 = filas2;
                     colums1 = colums2;
                     // ahora eligirada donde se movera
-
-                    string numero;
-                    bool isvalidate = false;
-                    while (!isvalidate)
-                    {
-                        try
-                        {
-                            cout << youDecide;
-                            cin >> numero;
-                            isvalidate = ValidateData(numero);
-                            if (!isvalidate)
-                            {
-                                throw numero;
-                            }
-                        }
-                        catch (string e)
-                        {
-                            cout << configureError;
-                            sleep(2);
-                            cleanToShow();
-                        }
-                    }
-                    opc = atoi(numero.c_str());
+                    opc = validateANumber(youDecide, configureError);
                 }
                 if (opc == 1)
                 {
@@ -746,8 +747,9 @@ void Table::AutomaticPlayWhite()
                     cout << penalty;
                     T[filas1][colums1] = blank;
                     whites--;
+                    cleanToShow();
                     sleep(2);
-                    return;
+                    return 0;
                 }
             }
             else if (superior > inferior)
@@ -760,31 +762,8 @@ void Table::AutomaticPlayWhite()
                 }
                 else
                 {
-                    string numero;
-                    bool isvalidate = false;
-                    while (!isvalidate)
-                    {
-                        try
-                        {
-                            cout << hardmodeMsj;
-                            cin >> numero;
-                            isvalidate = ValidateData(numero);
-                            if (!isvalidate)
-                            {
-                                throw numero;
-                            }
-                        }
-                        catch (string e)
-                        {
-                            cout << configureError;
-                            cleanToShow();
-                            sleep(2);
-                        }
-                    }
-
-                    opc = atoi(numero.c_str());
+                    opc = validateANumber(hardmodeMsj, configureError);
                 }
-
                 if (opc)
                 {
                     // una diagonal en blanco, dos es donde cae mi ficha, y de
@@ -852,8 +831,13 @@ void Table::AutomaticPlayWhite()
             {
                 whiteTurn();
             }
+            else
+            {
+                return 0;
+            }
         }
     }
+    return 1;
 }
 
 // logica necesaria para mover una ficha blanca coronada
@@ -1084,6 +1068,7 @@ void Table::whiteTurn()
             movements--;
             cleanToShow();
             cout << timeIsUp;
+            sleep(2);
         }
     }
 }
@@ -1118,6 +1103,10 @@ bool Table::whiteMovement()
 // restriccion al comer
 bool Table::eatRestricctionWhite()
 {
+    if (!hardmode)
+    {
+        return false;
+    }
     time_t restricted, restricted2;
     int count = 0;
     int opc = 0;

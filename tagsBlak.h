@@ -1,7 +1,7 @@
 #include "Structure.h"
 
 // movimiento automatico de las reinas negras
-void Table::automaticPlayCronwBMovement()
+bool Table::automaticPlayCronwBMovement()
 {
     int c = 1;
     // despues de 20 minutos de analis se concluye que la maxima cantidad de fichas consecutivas que se pueden comer son 2
@@ -142,8 +142,7 @@ void Table::automaticPlayCronwBMovement()
             else
             {
 
-                cout << hardmodeMsj;
-                cin >> opc;
+                opc = validateANumber(hardmodeMsj, configureError);
             }
             if (opc)
             {
@@ -301,8 +300,10 @@ void Table::automaticPlayCronwBMovement()
             else
             {
                 cout << penalty;
+                sleep(2);
+                cleanToShow();
                 T[filas2][colums2] = blank;
-                return;
+                return 0;
             }
 
             // si no esta activo el hardmode
@@ -315,9 +316,13 @@ void Table::automaticPlayCronwBMovement()
             {
                 blackTurn();
             }
+            else
+            {
+                return 0;
+            }
         }
     }
-    return;
+    return 1;
 }
 
 // maneja la logica del movimiento de fichas negras.
@@ -557,6 +562,7 @@ void Table::blackTurn()
             cleanToShow();
             movements--;
             cout << timeIsUp;
+            sleep(2);
         }
     }
 }
@@ -622,7 +628,8 @@ void Table::canEatWhites()
                 whites--;
                 // Esencialmente, en caso de ser posible seguir "comiendo" el jugador debe realizar una accion
                 // en dependencia de su modo de juego, el siguiente metodo realiza tal labor.
-                AutomaticPlayBlack();
+                if (!AutomaticPlayBlack())
+                    return;
             }
 
         } // la coordenada deciende
@@ -639,7 +646,8 @@ void Table::canEatWhites()
                 whites--;
                 // Esencialmente, en caso de ser posible seguir "comiendo" el jugador debe realizar una accion
                 // en dependencia de su modo de juego, el siguiente metodo realiza tal labor.
-                AutomaticPlayBlack();
+                if (!AutomaticPlayBlack())
+                    return;
             }
         }
 
@@ -666,13 +674,13 @@ void Table::canEatWhites()
     {
         movements--;
         MessageIsABadMovement();
-        sleep(2);
         cleanToShow();
+        sleep(2);
     }
 }
 
 // administra el automatico de las negras
-void Table::AutomaticPlayBlack()
+bool Table::AutomaticPlayBlack()
 
 // @Perspectiva logica basica: Desde una perspectiva logica, superficial el analisis de la continuidad del turno
 // solo depende de que sea posible comer otra ficha. En dependencia de la ficha en cuestion se analiza
@@ -798,12 +806,14 @@ void Table::AutomaticPlayBlack()
                     filas2 = filas1 - 2;
                     colums2 = colums1 + 2;
                     blackMovement();
+                    cleanToShow();
                 }
                 else if (opc == 2)
                 {
                     filas2 = filas1 + 2;
                     colums2 = colums1 + 2;
                     blackMovement();
+                    cleanToShow();
                 }
                 else
                 {
@@ -811,8 +821,9 @@ void Table::AutomaticPlayBlack()
                     cout << penalty;
                     T[filas1][colums1] = blank;
                     blacks--;
+                    cleanToShow();
                     sleep(2);
-                    return;
+                    return 0;
                 }
             }
 
@@ -904,8 +915,13 @@ void Table::AutomaticPlayBlack()
             {
                 blackTurn();
             }
+            else
+            {
+                return 0;
+            }
         }
     }
+    return 1;
 }
 
 // se encarga de las comidas de las fichas coronadas negras
@@ -947,8 +963,10 @@ void Table::cronwCanEatWhites()
                 T[filas2 + 1][colums2 - 1] = blank;
                 band = true;
                 MessageToCpuBIsMovement();
-                automaticPlayCronwBMovement();
+                cleanToShow();
                 whites--;
+                if (!automaticPlayCronwBMovement())
+                    return;
             }
         }
         else
@@ -970,6 +988,7 @@ void Table::cronwCanEatWhites()
                 T[filas2][colums2] = crownB;
                 band = true;
                 MessageToCpuBIsMovement();
+                cleanToShow();
             }
         }
     }
@@ -999,8 +1018,10 @@ void Table::cronwCanEatWhites()
                 T[filas2 - 1][colums2 - 1] = blank;
                 band = true;
                 MessageToCpuBIsMovement();
-                automaticPlayCronwBMovement();
+                cleanToShow();
                 whites--;
+                if (!automaticPlayCronwBMovement())
+                    return;
             }
         }
         else
@@ -1022,6 +1043,7 @@ void Table::cronwCanEatWhites()
                 T[filas2][colums2] = crownB;
                 band = true;
                 MessageToCpuBIsMovement();
+                cleanToShow();
             }
         }
     }
@@ -1051,8 +1073,10 @@ void Table::cronwCanEatWhites()
                 T[filas2 + 1][colums2 + 1] = blank;
                 band = true;
                 MessageToCpuBIsMovement();
-                automaticPlayCronwBMovement();
+                cleanToShow();
                 whites--;
+                if (!automaticPlayCronwBMovement())
+                    return;
             }
         }
         else
@@ -1074,6 +1098,7 @@ void Table::cronwCanEatWhites()
                 T[filas2][colums2] = crownB;
                 band = true;
                 MessageToCpuBIsMovement();
+                cleanToShow();
             }
         }
     }
@@ -1103,8 +1128,10 @@ void Table::cronwCanEatWhites()
                 T[filas2 - c][colums2 + c] = blank;
                 band = true;
                 MessageToCpuBIsMovement();
-                automaticPlayCronwBMovement();
+                cleanToShow();
                 whites--;
+                if (!automaticPlayCronwBMovement())
+                    return;
             }
         }
         else
@@ -1126,6 +1153,7 @@ void Table::cronwCanEatWhites()
                 T[filas2][colums2] = crownB;
                 band = true;
                 MessageToCpuBIsMovement();
+                cleanToShow();
             }
         }
     }
@@ -1138,6 +1166,10 @@ void Table::cronwCanEatWhites()
 // restriccion de comida
 bool Table::eatRestricctionBlack()
 {
+    if (!hardmode)
+    {
+        return false;
+    }
     time_t restricted, restricted2;
     int count = 0;
     int opc = 0;

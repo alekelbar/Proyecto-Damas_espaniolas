@@ -36,11 +36,12 @@ void myPause()
     char c = 'a';
     while (c != 'c')
     {
-        cout << "\nInserte una \"c\" para continuar (*-^) -- >";
+        // cin.clear();
+        cin.ignore(256, '\n');
+        cout << endl;
+        cout << "Inserte una \"c\" para continuar (*-^) -- >";
         c = getchar();
     }
-    cin.clear();
-    cin.ignore(256, '\n');
 }
 
 // propiedades del tablero
@@ -83,7 +84,7 @@ private:
     int playing = 1;
 
     // modo con reglas
-    bool hardmode = true;
+    bool hardmode = false;
 
     // si existe un ficha chocando al movimiento debemos saberlo
     bool ficha = false;
@@ -237,14 +238,14 @@ private:
     string crownB = "[$N$]";
 
     // tablero de juego
-    Tablero T = {{Black, blank, Black, blank, blank, blank, white, blank},
-                 {blank, Black, blank, blank, blank, white, blank, white},
-                 {Black, blank, Black, blank, blank, blank, white, blank},
-                 {blank, Black, blank, blank, blank, white, blank, white},
-                 {Black, blank, Black, blank, blank, blank, white, blank},
-                 {blank, Black, blank, blank, blank, white, blank, white},
-                 {Black, blank, Black, blank, blank, blank, white, blank},
-                 {blank, Black, blank, blank, blank, white, blank, white}};
+    Tablero T = {{Black, crownW, Black, blank, blank, Black, blank, blank},
+                 {blank, white, Black, white, white, white, white, white},
+                 {Black, blank, blank, blank, blank, blank, blank, blank},
+                 {blank, Black, white, Black, white, white, blank, white},
+                 {Black, blank, crownB, blank, blank, blank, blank, blank},
+                 {blank, blank, blank, blank, blank, blank, blank, white},
+                 {Black, white, Black, blank, Black, blank, Black, blank},
+                 {crownB, Black, blank, blank, blank, white, blank, white}};
 
     // coordenadas (horizontal(filas) y verticales(columnas))
 
@@ -261,8 +262,18 @@ private:
 
     // logica del juego
 public:
+    //generar el fichero
+    Table()
+    {
+        wri.open("guardado.txt", ios::out);
+        wri.close();
+    }
+
     // mostrar los tableros de juego
     void toShow();
+
+    // false menu
+    void falseMenu();
 
     // revisa constantemente si existe una dama y en caso de exitir la corona
     void toCrown();
@@ -295,13 +306,13 @@ public:
     void canEatBlacks();
 
     // se encarga de el movimiento automatico de las fichas blancas
-    void AutomaticPlayWhite();
+    bool AutomaticPlayWhite();
 
     // se encarga de comer fichas blancas y si es posible comer otra repetir
     void canEatWhites();
 
     // juego automatico en blancas
-    void AutomaticPlayBlack();
+    bool AutomaticPlayBlack();
 
     // se encarga de comer fichas blancas y de administrar una posible repeticion de turno
     void cronwCanEatWhites();
@@ -343,10 +354,10 @@ public:
     void play();
 
     // movimiento automatico de las reinas negras
-    void automaticPlayCronwBMovement();
+    bool automaticPlayCronwBMovement();
 
     // movimiento automatico de las reinas blancas
-    void automaticPlayCronwWMovement();
+    bool automaticPlayCronwWMovement();
 
     // pantalla de acerca de
     void aboutItscreen();

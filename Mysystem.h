@@ -173,7 +173,7 @@ void Table::aboutItscreen()
 	cout << "mas significativas como el modo con reglas o el modo multijugador. \n";
 
 	cout << endl;
-	sleep(2);
+	myPause();
 	system(clean);
 
 	cout << "\t\t\t\t  ";
@@ -196,7 +196,7 @@ void Table::aboutItscreen()
 	cout << "horizontal de la ficha y el segundo '1' la coordenada vertical." << endl;
 	cout << endl
 		 << endl;
-	sleep(2);
+	myPause();
 	system(clean);
 
 	cout << "\t\t\t";
@@ -212,10 +212,10 @@ void Table::aboutItscreen()
 
 	cout << endl
 		 << endl;
-	sleep(2);
-	system(clean)
+	myPause();
+	system(clean);
 
-			cout
+	cout
 		<< "\t\t\t ";
 	cout << "Modo de Dificultad con Reglas\n\n";
 	cout << "	Este modo agrega un sistema automatico, y ciertas obligacion del jugador." << endl;
@@ -227,7 +227,7 @@ void Table::aboutItscreen()
 
 	cout << endl
 		 << endl;
-	sleep(2);
+	myPause();
 	cleanToShowMenu();
 }
 
@@ -546,13 +546,13 @@ void Table::screenConfig()
 
 	cout << endl;
 	cout << "\t\t";
-	cout << " 		      Cronometro         \n";
+	cout << " 		      Configuraciones         \n";
 	cout << "\t\t";
-	cout << " 	 ______________________________________\n";
+	cout << " 	 **************************************\n\n";
 	cout << "\t\t";
 	cout << "	    HORAS: " << h << " MINUTOS: " << m << " SEGUNDOS: " << s << "\n";
-	cout << "\t\t";
-	cout << "         ______________________________________\n";
+	cout << "\n\t\t";
+	cout << "         **************************************\n\n";
 	cout << "\t\t";
 	cout << "      Cantidad maxima de movimientos permitidos: " << movements << " \n\n";
 	cout << "\t\t";
@@ -563,7 +563,7 @@ void Table::screenConfig()
 	cout << "       modo de multijugador: " << multi;
 	cout << endl;
 	cout << endl;
-	sleep(2);
+	myPause();
 	cleanToShowMenu();
 }
 
@@ -718,198 +718,259 @@ void Table::Menu()
 	}
 }
 
+//false menu
+void Table::falseMenu()
+{
+	system(clean);
+	cout << "\t\t\t  ";
+	cout << data;
+	cout << "\t\t\t";
+	cout << "********** MENU DE SELECCION ************" << endl;
+	cout << "\t\t\t";
+	cout << "********* Jugar(1);            **********" << endl;
+	cout << "\t\t\t";
+	cout << "*******   Cargar partida(2)       *******" << endl;
+	cout << "\t\t\t";
+	cout << "*****     Ver configuraciones(3)    *****" << endl;
+	cout << "\t\t\t";
+	cout << "****      Configuraciones(4)         ****" << endl;
+	cout << "\t\t\t";
+	cout << "***       borrar Partida(5)           ***" << endl;
+	cout << "\t\t\t";
+	cout << "**        Acerca de(6)                 **" << endl;
+	cout << "\t\t\t";
+	cout << "*         Salir(7)                      *" << endl;
+	cout << "\t\t\t";
+}
+
 // limpiar y mostrar el menu
 void Table::cleanToShowMenu()
 {
 	system(clean);
-	restore();
 	Menu();
 }
 
 // metodo para configurar
 void Table::configure()
 {
-	bool validateNum = false;
-	cout << "\t\t\t";
-	cout << "## Parametros de juego ##" << endl;
-	cout << "\t\t\t";
-	cout << "TIEMPO DE PARTIDA: \n";
-
 	string numero; // para probar
-	while (!validateNum)
+	int opc = 10;
+	bool validateNum = false;
+	while (opc != 0)
 	{
-		try
+		falseMenu();
+		cout << "\n\t";
+		opc = validateANumber("Tiempo de juego(1) - Movimiento(2) - Dificultad(3) - Volver al menu(0): ", configureError);
+
+		switch (opc)
 		{
+		case 1:
+			cout << "\n\t\t\t";
+			cout << "##          Parametros de juego        ##" << endl;
 			cout << "\t\t\t";
-			cout << "HORAS: ";
-			cin >> numero;
-			validateNum = ValidateData(numero);
-			if (!validateNum)
+			cout << "              Configuraciones \n";
+			cout << "\n\t\t\t";
+			cout << "Tiempo de juego:";
+			while (!validateNum)
 			{
-				throw numero;
+				try
+				{
+					cout << "\n\n\t\t\t";
+					cout << "HORAS: ";
+					cin >> numero;
+					validateNum = ValidateData(numero);
+					if (!validateNum)
+					{
+						throw numero;
+					}
+				}
+				catch (string e)
+				{
+					cout << "\t\t\t";
+					cout << configureError;
+				}
 			}
-		}
-		catch (string e)
-		{
+			hours = atoi(numero.c_str());
+			cout << endl;
+
+			// segunda validacion!
+			validateNum = false;
+			while (!validateNum)
+			{
+				try
+				{
+					cout << "\t\t\t";
+					cout << "MINUTOS: ";
+					cin >> numero;
+					validateNum = ValidateData(numero);
+
+					if (!validateNum)
+					{
+						throw numero;
+					}
+				}
+				catch (string e)
+				{
+					cout << "\t\t\t";
+					cout << configureError;
+				}
+			}
+			minutes = atoi(numero.c_str());
+			cout << endl;
+
+			// tercera validacion
+			validateNum = false;
+			while (!validateNum)
+			{
+				try
+				{
+					cout << "\t\t\t";
+					cout << "SEGUNDOS: ";
+					cin >> numero;
+					validateNum = ValidateData(numero);
+
+					if (!validateNum)
+					{
+						throw numero;
+					}
+				}
+				catch (string e)
+				{
+					cout << "\t\t\t";
+					cout << configureError;
+				}
+			}
+			seconds = atoi(numero.c_str());
+			cout << endl;
+			break;
+		case 2:
+			falseMenu();
+			// tercera validacion
+			cout << "\n\n\t\t\t";
+			cout << "##          Parametros de juego        ##" << endl;
 			cout << "\t\t\t";
-			cout << configureError;
+			cout << "              Configuraciones \n";
+			cout << "\n\t\t\t";
+			cout << "Movimiento:";
+			validateNum = false;
+			while (!validateNum)
+			{
+				try
+				{
+					cout << "\n\t\t\t";
+					cout << "Cantidad maxima de movimientos permitidos: ";
+					cin >> numero;
+					validateNum = ValidateData(numero);
+
+					if (!validateNum)
+					{
+						throw numero;
+					}
+				}
+				catch (string e)
+				{
+					cout << "\t\t\t";
+					cout << configureError;
+				}
+			}
+			movements = atoi(numero.c_str());
+			cout << endl;
+
+			// cuarta validacion
+			validateNum = false;
+			while (!validateNum)
+			{
+				try
+				{
+					cout << "\t\t\t";
+
+					cout << "Tiempo permitido por movimiento: ";
+					cin >> numero;
+					validateNum = ValidateData(numero);
+
+					if (!validateNum)
+					{
+						throw numero;
+					}
+				}
+				catch (string e)
+				{
+					cout << "\t\t\t";
+					cout << configureError;
+				}
+			}
+			timeToMovement = atoi(numero.c_str());
+			cout << endl;
+			break;
+		case 3:
+			// quinta validacion
+			falseMenu();
+			cout << "\n\t\t\t";
+			cout << "##          Parametros de juego        ##" << endl;
+			cout << "\t\t\t";
+			cout << "              Configuraciones \n";
+			cout << "\n\t\t\t";
+			cout << "Dificultad:";
+			validateNum = false;
+			while (!validateNum)
+			{
+				try
+				{
+					cout << "\n\n\t\t\t";
+					cout << "Modo de dificultad activa(1/0): ";
+					cin >> numero;
+					validateNum = ValidateData(numero);
+
+					if (!validateNum)
+					{
+						throw numero;
+					}
+				}
+				catch (string e)
+				{
+					cout << "\t\t\t";
+					cout << configureError;
+				}
+			}
+			hardmode = atoi(numero.c_str());
+			cout << endl;
+
+			// sexta validacion
+			validateNum = false;
+			while (!validateNum)
+			{
+				try
+				{
+					cout << "\t\t\t";
+					cout << "Modo de multijugador(1/0): ";
+					cin >> numero;
+					validateNum = ValidateData(numero);
+
+					if (!validateNum)
+					{
+						throw numero;
+					}
+				}
+				catch (string e)
+				{
+					cout << "\t\t\t";
+					cout << configureError;
+				}
+			}
+			multiplayer = atoi(numero.c_str());
+			cout << endl;
+			break;
+
+		case 0:
+			cleanToShowMenu();
+			break;
+
+		default:
+			break;
 		}
 	}
-	this->hours = atoi(numero.c_str());
-	cout << endl;
-
-	// segunda validacion!
-	validateNum = false;
-	while (!validateNum)
-	{
-		try
-		{
-			cout << "\t\t\t";
-			cout << "MINUTOS: ";
-			cin >> numero;
-			validateNum = ValidateData(numero);
-
-			if (!validateNum)
-			{
-				throw numero;
-			}
-		}
-		catch (string e)
-		{
-			cout << "\t\t\t";
-			cout << configureError;
-		}
-	}
-	minutes = atoi(numero.c_str());
-	cout << endl;
-
-	// tercera validacion
-	validateNum = false;
-	while (!validateNum)
-	{
-		try
-		{
-			cout << "\t\t\t";
-			cout << "SEGUNDOS: ";
-			cin >> numero;
-			validateNum = ValidateData(numero);
-
-			if (!validateNum)
-			{
-				throw numero;
-			}
-		}
-		catch (string e)
-		{
-			cout << "\t\t\t";
-			cout << configureError;
-		}
-	}
-	seconds = atoi(numero.c_str());
-	cout << endl;
-
-	// tercera validacion
-	validateNum = false;
-	while (!validateNum)
-	{
-		try
-		{
-			cout << "\t\t\t";
-			cout << "Cantidad maxima de movimientos permitidos: ";
-			cin >> numero;
-			validateNum = ValidateData(numero);
-
-			if (!validateNum)
-			{
-				throw numero;
-			}
-		}
-		catch (string e)
-		{
-			cout << "\t\t\t";
-			cout << configureError;
-		}
-	}
-	movements = atoi(numero.c_str());
-	cout << endl;
-
-	// cuarta validacion
-	validateNum = false;
-	while (!validateNum)
-	{
-		try
-		{
-			cout << "\t\t\t";
-
-			cout << "Tiempo permitido por movimiento: ";
-			cin >> numero;
-			validateNum = ValidateData(numero);
-
-			if (!validateNum)
-			{
-				throw numero;
-			}
-		}
-		catch (string e)
-		{
-			cout << "\t\t\t";
-			cout << configureError;
-		}
-	}
-	timeToMovement = atoi(numero.c_str());
-	cout << endl;
-
-	// quinta validacion
-	validateNum = false;
-	while (!validateNum)
-	{
-		try
-		{
-			cout << "\t\t\t";
-			cout << "Modo de dificultad activa(1/0): ";
-			cin >> numero;
-			validateNum = ValidateData(numero);
-
-			if (!validateNum)
-			{
-				throw numero;
-			}
-		}
-		catch (string e)
-		{
-			cout << "\t\t\t";
-			cout << configureError;
-		}
-	}
-	hardmode = atoi(numero.c_str());
-	cout << endl;
-
-	// sexta validacion
-	validateNum = false;
-	while (!validateNum)
-	{
-		try
-		{
-			cout << "\t\t\t";
-			cout << "Modo de multijugador(1/0): ";
-			cin >> numero;
-			validateNum = ValidateData(numero);
-
-			if (!validateNum)
-			{
-				throw numero;
-			}
-		}
-		catch (string e)
-		{
-			cout << "\t\t\t";
-			cout << configureError;
-		}
-	}
-	multiplayer = atoi(numero.c_str());
-	cout << endl;
 	ToSeconds();
-	sleep(2);
+	myPause();
 	cleanToShowMenu();
 }
 
@@ -2440,7 +2501,7 @@ void Table::restore()
 	movements = 20;
 
 	// modo con reglas
-	hardmode = true;
+	hardmode = false;
 
 	// si existe un ficha chocando al movimiento debemos saberlo
 	ficha = false;

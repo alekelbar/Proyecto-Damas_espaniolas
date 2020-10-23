@@ -59,16 +59,15 @@ void Table::save()
 
         // tiempo total, tiempo inicial, tiempo final, timepo de movimiento, cantidad de movimientos y el restante de cada ficha
         int timeRemaining = absoluteValue((int)timeOf - (int)t1), tmovement = timeToMovement, canMovem = movements;
-        int remainingBlack = blacks, remainigWhites = whites;
+        int remainingBlack = blacks, remainigWhites = whites, dificult;
         //  relleno3
-        string vacia3 = "vacia3";
 
         // objetos de lectura
         wri.open("guardado.txt", ios::out | ios::app);
 
         if (wri.is_open())
         {
-            wri << mytags << " " << yourtags << " " << timeRemaining << " " << tmovement << " " << canMovem << "  " << remainingBlack << " " << remainigWhites << " " << vacia3 << endl;
+            wri << mytags << " " << yourtags << " " << timeRemaining << " " << tmovement << " " << canMovem << "  " << remainingBlack << " " << remainigWhites << " " << dificult << endl;
             for (int i = 0; i < 8; i++)
             {
                 for (int j = 0; j < 8; j++)
@@ -81,7 +80,8 @@ void Table::save()
             }
             wri.close();
             cout << "La partida esta a salvo ;D!\n";
-            sleep(2);
+            restore();
+            myPause();
             cleanToShowMenu();
         }
         else
@@ -167,7 +167,7 @@ void Table::chargingSave()
     bool notRegister = seeSaveGame();
     if (!notRegister)
     {
-        sleep(2);
+        myPause();
         cleanToShowMenu();
     }
 
@@ -185,8 +185,7 @@ void Table::chargingSave()
     // variables de recorrido
     string mytags, yourtags;
     int timeRemaining, tmovement, canMovem;
-    int remainingBlacks, RemainingWhite;
-    string vacia3;
+    int remainingBlacks, RemainingWhite, dificult;
     // variables de relleno
     string value1, value2, value3;
     // objeto de manipulacion de archivos
@@ -195,7 +194,7 @@ void Table::chargingSave()
     rea >> mytags;
     while (!rea.eof())
     {
-        rea >> yourtags >> timeRemaining >> tmovement >> canMovem >> remainingBlacks >> RemainingWhite >> vacia3;
+        rea >> yourtags >> timeRemaining >> tmovement >> canMovem >> remainingBlacks >> RemainingWhite >> dificult;
 
         // si es mi partida la cargo
         if (mytags == nick)
@@ -224,6 +223,8 @@ void Table::chargingSave()
             blacks = remainingBlacks;
             // blancas restantes
             whites = RemainingWhite;
+            // modo de dificultad
+            hardmode = dificult;
         }
         else
         {
@@ -258,8 +259,7 @@ bool Table::seeSaveGame()
     // variables de recorrido
     string mytags, yourtags;
     int timeRemaining, tmovement, canMovem;
-    int remainingBlacks, RemainingWhite;
-    string vacia3;
+    int remainingBlacks, RemainingWhite, dificult;
     // variables de relleno
     string value1, value2, value3;
     // objeto de manipulacion de archivos
@@ -273,15 +273,20 @@ bool Table::seeSaveGame()
         rea.close();
         return false;
     }
-
+    string mode = "MODO CON REGLAS";
     while (!rea.eof())
     {
-        rea >> yourtags >> timeRemaining >> tmovement >> canMovem >> remainingBlacks >> RemainingWhite >> vacia3;
+        rea >> yourtags >> timeRemaining >> tmovement >> canMovem >> remainingBlacks >> RemainingWhite >> dificult;
         cout << "/-/ Nickname; " << mytags << endl;
         cout << "/-/ Tiempo restante de juego en segundos: " << timeRemaining << endl;
         cout << "/-/ Movimientos restantes: " << canMovem << endl;
         cout << "/-/ fichas negras restantes: " << remainingBlacks << endl;
         cout << "/-/ fichas blancas restantes: " << RemainingWhite << endl;
+        if (!dificult)
+        {
+            mode = "MODO SIN REGLAS";
+        }
+        cout << "/-/ Modo de dificultad activo: " << dificult << endl;
         cout << endl;
 
         for (int i = 0; i < 8; i++)
@@ -336,7 +341,7 @@ void Table::restoreSave(string nick, bool band)
 
     if (!notRegister && !band)
     {
-        sleep(2);
+        myPause();
         cleanToShowMenu();
     }
 
@@ -361,11 +366,10 @@ void Table::restoreSave(string nick, bool band)
     // variables de recorrido
     string mytags, yourtags;
     int timeRemaining, tmovement, canMovem;
-    int remainingBlacks, RemainingWhite;
+    int remainingBlacks, RemainingWhite, dificult;
     string value1 = "", value2 = "", value3 = "";
 
     // variables de relleno
-    string vacia3;
 
     // objeto de manipulacion de archivos
     rea.open("guardado.txt", ios::in);
@@ -378,7 +382,7 @@ void Table::restoreSave(string nick, bool band)
         rea >> mytags;
         while (!rea.eof())
         {
-            rea >> yourtags >> timeRemaining >> tmovement >> canMovem >> remainingBlacks >> RemainingWhite >> vacia3;
+            rea >> yourtags >> timeRemaining >> tmovement >> canMovem >> remainingBlacks >> RemainingWhite >> dificult;
             // ¿es el tablero que estoy buscando?
             if (mytags == nick)
             {
@@ -396,7 +400,7 @@ void Table::restoreSave(string nick, bool band)
             // si no lo es, continuo buscando
             else
             {
-                wri << mytags << " " << yourtags << " " << timeRemaining << " " << tmovement << " " << canMovem << "  " << remainingBlacks << " " << RemainingWhite << " " << vacia3 << endl;
+                wri << mytags << " " << yourtags << " " << timeRemaining << " " << tmovement << " " << canMovem << "  " << remainingBlacks << " " << RemainingWhite << " " << dificult << endl;
                 for (int a = 0; a < 8; a++)
                 {
                     for (int b = 0; b < 8; b++)
