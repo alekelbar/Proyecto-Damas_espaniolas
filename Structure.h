@@ -238,14 +238,14 @@ private:
     string crownB = "[$N$]";
 
     // tablero de juego
-    Tablero T = {{Black, crownW, Black, blank, blank, Black, blank, blank},
-                 {blank, white, Black, white, white, white, white, white},
-                 {Black, blank, blank, blank, blank, blank, blank, blank},
-                 {blank, Black, white, Black, white, white, blank, white},
-                 {Black, blank, crownB, blank, blank, blank, blank, blank},
-                 {blank, blank, blank, blank, blank, blank, blank, white},
-                 {Black, white, Black, blank, Black, blank, Black, blank},
-                 {crownB, Black, blank, blank, blank, white, blank, white}};
+    Tablero T = {{Black, blank, Black, blank, blank, blank, white, blank},
+                 {blank, Black, blank, blank, blank, white, blank, white},
+                 {Black, blank, Black, blank, blank, blank, white, blank},
+                 {blank, Black, blank, blank, blank, white, blank, white},
+                 {Black, blank, Black, blank, blank, blank, white, blank},
+                 {blank, Black, blank, blank, blank, white, blank, white},
+                 {Black, blank, Black, blank, blank, blank, white, blank},
+                 {blank, Black, blank, blank, blank, white, blank, white}};
 
     // coordenadas (horizontal(filas) y verticales(columnas))
 
