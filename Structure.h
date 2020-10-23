@@ -122,22 +122,22 @@ private:
     string lossTurn = "** TURNO PERDIDO ** \n";
 
     // la ficha negra que movera
-    string myBlack = "TURNO NEGRO: \nHORIZONTAL DE SU FICHA $===> ";
+    string myBlack = "TURNO NEGRO: \nHORIZONTAL DE SU FICHA $=$=$> ";
 
     // la ficha negra que movera
-    string myBlack2 = "TURNO NEGRO: \nVERTICAL DE SU FICHA $===> ";
+    string myBlack2 = "TURNO NEGRO: \nVERTICAL DE SU FICHA $=$=$> ";
 
     // ficha blanca que movera
-    string myWhite = "TURNO BLANCO: \nHORIZONTAL DE SU FICHA $===> ";
+    string myWhite = "TURNO BLANCO: \nHORIZONTAL DE SU FICHA $=$=$> ";
 
     // ficha blanca que movera
-    string myWhite2 = "TURNO BLANCO: \nVERTICAL DE SU FICHA $===> ";
+    string myWhite2 = "TURNO BLANCO: \nVERTICAL DE SU FICHA $=$=$> ";
 
     // donde se movera
-    string objetive = "HORIZONTAL DE SU ESPACIO OBJETIVO $===> ";
+    string objetive = "HORIZONTAL DE SU ESPACIO OBJETIVO $=$=$> ";
 
     // donde se movera
-    string objetive2 = "VERTICAL DE SU ESPACIO OBJETIVO $===> ";
+    string objetive2 = "VERTICAL DE SU ESPACIO OBJETIVO $=$=$> ";
 
     // coordenada fuera del tablero.
     string outLimits = "ESA FICHA ESTA FUERA DEL TABLERO !! U.U \n";
