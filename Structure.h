@@ -12,6 +12,12 @@
 #include <unistd.h>
 using namespace std;
 
+// macros para limpiar pantalla
+#ifdef __linux__
+#define clean "clear"
+#elif _WIN32
+#define clean "cls"
+#endif
 //funcion valor absoluto
 int absoluteValue(int x)
 {

@@ -111,7 +111,7 @@ void Table::MessageIsOutLimits()
 // limpiar y volver a mostrar
 void Table::cleanToShow()
 {
-	system("clear");
+	system(clean);
 	toShow();
 }
 
@@ -130,7 +130,7 @@ void Table::MessageWrongTab()
 // pantalla de acerca de
 void Table::aboutItscreen()
 {
-	system("clear");
+	system(clean);
 	cout << endl;
 	cout << "\t     ";
 	cout << "           *********       Acerca de    **********" << endl;
@@ -174,7 +174,7 @@ void Table::aboutItscreen()
 
 	cout << endl;
 	sleep(2);
-	system("clear");
+	system(clean);
 
 	cout << "\t\t\t\t  ";
 	cout << "Movilidad Basica\n\n";
@@ -197,7 +197,7 @@ void Table::aboutItscreen()
 	cout << endl
 		 << endl;
 	sleep(2);
-	system("clear");
+	system(clean);
 
 	cout << "\t\t\t";
 	cout << "Modo Multijugar y Modo de un Solo Jugador" << endl
@@ -213,9 +213,10 @@ void Table::aboutItscreen()
 	cout << endl
 		 << endl;
 	sleep(2);
-	system("clear");
+	system(clean)
 
-	cout << "\t\t\t ";
+			cout
+		<< "\t\t\t ";
 	cout << "Modo de Dificultad con Reglas\n\n";
 	cout << "	Este modo agrega un sistema automatico, y ciertas obligacion del jugador." << endl;
 	cout << "En el modo con reglas, o <hardmode> es completamente obligatorio comer." << endl;
@@ -640,7 +641,7 @@ void Table::tagSelecction()
 void Table::Menu()
 {
 	string nick;
-	system("clear");
+	system(clean);
 	while (true)
 	{
 		string numero;
@@ -720,7 +721,7 @@ void Table::Menu()
 // limpiar y mostrar el menu
 void Table::cleanToShowMenu()
 {
-	system("clear");
+	system(clean);
 	restore();
 	Menu();
 }

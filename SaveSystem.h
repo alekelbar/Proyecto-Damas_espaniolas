@@ -253,7 +253,7 @@ void Table::chargingSave()
 // ver partidas guardadas
 bool Table::seeSaveGame()
 {
-    system("clear");
+    system(clean);
     cout << "\nLISTA DE PARTIDAS GUARDADAS 1 POR 1\n";
     // variables de recorrido
     string mytags, yourtags;
