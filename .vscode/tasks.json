@@ -3,7 +3,7 @@
         {
             "type": "shell",
             "label": "C/C++: clang++ build active file",
-            "command": "/usr/bin/clang++",
+            "command": "g++ --std=c++11 ${file} -g -o ${fileDirname}/${fileBasenameNoExtension}",
             "args": [
                 "-g",
                 "${file}",

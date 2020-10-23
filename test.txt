@@ -96,3 +96,23 @@ Este documento respalda distintas formas de probar la movilidad del juego
                  {white, blank, blank, blank, Black, blank, Black, blank},
                  {blank, blank, blank, blank, blank, Black, blank, Black}};
 
+    tablero totalmente blanco
+
+    Tablero T = {{blank, blank, blank, blank, blank, blank, blank, blank},
+                {blank, blank, blank, blank, blank, blank, blank, blank},
+                {blank, blank, blank, blank, blank, blank, blank, blank},
+                {blank, blank, blank, blank, blank, blank, blank, blank},
+                {blank, blank, blank, blank, blank, blank, blank, blank},
+                {blank, blank, blank, blank, blank, blank, blank, blank},
+                {blank, blank, blank, blank, blank, blank, blank, blank},
+                {blank, blank, blank, blank, blank, blank, blank, blank}};
+
+    informar de este posible bug
+    Tablero T = {{blank, blank, blank, blank, blank, blank, blank, blank},
+                 {blank, blank, blank, blank, blank, blank, blank, blank},
+                 {blank, blank, blank, blank, blank, blank, blank, blank},
+                 {blank, blank, blank, blank, blank, blank, blank, blank},
+                 {blank, crownB, blank, blank, blank, blank, blank, blank},
+                 {blank, blank, blank, blank, blank, blank, blank, blank},
+                 {blank, blank, blank, blank, white, blank, blank, blank},
+                 {blank, blank, blank, blank, blank, blank, blank, blank}};
