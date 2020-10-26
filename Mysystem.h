@@ -32,7 +32,8 @@ void Table::toShow()
 		 << endl;
 
 	cout << "\t\t";
-	cout << "           Movimientos disponibles: " << movements << endl;
+	cout << "           Movimientos disponibles: " << movements << endl
+		 << endl;
 	cout << "\t\t";
 	cout << "           Tiempo por turno:        " << timeToMovement
 		 << endl;

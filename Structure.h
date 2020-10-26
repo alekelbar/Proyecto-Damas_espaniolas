@@ -22,7 +22,7 @@ using namespace std;
 #elif _WIN32
 #define clean "cls"
 #include <Windows.h>
-#define dormir(n) Sleep(n);
+#define dormir(n) Sleep(n*1000);
 #endif
 
 // funcion valor absoluto
@@ -37,7 +37,7 @@ int absoluteValue(int x)
 		return x * (-1);
 }
 
-// TODO; bug perron! dar una pequeña pausa
+// dar una pequenia pausa
 void myPause()
 {
 	char c = 'a';
@@ -242,7 +242,7 @@ private:
 	// fichas
 	string white = "( B )";
 	string Black = "( N )";
-	string blank = "( ˙ )";
+	string blank = "( . )";
 	string crownW = "(#B#)";
 	string crownB = "($N$)";
 
