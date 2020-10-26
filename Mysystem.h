@@ -9,7 +9,8 @@ void Table::toShow()
 	cout << data;
 	cout << " *** BLANCAS restantes: " << whites;
 
-	cout << "   		    	        NEGRAS restantes: " << blacks << " ***" << endl
+	cout << "   		    	        NEGRAS restantes: " << blacks
+		 << " ***" << endl
 		 << endl;
 
 	string vs;
@@ -22,14 +23,19 @@ void Table::toShow()
 		vs = playerName2;
 	}
 
-	cout << "                                  " << playerName << " VS " << vs << endl;
+	cout << "                                  " << playerName << " VS "
+		 << vs << endl;
 	ToHours();
 	cout << endl;
-	cout << "                             Tiempo Restante: " << hAux << ":" << mAux << ":" << sAux << endl
+	cout << "                             Tiempo Restante: " << hAux << ":"
+		 << mAux << ":" << sAux << endl
 		 << endl;
 
 	cout << "\t\t";
 	cout << "           Movimientos disponibles: " << movements << endl;
+	cout << "\t\t";
+	cout << "           Tiempo por turno:        " << timeToMovement
+		 << endl;
 	cout << "\t\t";
 	cout << "     0     1     2     3     4     5     6     7 \n";
 	for (int i = 0; i < 8; i++)
@@ -51,7 +57,6 @@ void Table::toCrown()
 	{
 		for (int colums = 0; colums < 8; colums++)
 		{
-
 			// coronacion blanca
 			if (T[rows][colums] == Black && colums == 7)
 			{
@@ -70,7 +75,7 @@ void Table::toCrown()
 // limita el tablero de la coordenada Y
 bool Table::validateLimitsY()
 {
-	//auxiliares
+	// auxiliares
 	int a = filas1, b = colums1;
 
 	// analizando los limites superiores e inferiores
@@ -84,7 +89,7 @@ bool Table::validateLimitsY()
 // valida los limites de la coordenada X
 bool Table::validateLimitsX()
 {
-	//auxiliares
+	// auxiliares
 	int a = filas2, b = colums2;
 
 	// analizando los limites superiores e inferiores
@@ -96,10 +101,7 @@ bool Table::validateLimitsX()
 }
 
 // mensaje para cuando fue un mal movimiento
-void Table::MessageIsABadMovement()
-{
-	cout << badMovement;
-}
+void Table::MessageIsABadMovement() { cout << badMovement; }
 
 // mensaje para cuando se sale de los limites
 void Table::MessageIsOutLimits()
@@ -122,10 +124,7 @@ void Table::MessageToContinue()
 }
 
 // mensaje para una ficha equivocada
-void Table::MessageWrongTab()
-{
-	cout << wrongTab << endl;
-}
+void Table::MessageWrongTab() { cout << wrongTab << endl; }
 
 // pantalla de acerca de
 void Table::aboutItscreen()
@@ -157,20 +156,39 @@ void Table::aboutItscreen()
 
 	cout << endl;
 	cout << "\t\t\t  " << data << endl;
-	cout << "	Las damas es un juego de mesa para dos contrincantes. El juego consiste" << endl;
-	cout << "en mover las piezas en diagonal a través de los cuadros negros (o blancos en" << endl;
-	cout << "algunas variantes) de un tablero de 64 o 100 cuadros. Si alguien no mata(captura)" << endl;
-	cout << "al jugar contrario perderá esa pieza a la intención obligatoria de capturar (comer)" << endl;
-	cout << "las piezas del jugador contrario, pasando por encima de dichas piezas." << endl
+	cout << "	Las damas es un juego de mesa para dos contrincantes. "
+			"El juego consiste"
+		 << endl;
+	cout << "en mover las piezas en diagonal a través de los cuadros "
+			"negros (o blancos en"
+		 << endl;
+	cout << "algunas variantes) de un tablero de 64 o 100 cuadros. Si "
+			"alguien no mata(captura)"
+		 << endl;
+	cout << "al jugar contrario perderá esa pieza a la intención "
+			"obligatoria de capturar (comer)"
+		 << endl;
+	cout << "las piezas del jugador contrario, pasando por encima de "
+			"dichas piezas."
+		 << endl
 		 << endl;
 
 	cout << "\t\t\t  ";
 	cout << "Como Jugar Esta Version Del Juego\n\n";
-	cout << "	De manera estandar nuestro juego demora 10 minutos por partida y tiene 20" << endl;
-	cout << "segundos para pensar su movimiento. Puede configurar los parametros basicos en las " << endl;
-	cout << "opciones del menu. La opcion (2) le permite modificar el tiempo de juego, la " << endl;
-	cout << "cantidad de movimientos por partida, entre otros. Ademas de otras configuraciones" << endl;
-	cout << "mas significativas como el modo con reglas o el modo multijugador. \n";
+	cout << "	De manera estandar nuestro juego demora 10 minutos por "
+			"partida y tiene 20"
+		 << endl;
+	cout << "segundos para pensar su movimiento. Puede configurar los "
+			"parametros basicos en las "
+		 << endl;
+	cout << "opciones del menu. La opcion (2) le permite modificar el "
+			"tiempo de juego, la "
+		 << endl;
+	cout << "cantidad de movimientos por partida, entre otros. Ademas de "
+			"otras configuraciones"
+		 << endl;
+	cout << "mas significativas como el modo con reglas o el modo "
+			"multijugador. \n";
 
 	cout << endl;
 	myPause();
@@ -178,9 +196,15 @@ void Table::aboutItscreen()
 
 	cout << "\t\t\t\t  ";
 	cout << "Movilidad Basica\n\n";
-	cout << "	Siendo un tablero de 8x8 espacios cada ficha tiene un par de ejes coordenados." << endl;
-	cout << "Esto significa que para indicar la posicion de una ficha se debe señalar mediante" << endl;
-	cout << "un par ordenado. Por ejemplo, observemos la siguiente ficha y su ubicacion en el tablero" << endl;
+	cout << "	Siendo un tablero de 8x8 espacios cada ficha tiene un "
+			"par de ejes coordenados."
+		 << endl;
+	cout << "Esto significa que para indicar la posicion de una ficha se "
+			"debe señalar mediante"
+		 << endl;
+	cout << "un par ordenado. Por ejemplo, observemos la siguiente ficha y "
+			"su ubicacion en el tablero"
+		 << endl;
 
 	cout << endl
 		 << endl;
@@ -188,12 +212,24 @@ void Table::aboutItscreen()
 	cout << "0 [B] ( )\n";
 	cout << "1 ( ) ( )\n";
 	cout << endl;
-	cout << "	El espacio que contiene la ficha 'B' se localiza mediante el eje coordenada como" << endl;
-	cout << "<0 0>. a diferencia de las demas posiciones que se encuentran vacias. Dichas posiciones" << endl;
-	cout << "se localizan facilmente por las indicaciones coordenadas. Si quisieramos mover la ficha " << endl;
-	cout << "a la diagonal inferior derecha(siendo que es un movimiento valido) diriamos entonces " << endl;
-	cout << "que la ficha <0 0> se movere a la diagonal <1 1> siendo el primer '1' la coordenada " << endl;
-	cout << "horizontal de la ficha y el segundo '1' la coordenada vertical." << endl;
+	cout << "	El espacio que contiene la ficha 'B' se localiza "
+			"mediante el eje coordenada como"
+		 << endl;
+	cout << "<0 0>. a diferencia de las demas posiciones que se encuentran "
+			"vacias. Dichas posiciones"
+		 << endl;
+	cout << "se localizan facilmente por las indicaciones coordenadas. Si "
+			"quisieramos mover la ficha "
+		 << endl;
+	cout << "a la diagonal inferior derecha(siendo que es un movimiento "
+			"valido) diriamos entonces "
+		 << endl;
+	cout << "que la ficha <0 0> se movere a la diagonal <1 1> siendo el "
+			"primer '1' la coordenada "
+		 << endl;
+	cout
+		<< "horizontal de la ficha y el segundo '1' la coordenada vertical."
+		<< endl;
 	cout << endl
 		 << endl;
 	myPause();
@@ -202,28 +238,52 @@ void Table::aboutItscreen()
 	cout << "\t\t\t";
 	cout << "Modo Multijugar y Modo de un Solo Jugador" << endl
 		 << endl;
-	cout << "	Puede jugar contra una CPU algo ordiniaria o turnarse con un conocido." << endl;
-	cout << "Por defecto el juego esta en <single player>, sin embargo, es posible jugar en un modo" << endl;
-	cout << "de dos jugadores, accediendo a las configuraciones del juego y activando el modo. " << endl;
-	cout << "Dentro de este juego casi cualquier confirmacion y/o negacion se realiza con valores " << endl;
-	cout << "booleanos. Definiremos un valor verdadero como cualquier valor distinto de cero, de" << endl;
-	cout << "preferencia (1) y como una negacion al (0). Eso quiere decir que si usted es consultado" << endl;
-	cout << "y su respuesta es un valor distinto de cero, usted esta respondiendo afirmativamente.\n";
+	cout << "	Puede jugar contra una CPU algo ordiniaria o turnarse "
+			"con un conocido."
+		 << endl;
+	cout << "Por defecto el juego esta en <single player>, sin embargo, es "
+			"posible jugar en un modo"
+		 << endl;
+	cout << "de dos jugadores, accediendo a las configuraciones del juego "
+			"y activando el modo. "
+		 << endl;
+	cout << "Dentro de este juego casi cualquier confirmacion y/o negacion "
+			"se realiza con valores "
+		 << endl;
+	cout << "booleanos. Definiremos un valor verdadero como cualquier "
+			"valor distinto de cero, de"
+		 << endl;
+	cout << "preferencia (1) y como una negacion al (0). Eso quiere decir "
+			"que si usted es consultado"
+		 << endl;
+	cout << "y su respuesta es un valor distinto de cero, usted esta "
+			"respondiendo afirmativamente.\n";
 
 	cout << endl
 		 << endl;
 	myPause();
 	system(clean);
 
-	cout
-		<< "\t\t\t ";
+	cout << "\t\t\t ";
 	cout << "Modo de Dificultad con Reglas\n\n";
-	cout << "	Este modo agrega un sistema automatico, y ciertas obligacion del jugador." << endl;
-	cout << "En el modo con reglas, o <hardmode> es completamente obligatorio comer." << endl;
-	cout << "Eso implica una reglamentacion basica que te obliga a realizar ciertos " << endl;
-	cout << "movimientos, o en caso contrario sera penalizado perdiendo la ficha en cuestion." << endl;
-	cout << "los fundamentos para obligar estos movimientos son la cantidad de comidad y" << endl;
-	cout << "su calidad. ¿que sucede si existe la misma cantidad? En ese caso, sera su decicion." << endl;
+	cout << "	Este modo agrega un sistema automatico, y ciertas "
+			"obligacion del jugador."
+		 << endl;
+	cout << "En el modo con reglas, o <hardmode> es completamente "
+			"obligatorio comer."
+		 << endl;
+	cout << "Eso implica una reglamentacion basica que te obliga a "
+			"realizar ciertos "
+		 << endl;
+	cout << "movimientos, o en caso contrario sera penalizado perdiendo la "
+			"ficha en cuestion."
+		 << endl;
+	cout << "los fundamentos para obligar estos movimientos son la "
+			"cantidad de comidad y"
+		 << endl;
+	cout << "su calidad. ¿que sucede si existe la misma cantidad? En ese "
+			"caso, sera su decicion."
+		 << endl;
 
 	cout << endl
 		 << endl;
@@ -232,10 +292,7 @@ void Table::aboutItscreen()
 }
 
 // existe una ficha en medio
-void Table::MessageTabInTheMiddle()
-{
-	cout << tabinthemiddle << endl;
-}
+void Table::MessageTabInTheMiddle() { cout << tabinthemiddle << endl; }
 
 // mensaje cuando hay un obstaculo
 void Table::MessageToBlocking(int a, int b)
@@ -246,7 +303,6 @@ void Table::MessageToBlocking(int a, int b)
 // verificar si existe posibilidad de movimiento
 bool Table::ICanFollow()
 {
-
 	for (int i = 0; i < 8; i++)
 	{
 		for (int j = 0; j < 8; j++)
@@ -258,20 +314,28 @@ bool Table::ICanFollow()
 				// diagonal inferior derecha
 				if (i + 1 < 8 && j + 1 < 8)
 				{
-					if ((T[i + 1][j + 1] == blank) || ((i + 2 < 8 && j + 2 < 8 && T[i + 1][j + 1] == white || T[i + 1][j + 1] == crownW) && T[i + 2][j + 2] == blank))
+					if ((T[i + 1][j + 1] == blank) ||
+						((i + 2 < 8 && j + 2 < 8 &&
+							  T[i + 1][j + 1] == white ||
+						  T[i + 1][j + 1] == crownW) &&
+						 T[i + 2][j + 2] == blank))
 					{
-						// cout << "en1: " << i << j << endl;
-						// cout << "negras\n";
+						// cout << "en1: " << i << j <<
+						// endl; cout << "negras\n";
 						return true;
 					}
 				}
 				// diagonal superior derecha
 				else if (i - 1 >= 0 && j + 1 < 8)
 				{
-					if ((T[i - 1][j + 1] == blank) || ((i - 2 >= 0 && j + 2 < 8 && T[i - 1][j + 1] == white || T[i - 1][j + 1] == crownW) && T[i - 2][j + 2] == blank))
+					if ((T[i - 1][j + 1] == blank) ||
+						((i - 2 >= 0 && j + 2 < 8 &&
+							  T[i - 1][j + 1] == white ||
+						  T[i - 1][j + 1] == crownW) &&
+						 T[i - 2][j + 2] == blank))
 					{
-						// cout << "en2: " << i << j << endl;
-						// cout << "negras\n";
+						// cout << "en2: " << i << j <<
+						// endl; cout << "negras\n";
 						return true;
 					}
 				}
@@ -283,21 +347,29 @@ bool Table::ICanFollow()
 				// diagonal inferior izquierda
 				if (i + 1 < 8 && j - 1 >= 0)
 				{
-					if ((T[i + 1][j - 1] == blank) || ((i + 2 < 8 && j - 2 >= 0 && T[i + 1][j - 1] == Black || T[i + 1][j - 1] == crownB) && T[i + 2][j - 2] == blank))
+					if ((T[i + 1][j - 1] == blank) ||
+						((i + 2 < 8 && j - 2 >= 0 &&
+							  T[i + 1][j - 1] == Black ||
+						  T[i + 1][j - 1] == crownB) &&
+						 T[i + 2][j - 2] == blank))
 					{
-						// cout << "en1: " << i << j << endl;
-						// cout << "blancas\n";
+						// cout << "en1: " << i << j <<
+						// endl; cout << "blancas\n";
 						return true;
 					}
 				}
 
-				//diagonal superior derecha
+				// diagonal superior derecha
 				else if (i - 1 >= 0 && j - 1 >= 0)
 				{
-					if ((T[i - 1][j - 1] == blank) || ((i - 2 >= 0 && j - 2 >= 0 && T[i - 1][j - 1] == Black || T[i - 1][j - 1] == crownB) && T[i - 2][j - 2] == blank))
+					if ((T[i - 1][j - 1] == blank) ||
+						((i - 2 >= 0 && j - 2 >= 0 &&
+							  T[i - 1][j - 1] == Black ||
+						  T[i - 1][j - 1] == crownB) &&
+						 T[i - 2][j - 2] == blank))
 					{
-						// cout << "en2: " << i << j << endl;
-						// cout << "blancas\n";
+						// cout << "en2: " << i << j <<
+						// endl; cout << "blancas\n";
 						return true;
 					}
 				}
@@ -306,97 +378,134 @@ bool Table::ICanFollow()
 			if (T[i][j] == crownB)
 			{
 				int c = 1;
-				if (T[i - c][j + c] == blank && i - c >= 0 && j + c < 8)
+				if (T[i - c][j + c] == blank && i - c >= 0 &&
+					j + c < 8)
 				{
 					// cout << "en: " << i << j << endl;
 					// cout << "negrasRsr\n";
 					return true;
 				}
 				// diagonal superior derecha
-				for (int a = j; a < absoluteValue(j - 7) && i - c >= 0 && j + c < 8; a++)
+				for (int a = j; a < absoluteValue(j - 7) &&
+								i - c >= 0 && j + c < 8;
+					 a++)
 				{
 					// se puede mover
 					// hasta ahi no se puede mover
-					if (T[i - c][j + c] == Black || T[i - c][j + c] == crownB)
+					if (T[i - c][j + c] == Black ||
+						T[i - c][j + c] == crownB)
 					{
 						break;
 					}
-					if ((T[i - c][j + c] == white || T[i - c][j + c] == crownW) && T[i - (c + 1)][j + (c + 1)] == blank && i - (c + 1) >= 0 && j + (c + 1) < 8)
+					if ((T[i - c][j + c] == white ||
+						 T[i - c][j + c] == crownW) &&
+						T[i - (c + 1)][j + (c + 1)] ==
+							blank &&
+						i - (c + 1) >= 0 &&
+						j + (c + 1) < 8)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "negrasRsr\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "negrasRsr\n";
 						return true;
 					}
 					c++;
 				}
 				c = 1;
 				// se puede mover
-				if (T[i + c][j + c] == blank && i + c < 8 && j + c < 8)
+				if (T[i + c][j + c] == blank && i + c < 8 &&
+					j + c < 8)
 				{
 					// cout << "en: " << i << j << endl;
 					// cout << "negrasRir\n";
 					return true;
 				}
 				// diagonal inferior derecha
-				for (int a = j; a < absoluteValue(j - 7) && i + c < 8 && j + c < 8; a++)
+				for (int a = j; a < absoluteValue(j - 7) &&
+								i + c < 8 && j + c < 8;
+					 a++)
 				{
 					// hasta ahi no se puede mover
-					if (T[i + c][j + c] == Black || T[i + c][j + c] == crownB)
+					if (T[i + c][j + c] == Black ||
+						T[i + c][j + c] == crownB)
 					{
 						break;
 					}
-					if ((T[i + c][j + c] == white || T[i + c][j + c] == crownW) && T[i + (c + 1)][j + (c + 1)] == blank && i + (c + 1) < 8 && j + (c + 1) < 8)
+					if ((T[i + c][j + c] == white ||
+						 T[i + c][j + c] == crownW) &&
+						T[i + (c + 1)][j + (c + 1)] ==
+							blank &&
+						i + (c + 1) < 8 &&
+						j + (c + 1) < 8)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "negrasRir\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "negrasRir\n";
 						return true;
 					}
 					c++;
 				}
 				c = 1;
 				// se puede mover
-				if (T[i - c][j - c] == blank && i - c >= 0 && j - c >= 0)
+				if (T[i - c][j - c] == blank && i - c >= 0 &&
+					j - c >= 0)
 				{
 					// cout << "en: " << i << j << endl;
 					// cout << "negrasRsi\n";
 					return true;
 				}
 				// diagonal superior izquierda
-				for (int a = j; a < absoluteValue(j - 7) && i - c >= 0 && j - c >= 0; a++)
+				for (int a = j; a < absoluteValue(j - 7) &&
+								i - c >= 0 && j - c >= 0;
+					 a++)
 				{
 					// hasta ahi no se puede mover
-					if (T[i - c][j - c] == Black || T[i - c][j - c] == crownB)
+					if (T[i - c][j - c] == Black ||
+						T[i - c][j - c] == crownB)
 					{
 						break;
 					}
-					if ((T[i - c][j - c] == white || T[i - c][j - c] == crownW) && T[i - (c + 1)][j - (c + 1)] == blank && i - (c + 1) >= 0 && j - (c + 1) >= 0)
+					if ((T[i - c][j - c] == white ||
+						 T[i - c][j - c] == crownW) &&
+						T[i - (c + 1)][j - (c + 1)] ==
+							blank &&
+						i - (c + 1) >= 0 &&
+						j - (c + 1) >= 0)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "negrasRsi\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "negrasRsi\n";
 						return true;
 					}
 					c++;
 				}
 				c = 1;
 				// se puede mover
-				if (T[i + c][j - c] == blank && i + c < 8 && j - c >= 0)
+				if (T[i + c][j - c] == blank && i + c < 8 &&
+					j - c >= 0)
 				{
 					// cout << "en: " << i << j << endl;
 					// cout << "negrasRii\n";
 					return true;
 				}
 				// diagonal inferior izquierda
-				for (int a = j; a < absoluteValue(j - 7) && i + c < 8 && j - c >= 0; a++)
+				for (int a = j; a < absoluteValue(j - 7) &&
+								i + c < 8 && j - c >= 0;
+					 a++)
 				{
 					// hasta ahi no se puede mover
-					if (T[i + c][j - c] == Black || T[i + c][j - c] == crownB)
+					if (T[i + c][j - c] == Black ||
+						T[i + c][j - c] == crownB)
 					{
 						break;
 					}
-					if ((T[i + c][j - c] == white || T[i + c][j - c] == crownW) && T[i + (c + 1)][j - (c + 1)] == blank && i + (c + 1) < 8 && j - (c + 1) >= 0)
+					if ((T[i + c][j - c] == white ||
+						 T[i + c][j - c] == crownW) &&
+						T[i + (c + 1)][j - (c + 1)] ==
+							blank &&
+						i + (c + 1) < 8 &&
+						j - (c + 1) >= 0)
 					{
-						// 	cout << "en: " << i << j << endl;
-						// 	cout << "negrasRii\n";
+						// 	cout << "en: " << i << j
+						// << endl; 	cout <<
+						// "negrasRii\n";
 						return true;
 					}
 					c++;
@@ -407,96 +516,132 @@ bool Table::ICanFollow()
 			{
 				int c = 1;
 				// se puede mover
-				if (T[i - c][j + c] == blank && i - c >= 0 && j + c < 8)
+				if (T[i - c][j + c] == blank && i - c >= 0 &&
+					j + c < 8)
 				{
 					// cout << "en: " << i << j << endl;
 					// cout << "blancasRsr\n";
 					return true;
 				}
 				// diagonal superior derecha
-				for (int a = j; a < absoluteValue(j - 7) && i - c >= 0 && j + c < 8; a++)
+				for (int a = j; a < absoluteValue(j - 7) &&
+								i - c >= 0 && j + c < 8;
+					 a++)
 				{
 					// hasta ahi no se puede mover
-					if (T[i - c][j + c] == white || T[i - c][j + c] == crownW)
+					if (T[i - c][j + c] == white ||
+						T[i - c][j + c] == crownW)
 					{
 						break;
 					}
-					if ((T[i - c][j + c] == Black || T[i - c][j + c] == crownB) && T[i - (c + 1)][j + (c + 1)] == blank && i - (c + 1) >= 0 && j + (c + 1) < 8)
+					if ((T[i - c][j + c] == Black ||
+						 T[i - c][j + c] == crownB) &&
+						T[i - (c + 1)][j + (c + 1)] ==
+							blank &&
+						i - (c + 1) >= 0 &&
+						j + (c + 1) < 8)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "blancasRsr\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "blancasRsr\n";
 						return true;
 					}
 					c++;
 				}
 				c = 1;
 				// se puede mover
-				if (T[i + c][j + c] == blank && i + c < 8 && j + c < 8)
+				if (T[i + c][j + c] == blank && i + c < 8 &&
+					j + c < 8)
 				{
 					// cout << "en: " << i << j << endl;
 					// cout << "blancasRir\n";
 					return true;
 				}
 				// diagonal inferior derecha
-				for (int a = j; a < absoluteValue(j - 7) && i + c < 8 && j + c < 8; a++)
+				for (int a = j; a < absoluteValue(j - 7) &&
+								i + c < 8 && j + c < 8;
+					 a++)
 				{
 					// hasta ahi no se puede mover
-					if (T[i + c][j + c] == white || T[i + c][j + c] == crownW)
+					if (T[i + c][j + c] == white ||
+						T[i + c][j + c] == crownW)
 					{
 						break;
 					}
-					if ((T[i + c][j + c] == Black || T[i + c][j + c] == crownB) && T[i + (c + 1)][j + (c + 1)] == blank && i + (c + 1) < 8 && j + (c + 1) < 8)
+					if ((T[i + c][j + c] == Black ||
+						 T[i + c][j + c] == crownB) &&
+						T[i + (c + 1)][j + (c + 1)] ==
+							blank &&
+						i + (c + 1) < 8 &&
+						j + (c + 1) < 8)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "blancasRif\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "blancasRif\n";
 						return true;
 					}
 					c++;
 				}
 				c = 1;
 				// se puede mover
-				if (T[i - c][j - c] == blank && i - c >= 0 && j - c >= 0)
+				if (T[i - c][j - c] == blank && i - c >= 0 &&
+					j - c >= 0)
 				{
 					// cout << "en: " << i << j << endl;
 					// cout << "blancasRsi\n";
 					return true;
 				}
 				// diagonal superior izquierda
-				for (int a = j; a < absoluteValue(j - 7) && i - c >= 0 && j - c >= 0; a++)
+				for (int a = j; a < absoluteValue(j - 7) &&
+								i - c >= 0 && j - c >= 0;
+					 a++)
 				{
 					// hasta ahi no se puede mover
-					if (T[i - c][j - c] == white || T[i - c][j - c] == crownW)
+					if (T[i - c][j - c] == white ||
+						T[i - c][j - c] == crownW)
 					{
 						break;
 					}
-					if ((T[i - c][j - c] == Black || T[i - c][j - c] == crownB) && T[i - (c + 1)][j - (c + 1)] == blank && i - (c + 1) >= 0 && j - (c + 1) >= 0)
+					if ((T[i - c][j - c] == Black ||
+						 T[i - c][j - c] == crownB) &&
+						T[i - (c + 1)][j - (c + 1)] ==
+							blank &&
+						i - (c + 1) >= 0 &&
+						j - (c + 1) >= 0)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "blancasRsi\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "blancasRsi\n";
 						return true;
 					}
 					c++;
 				}
 				c = 1;
 				// se puede mover
-				if (T[i + c][j - c] == blank && i + c < 8 && j - c >= 0)
+				if (T[i + c][j - c] == blank && i + c < 8 &&
+					j - c >= 0)
 				{
 					// cout << "en: " << i << j << endl;
 					// cout << "blancasRii\n";
 					return true;
 				}
 				// diagonal inferior izquierda
-				for (int a = j; a < absoluteValue(j - 7) && i + c < 8 && j - c >= 0; a++)
+				for (int a = j; a < absoluteValue(j - 7) &&
+								i + c < 8 && j - c >= 0;
+					 a++)
 				{
 					// hasta ahi no se puede mover
-					if (T[i + c][j - c] == white || T[i + c][j - c] == crownW)
+					if (T[i + c][j - c] == white ||
+						T[i + c][j - c] == crownW)
 					{
 						break;
 					}
-					if ((T[i + c][j - c] == Black || T[i + c][j - c] == crownB) && T[i + (c + 1)][j - (c + 1)] == blank && i + (c + 1) < 8 && j - (c + 1) >= 0)
+					if ((T[i + c][j - c] == Black ||
+						 T[i + c][j - c] == crownB) &&
+						T[i + (c + 1)][j - (c + 1)] ==
+							blank &&
+						i + (c + 1) < 8 &&
+						j - (c + 1) >= 0)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "blancasRii\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "blancasRii\n";
 						return true;
 					}
 					c++;
@@ -525,7 +670,8 @@ void Table::ToHours()
 	totalSec %= 3600;		// dwriuento las horas
 
 	mAux = totalSec / 60; // minutos totales
-	sAux = totalSec % 60; // dwriuento los minutos y ajusto los segundos totales
+	sAux = totalSec %
+		   60; // dwriuento los minutos y ajusto los segundos totales
 }
 
 // pantalla de configuracion
@@ -550,13 +696,16 @@ void Table::screenConfig()
 	cout << "\t\t";
 	cout << " 	 **************************************\n\n";
 	cout << "\t\t";
-	cout << "	    HORAS: " << h << " MINUTOS: " << m << " SEGUNDOS: " << s << "\n";
+	cout << "	    HORAS: " << h << " MINUTOS: " << m
+		 << " SEGUNDOS: " << s << "\n";
 	cout << "\n\t\t";
 	cout << "         **************************************\n\n";
 	cout << "\t\t";
-	cout << "      Cantidad maxima de movimientos permitidos: " << movements << " \n\n";
+	cout << "      Cantidad maxima de movimientos permitidos: " << movements
+		 << " \n\n";
 	cout << "\t\t";
-	cout << "       Tiempo permitido por movimiento: " << timeToMovement << "\n\n";
+	cout << "       Tiempo permitido por movimiento: " << timeToMovement
+		 << "\n\n";
 	cout << "\t\t";
 	cout << "       modo de dificultad activa: " << reglas << "\n\n";
 	cout << "\t\t";
@@ -579,6 +728,7 @@ void Table::tagSelecction()
 		cout << "\t\t\t";
 		while (playerName.length() != 4)
 		{
+			falseMenu();
 			cout << "\n\t\t\t";
 			cout << "$ use un nickname de 4 caracteres $" << endl;
 			cout << "\t\t\t";
@@ -588,6 +738,7 @@ void Table::tagSelecction()
 
 		while (playerName2.length() != 4)
 		{
+			falseMenu();
 			cout << "\n\t\t\t";
 			cout << "$ use un nickname de 4 caracteres $" << endl;
 			cout << "\t\t\t";
@@ -597,7 +748,7 @@ void Table::tagSelecction()
 	}
 	else
 	{
-		//restore
+		// restore
 		playerName = "";
 		playerName2 = "";
 		cpu = "";
@@ -605,15 +756,18 @@ void Table::tagSelecction()
 		int aleatorio = 0;
 		while (playerName.length() != 4)
 		{
+			falseMenu();
 			cout << "\n\t\t\t";
 			cout << "$ use un nickname de 4 caracteres $" << endl;
 			cout << "\t\t\t";
 			cout << "Jugador uno, ¿cual es su nombre? --> ";
 			cin >> playerName;
 		}
-
+		// generar un numero aleatorio
 		srand(time(0));
+		// el numero se aloja aca
 		aleatorio = 1 + rand() % (3 - 1);
+
 		if (aleatorio == 1)
 		{
 			cpu = "negras";
@@ -712,13 +866,13 @@ void Table::Menu()
 			break;
 		default:
 			cout << "Opcion no disponible." << endl;
-			sleep(2);
+			dormir(2);
 		}
 		cleanToShowMenu();
 	}
 }
 
-//false menu
+// false menu
 void Table::falseMenu()
 {
 	system(clean);
@@ -760,17 +914,24 @@ void Table::configure()
 	{
 		falseMenu();
 		cout << "\n\t";
-		opc = validateANumber("Tiempo de juego(1) - Movimiento(2) - Dificultad(3) - Volver al menu(0): ", configureError);
+		opc = validateANumber(
+			"Tiempo de juego(1) - Movimiento(2) - Dificultad(3) - "
+			"Volver al menu(0): ",
+			configureError);
 
 		switch (opc)
 		{
 		case 1:
+			falseMenu();
 			cout << "\n\t\t\t";
-			cout << "##          Parametros de juego        ##" << endl;
+			cout << "##          Parametros de juego       "
+					" ##"
+				 << endl;
 			cout << "\t\t\t";
 			cout << "              Configuraciones \n";
 			cout << "\n\t\t\t";
 			cout << "Tiempo de juego:";
+			validateNum = false;
 			while (!validateNum)
 			{
 				try
@@ -778,7 +939,8 @@ void Table::configure()
 					cout << "\n\n\t\t\t";
 					cout << "HORAS: ";
 					cin >> numero;
-					validateNum = ValidateData(numero);
+					validateNum =
+						ValidateData(numero);
 					if (!validateNum)
 					{
 						throw numero;
@@ -802,7 +964,8 @@ void Table::configure()
 					cout << "\t\t\t";
 					cout << "MINUTOS: ";
 					cin >> numero;
-					validateNum = ValidateData(numero);
+					validateNum =
+						ValidateData(numero);
 
 					if (!validateNum)
 					{
@@ -827,7 +990,8 @@ void Table::configure()
 					cout << "\t\t\t";
 					cout << "SEGUNDOS: ";
 					cin >> numero;
-					validateNum = ValidateData(numero);
+					validateNum =
+						ValidateData(numero);
 
 					if (!validateNum)
 					{
@@ -847,7 +1011,9 @@ void Table::configure()
 			falseMenu();
 			// tercera validacion
 			cout << "\n\n\t\t\t";
-			cout << "##          Parametros de juego        ##" << endl;
+			cout << "##          Parametros de juego       "
+					" ##"
+				 << endl;
 			cout << "\t\t\t";
 			cout << "              Configuraciones \n";
 			cout << "\n\t\t\t";
@@ -858,9 +1024,12 @@ void Table::configure()
 				try
 				{
 					cout << "\n\t\t\t";
-					cout << "Cantidad maxima de movimientos permitidos: ";
+					cout << "Cantidad maxima de "
+							"movimientos "
+							"permitidos: ";
 					cin >> numero;
-					validateNum = ValidateData(numero);
+					validateNum =
+						ValidateData(numero);
 
 					if (!validateNum)
 					{
@@ -884,9 +1053,11 @@ void Table::configure()
 				{
 					cout << "\t\t\t";
 
-					cout << "Tiempo permitido por movimiento: ";
+					cout << "Tiempo permitido por "
+							"movimiento: ";
 					cin >> numero;
-					validateNum = ValidateData(numero);
+					validateNum =
+						ValidateData(numero);
 
 					if (!validateNum)
 					{
@@ -906,7 +1077,9 @@ void Table::configure()
 			// quinta validacion
 			falseMenu();
 			cout << "\n\t\t\t";
-			cout << "##          Parametros de juego        ##" << endl;
+			cout << "##          Parametros de juego       "
+					" ##"
+				 << endl;
 			cout << "\t\t\t";
 			cout << "              Configuraciones \n";
 			cout << "\n\t\t\t";
@@ -917,9 +1090,11 @@ void Table::configure()
 				try
 				{
 					cout << "\n\n\t\t\t";
-					cout << "Modo de dificultad activa(1/0): ";
+					cout << "Modo de dificultad "
+							"activa(1/0): ";
 					cin >> numero;
-					validateNum = ValidateData(numero);
+					validateNum =
+						ValidateData(numero);
 
 					if (!validateNum)
 					{
@@ -942,9 +1117,11 @@ void Table::configure()
 				try
 				{
 					cout << "\t\t\t";
-					cout << "Modo de multijugador(1/0): ";
+					cout << "Modo de "
+							"multijugador(1/0): ";
 					cin >> numero;
-					validateNum = ValidateData(numero);
+					validateNum =
+						ValidateData(numero);
 
 					if (!validateNum)
 					{
@@ -993,7 +1170,7 @@ int Table::validateANumber(string message, string error)
 		catch (string e)
 		{
 			cout << error;
-			sleep(2);
+			dormir(2);
 		}
 	}
 	return atoi(numero.c_str());
@@ -1017,33 +1194,72 @@ bool Table::cpuBlackMovement()
 					// diagonal inferior derecha
 					if (i + 1 < 8 && j + 1 < 8)
 					{
-						if ((T[i + 1][j + 1] == blank) || ((i + 2 < 8 && j + 2 < 8 && T[i + 1][j + 1] == white || T[i + 1][j + 1] == crownW) && T[i + 2][j + 2] == blank))
+						if ((T[i + 1][j + 1] ==
+							 blank) ||
+							((i + 2 < 8 && j + 2 < 8 &&
+								  T[i + 1][j + 1] ==
+									  white ||
+							  T[i + 1][j + 1] ==
+								  crownW) &&
+							 T[i + 2][j + 2] ==
+								 blank))
 						{
-							// cout << "en1: " << i << j << endl;
-							// cout << "negras\n";
-							if (((i + 2 < 8 && j + 2 < 8 && T[i + 1][j + 1] == white || T[i + 1][j + 1] == crownW) && T[i + 2][j + 2] == blank))
+							// cout << "en1: " << i
+							// << j << endl; cout <<
+							// "negras\n";
+							if (((i + 2 < 8 &&
+									  j + 2 < 8 &&
+									  T[i + 1]
+									   [j + 1] ==
+										  white ||
+								  T[i + 1][j + 1] ==
+									  crownW) &&
+								 T[i + 2][j + 2] ==
+									 blank))
 							{
-								// de donde parto
+								// de donde
+								// parto
 								filas1 = i;
 								colums1 = j;
-								//a donde voy
+								// a donde voy
 								filas2 = i + 2;
 								colums2 = j + 2;
-								// cout << "1 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << " , " << colums2 << endl;
-								// sleep(2);
+								// cout << "1 se
+								// seleciono: "
+								// << filas1 <<
+								// "," <<
+								// colums1 << "
+								// hacia " <<
+								// filas2 << " ,
+								// " << colums2
+								// << endl;
+								// dormir(2);
 								blackMovement();
 								return 1;
 							}
 							else
 							{
-								// de donde parto
+								// de donde
+								// parto
 								filas1 = i;
 								colums1 = j;
-								//a donde voy
+								// a donde voy
 								filas2 = i + 1;
 								colums2 = j + 1;
-								// cout << "2 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
-								// cout << "los iteradores son: " << i << "," << j << endl;
+								// cout << "2 se
+								// seleciono: "
+								// << filas1 <<
+								// "," <<
+								// colums1 << "
+								// hacia " <<
+								// filas2 << ",
+								// " << colums2
+								// << endl; cout
+								// << "los
+								// iteradores
+								// son: " << i
+								// << "," << j
+								// << endl;
 								// pause();
 								blackMovement();
 								return 1;
@@ -1056,37 +1272,72 @@ bool Table::cpuBlackMovement()
 					// diagonal superior derecha
 					else if (i - 1 >= 0 && j + 1 < 8)
 					{
-						if ((T[i - 1][j + 1] == blank) || ((i - 2 >= 0 && j + 2 < 8 && T[i - 1][j + 1] == white || T[i - 1][j + 1] == crownW) && T[i - 2][j + 2] == blank))
+						if ((T[i - 1][j + 1] ==
+							 blank) ||
+							((i - 2 >= 0 && j + 2 < 8 &&
+								  T[i - 1][j + 1] ==
+									  white ||
+							  T[i - 1][j + 1] ==
+								  crownW) &&
+							 T[i - 2][j + 2] ==
+								 blank))
 						{
-							if (((i - 2 >= 0 && j + 2 < 8 && T[i - 1][j + 1] == white || T[i - 1][j + 1] == crownW) && T[i - 2][j + 2] == blank))
+							if (((i - 2 >= 0 &&
+									  j + 2 < 8 &&
+									  T[i - 1]
+									   [j + 1] ==
+										  white ||
+								  T[i - 1][j + 1] ==
+									  crownW) &&
+								 T[i - 2][j + 2] ==
+									 blank))
 							{
-								// de donde parto
+								// de donde
+								// parto
 								filas1 = i;
 								colums1 = j;
-								//a donde voy
+								// a donde voy
 								filas2 = i - 2;
 								colums2 = j + 2;
-								// cout << "3 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+								// cout << "3 se
+								// seleciono: "
+								// << filas1 <<
+								// "," <<
+								// colums1 << "
+								// hacia " <<
+								// filas2 << ",
+								// " << colums2
+								// << endl;
 								// pause();
 								blackMovement();
 								return 1;
 							}
 							else
 							{
-								// de donde parto
+								// de donde
+								// parto
 								filas1 = i;
 								colums1 = j;
-								//a donde voy
+								// a donde voy
 								filas2 = i - 1;
 								colums2 = j + 1;
-								// cout << "4 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+								// cout << "4 se
+								// seleciono: "
+								// << filas1 <<
+								// "," <<
+								// colums1 << "
+								// hacia " <<
+								// filas2 << ",
+								// " << colums2
+								// << endl;
 								// pause();
 								blackMovement();
 								return 1;
 							}
 
-							// cout << "en2: " << i << j << endl;
-							// cout << "negras\n";
+							// cout << "en2: " << i
+							// << j << endl; cout <<
+							// "negras\n";
 						}
 					}
 				}
@@ -1095,41 +1346,60 @@ bool Table::cpuBlackMovement()
 				if (T[i][j] == crownB)
 				{
 					int c = 1;
-					if (T[i - c][j + c] == blank && i - c >= 0 && j + c < 8)
+					if (T[i - c][j + c] == blank &&
+						i - c >= 0 && j + c < 8)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "negrasRsr\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "negrasRsr\n";
 						// mi ficha
 						filas1 = i;
 						colums1 = j;
 						// donde me voy
 						filas2 = i - c;
 						colums2 = j + c;
-						// cout << "5 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
-						// pause();
+						// cout << "5 se seleciono: " <<
+						// filas1 << "," << colums1 << "
+						// hacia " << filas2 << ", " <<
+						// colums2 << endl; pause();
 						crownBMovement();
 						return 1;
 					}
 					// diagonal superior derecha
-					for (int a = j; a < absoluteValue(j - 7) && i - c >= 0 && j + c < 8; a++)
+					for (int a = j;
+						 a < absoluteValue(j - 7) &&
+						 i - c >= 0 && j + c < 8;
+						 a++)
 					{
 						// se puede mover
 						// hasta ahi no se puede mover
-						if (T[i - c][j + c] == Black || T[i - c][j + c] == crownB)
+						if (T[i - c][j + c] == Black ||
+							T[i - c][j + c] == crownB)
 						{
 							break;
 						}
-						if ((T[i - c][j + c] == white || T[i - c][j + c] == crownW) && T[i - (c + 1)][j + (c + 1)] == blank && i - (c + 1) >= 0 && j + (c + 1) < 8)
+						if ((T[i - c][j + c] == white ||
+							 T[i - c][j + c] ==
+								 crownW) &&
+							T[i - (c + 1)]
+							 [j + (c + 1)] == blank &&
+							i - (c + 1) >= 0 &&
+							j + (c + 1) < 8)
 						{
-							// cout << "en: " << i << j << endl;
-							// cout << "negrasRsr\n";
-							// mi ficha
+							// cout << "en: " << i
+							// << j << endl; cout <<
+							// "negrasRsr\n"; mi
+							// ficha
 							filas1 = i;
 							colums1 = j;
 							// donde me voy a mover
 							filas2 = i - (c + 1);
 							colums2 = j + (c + 1);
-							// cout << "6 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+							// cout << "6 se
+							// seleciono: " <<
+							// filas1 << "," <<
+							// colums1 << " hacia "
+							// << filas2 << ", " <<
+							// colums2 << endl;
 							// pause();
 							crownBMovement();
 							return 1;
@@ -1139,40 +1409,60 @@ bool Table::cpuBlackMovement()
 					// note: listo
 					c = 1;
 					// se puede mover
-					if (T[i + c][j + c] == blank && i + c < 8 && j + c < 8)
+					if (T[i + c][j + c] == blank &&
+						i + c < 8 && j + c < 8)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "negrasRir\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "negrasRir\n";
 						// mi ficha
 						filas1 = i;
 						colums1 = j;
-						//donde me voy a mover
+						// donde me voy a mover
 						filas2 = i + c;
 						colums2 = j + c;
-						// cout << "7 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
-						// pause();
+						// cout << "7 se seleciono: " <<
+						// filas1 << "," << colums1 << "
+						// hacia " << filas2 << ", " <<
+						// colums2 << endl; pause();
 						crownBMovement();
 						return 1;
 					}
 					// diagonal inferior derecha
-					for (int a = j; a < absoluteValue(j - 7) && i + c < 8 && j + c < 8; a++)
+					for (int a = j;
+						 a < absoluteValue(j - 7) &&
+						 i + c < 8 && j + c < 8;
+						 a++)
 					{
 						// hasta ahi no se puede mover
-						if (T[i + c][j + c] == Black || T[i + c][j + c] == crownB)
+						if (T[i + c][j + c] == Black ||
+							T[i + c][j + c] == crownB)
 						{
 							break;
 						}
-						if ((T[i + c][j + c] == white || T[i + c][j + c] == crownW) && T[i + (c + 1)][j + (c + 1)] == blank && i + (c + 1) < 8 && j + (c + 1) < 8)
+						if ((T[i + c][j + c] == white ||
+							 T[i + c][j + c] ==
+								 crownW) &&
+							T[i + (c + 1)]
+							 [j + (c + 1)] == blank &&
+							i + (c + 1) < 8 &&
+							j + (c + 1) < 8)
 						{
-							// cout << "en: " << i << j << endl;
-							// cout << "negrasRir\n";
-							// mi ficha
+							// cout << "en: " << i
+							// << j << endl; cout <<
+							// "negrasRir\n"; mi
+							// ficha
 							filas1 = i;
 							colums1 = j;
-							// ficha donde me voy a mover
+							// ficha donde me voy a
+							// mover
 							filas2 = i + (c + 1);
 							colums2 = j + (c + 1);
-							// cout << "8 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+							// cout << "8 se
+							// seleciono: " <<
+							// filas1 << "," <<
+							// colums1 << " hacia "
+							// << filas2 << ", " <<
+							// colums2 << endl;
 							// pause();
 							crownBMovement();
 							return 1;
@@ -1182,40 +1472,59 @@ bool Table::cpuBlackMovement()
 					// note listo
 					c = 1;
 					// se puede mover
-					if (T[i - c][j - c] == blank && i - c >= 0 && j - c >= 0)
+					if (T[i - c][j - c] == blank &&
+						i - c >= 0 && j - c >= 0)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "negrasRsi\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "negrasRsi\n";
 						// mi ficha
 						filas1 = i;
 						colums1 = j;
 						// donde voy
 						filas2 = i - c;
 						colums2 = j - c;
-						// cout << "9 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
-						// pause();
+						// cout << "9 se seleciono: " <<
+						// filas1 << "," << colums1 << "
+						// hacia " << filas2 << ", " <<
+						// colums2 << endl; pause();
 						crownBMovement();
 						return 1;
 					}
 					// diagonal superior izquierda
-					for (int a = j; a < absoluteValue(j - 7) && i - c >= 0 && j - c >= 0; a++)
+					for (int a = j;
+						 a < absoluteValue(j - 7) &&
+						 i - c >= 0 && j - c >= 0;
+						 a++)
 					{
 						// hasta ahi no se puede mover
-						if (T[i - c][j - c] == Black || T[i - c][j - c] == crownB)
+						if (T[i - c][j - c] == Black ||
+							T[i - c][j - c] == crownB)
 						{
 							break;
 						}
-						if ((T[i - c][j - c] == white || T[i - c][j - c] == crownW) && T[i - (c + 1)][j - (c + 1)] == blank && i - (c + 1) >= 0 && j - (c + 1) >= 0)
+						if ((T[i - c][j - c] == white ||
+							 T[i - c][j - c] ==
+								 crownW) &&
+							T[i - (c + 1)]
+							 [j - (c + 1)] == blank &&
+							i - (c + 1) >= 0 &&
+							j - (c + 1) >= 0)
 						{
-							// cout << "en: " << i << j << endl;
-							// cout << "negrasRsi\n";
-							// mi ficha
+							// cout << "en: " << i
+							// << j << endl; cout <<
+							// "negrasRsi\n"; mi
+							// ficha
 							filas1 = i;
 							colums1 = j;
 							// donde voy
 							filas2 = i - (c + 1);
 							colums2 = j - (c + 1);
-							// cout << "10 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+							// cout << "10 se
+							// seleciono: " <<
+							// filas1 << "," <<
+							// colums1 << " hacia "
+							// << filas2 << ", " <<
+							// colums2 << endl;
 							// pause();
 							crownBMovement();
 							return 1;
@@ -1225,39 +1534,60 @@ bool Table::cpuBlackMovement()
 					// note listo
 					c = 1;
 					// se puede mover
-					if (T[i + c][j - c] == blank && i + c < 8 && j - c >= 0)
+					if (T[i + c][j - c] == blank &&
+						i + c < 8 && j - c >= 0)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "negrasRii\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "negrasRii\n";
 						filas1 = i;
 						colums1 = j;
 						// donde voy
 						filas2 = i + c;
 						colums2 = j - c;
-						// cout << "11 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+						// cout << "11 se seleciono: "
+						// << filas1 << "," << colums1
+						// << " hacia " << filas2 << ",
+						// " << colums2 << endl;
 						// pause();
 						crownBMovement();
 						return 1;
 					}
 					// diagonal inferior izquierda
-					for (int a = j; a < absoluteValue(j - 7) && i + c < 8 && j - c >= 0; a++)
+					for (int a = j;
+						 a < absoluteValue(j - 7) &&
+						 i + c < 8 && j - c >= 0;
+						 a++)
 					{
 						// hasta ahi no se puede mover
-						if (T[i + c][j - c] == Black || T[i + c][j - c] == crownB)
+						if (T[i + c][j - c] == Black ||
+							T[i + c][j - c] == crownB)
 						{
 							break;
 						}
-						if ((T[i + c][j - c] == white || T[i + c][j - c] == crownW) && T[i + (c + 1)][j - (c + 1)] == blank && i + (c + 1) < 8 && j - (c + 1) >= 0)
+						if ((T[i + c][j - c] == white ||
+							 T[i + c][j - c] ==
+								 crownW) &&
+							T[i + (c + 1)]
+							 [j - (c + 1)] == blank &&
+							i + (c + 1) < 8 &&
+							j - (c + 1) >= 0)
 						{
-							// 	cout << "en: " << i << j << endl;
-							// 	cout << "negrasRii\n";
-							// mi ficha
+							// 	cout << "en: "
+							// << i << j << endl;
+							// 	cout <<
+							// "negrasRii\n"; mi
+							// ficha
 							filas1 = i;
 							colums1 = j;
 							// donde voy
 							filas2 = i + (c + 1);
 							colums2 = j - (c + 1);
-							// cout << "12 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+							// cout << "12 se
+							// seleciono: " <<
+							// filas1 << "," <<
+							// colums1 << " hacia "
+							// << filas2 << ", " <<
+							// colums2 << endl;
 							// pause();
 							crownBMovement();
 							return 1;
@@ -1280,34 +1610,73 @@ bool Table::cpuBlackMovement()
 					// diagonal inferior derecha
 					if (i + 1 < 8 && j + 1 < 8)
 					{
-						if ((T[i + 1][j + 1] == blank) || ((i + 2 < 8 && j + 2 < 8 && T[i + 1][j + 1] == white || T[i + 1][j + 1] == crownW) && T[i + 2][j + 2] == blank))
+						if ((T[i + 1][j + 1] ==
+							 blank) ||
+							((i + 2 < 8 && j + 2 < 8 &&
+								  T[i + 1][j + 1] ==
+									  white ||
+							  T[i + 1][j + 1] ==
+								  crownW) &&
+							 T[i + 2][j + 2] ==
+								 blank))
 						{
-							// cout << "en1: " << i << j << endl;
-							// cout << "negras\n";
-							if (((i + 2 < 8 && j + 2 < 8 && T[i + 1][j + 1] == white || T[i + 1][j + 1] == crownW) && T[i + 2][j + 2] == blank))
+							// cout << "en1: " << i
+							// << j << endl; cout <<
+							// "negras\n";
+							if (((i + 2 < 8 &&
+									  j + 2 < 8 &&
+									  T[i + 1]
+									   [j + 1] ==
+										  white ||
+								  T[i + 1][j + 1] ==
+									  crownW) &&
+								 T[i + 2][j + 2] ==
+									 blank))
 							{
-								// de donde parto
+								// de donde
+								// parto
 								filas1 = i;
 								colums1 = j;
-								//a donde voy
+								// a donde voy
 								filas2 = i + 2;
 								colums2 = j + 2;
-								// cout << "1 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << " , " << colums2 << endl;
+								// cout << "1 se
+								// seleciono: "
+								// << filas1 <<
+								// "," <<
+								// colums1 << "
+								// hacia " <<
+								// filas2 << " ,
+								// " << colums2
+								// << endl;
 								// pause();
 								blackMovement();
 								return 1;
 							}
 							else
 							{
-								// de donde parto
+								// de donde
+								// parto
 								filas1 = i;
 								colums1 = j;
-								//a donde voy
+								// a donde voy
 								filas2 = i + 1;
 								colums2 = j + 1;
-								// cout << "2 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
-								// cout << "los iteradores son: " << i << "," << j << endl;
-								sleep(2);
+								// cout << "2 se
+								// seleciono: "
+								// << filas1 <<
+								// "," <<
+								// colums1 << "
+								// hacia " <<
+								// filas2 << ",
+								// " << colums2
+								// << endl; cout
+								// << "los
+								// iteradores
+								// son: " << i
+								// << "," << j
+								// << endl;
+								dormir(2);
 								blackMovement();
 								return 1;
 							}
@@ -1319,37 +1688,72 @@ bool Table::cpuBlackMovement()
 					// diagonal superior derecha
 					else if (i - 1 >= 0 && j + 1 < 8)
 					{
-						if ((T[i - 1][j + 1] == blank) || ((i - 2 >= 0 && j + 2 < 8 && T[i - 1][j + 1] == white || T[i - 1][j + 1] == crownW) && T[i - 2][j + 2] == blank))
+						if ((T[i - 1][j + 1] ==
+							 blank) ||
+							((i - 2 >= 0 && j + 2 < 8 &&
+								  T[i - 1][j + 1] ==
+									  white ||
+							  T[i - 1][j + 1] ==
+								  crownW) &&
+							 T[i - 2][j + 2] ==
+								 blank))
 						{
-							if (((i - 2 >= 0 && j + 2 < 8 && T[i - 1][j + 1] == white || T[i - 1][j + 1] == crownW) && T[i - 2][j + 2] == blank))
+							if (((i - 2 >= 0 &&
+									  j + 2 < 8 &&
+									  T[i - 1]
+									   [j + 1] ==
+										  white ||
+								  T[i - 1][j + 1] ==
+									  crownW) &&
+								 T[i - 2][j + 2] ==
+									 blank))
 							{
-								// de donde parto
+								// de donde
+								// parto
 								filas1 = i;
 								colums1 = j;
-								//a donde voy
+								// a donde voy
 								filas2 = i - 2;
 								colums2 = j + 2;
-								// cout << "3 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+								// cout << "3 se
+								// seleciono: "
+								// << filas1 <<
+								// "," <<
+								// colums1 << "
+								// hacia " <<
+								// filas2 << ",
+								// " << colums2
+								// << endl;
 								// pause();
 								blackMovement();
 								return 1;
 							}
 							else
 							{
-								// de donde parto
+								// de donde
+								// parto
 								filas1 = i;
 								colums1 = j;
-								//a donde voy
+								// a donde voy
 								filas2 = i - 1;
 								colums2 = j + 1;
-								// cout << "4 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+								// cout << "4 se
+								// seleciono: "
+								// << filas1 <<
+								// "," <<
+								// colums1 << "
+								// hacia " <<
+								// filas2 << ",
+								// " << colums2
+								// << endl;
 								// pause();
 								blackMovement();
 								return 1;
 							}
 
-							// cout << "en2: " << i << j << endl;
-							// cout << "negras\n";
+							// cout << "en2: " << i
+							// << j << endl; cout <<
+							// "negras\n";
 						}
 					}
 				}
@@ -1358,41 +1762,60 @@ bool Table::cpuBlackMovement()
 				if (T[i][j] == crownB)
 				{
 					int c = 1;
-					if (T[i - c][j + c] == blank && i - c >= 0 && j + c < 8)
+					if (T[i - c][j + c] == blank &&
+						i - c >= 0 && j + c < 8)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "negrasRsr\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "negrasRsr\n";
 						// mi ficha
 						filas1 = i;
 						colums1 = j;
 						// donde me voy
 						filas2 = i - c;
 						colums2 = j + c;
-						// cout << "5 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
-						// pause();
+						// cout << "5 se seleciono: " <<
+						// filas1 << "," << colums1 << "
+						// hacia " << filas2 << ", " <<
+						// colums2 << endl; pause();
 						crownBMovement();
 						return 1;
 					}
 					// diagonal superior derecha
-					for (int a = j; a < absoluteValue(j - 7) && i - c >= 0 && j + c < 8; a++)
+					for (int a = j;
+						 a < absoluteValue(j - 7) &&
+						 i - c >= 0 && j + c < 8;
+						 a++)
 					{
 						// se puede mover
 						// hasta ahi no se puede mover
-						if (T[i - c][j + c] == Black || T[i - c][j + c] == crownB)
+						if (T[i - c][j + c] == Black ||
+							T[i - c][j + c] == crownB)
 						{
 							break;
 						}
-						if ((T[i - c][j + c] == white || T[i - c][j + c] == crownW) && T[i - (c + 1)][j + (c + 1)] == blank && i - (c + 1) >= 0 && j + (c + 1) < 8)
+						if ((T[i - c][j + c] == white ||
+							 T[i - c][j + c] ==
+								 crownW) &&
+							T[i - (c + 1)]
+							 [j + (c + 1)] == blank &&
+							i - (c + 1) >= 0 &&
+							j + (c + 1) < 8)
 						{
-							// cout << "en: " << i << j << endl;
-							// cout << "negrasRsr\n";
-							// mi ficha
+							// cout << "en: " << i
+							// << j << endl; cout <<
+							// "negrasRsr\n"; mi
+							// ficha
 							filas1 = i;
 							colums1 = j;
 							// donde me voy a mover
 							filas2 = i - (c + 1);
 							colums2 = j + (c + 1);
-							// cout << "6 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+							// cout << "6 se
+							// seleciono: " <<
+							// filas1 << "," <<
+							// colums1 << " hacia "
+							// << filas2 << ", " <<
+							// colums2 << endl;
 							// pause();
 							crownBMovement();
 							return 1;
@@ -1402,40 +1825,60 @@ bool Table::cpuBlackMovement()
 					// note: listo
 					c = 1;
 					// se puede mover
-					if (T[i + c][j + c] == blank && i + c < 8 && j + c < 8)
+					if (T[i + c][j + c] == blank &&
+						i + c < 8 && j + c < 8)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "negrasRir\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "negrasRir\n";
 						// mi ficha
 						filas1 = i;
 						colums1 = j;
-						//donde me voy a mover
+						// donde me voy a mover
 						filas2 = i + c;
 						colums2 = j + c;
-						// cout << "7 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
-						// pause();
+						// cout << "7 se seleciono: " <<
+						// filas1 << "," << colums1 << "
+						// hacia " << filas2 << ", " <<
+						// colums2 << endl; pause();
 						crownBMovement();
 						return 1;
 					}
 					// diagonal inferior derecha
-					for (int a = j; a < absoluteValue(j - 7) && i + c < 8 && j + c < 8; a++)
+					for (int a = j;
+						 a < absoluteValue(j - 7) &&
+						 i + c < 8 && j + c < 8;
+						 a++)
 					{
 						// hasta ahi no se puede mover
-						if (T[i + c][j + c] == Black || T[i + c][j + c] == crownB)
+						if (T[i + c][j + c] == Black ||
+							T[i + c][j + c] == crownB)
 						{
 							break;
 						}
-						if ((T[i + c][j + c] == white || T[i + c][j + c] == crownW) && T[i + (c + 1)][j + (c + 1)] == blank && i + (c + 1) < 8 && j + (c + 1) < 8)
+						if ((T[i + c][j + c] == white ||
+							 T[i + c][j + c] ==
+								 crownW) &&
+							T[i + (c + 1)]
+							 [j + (c + 1)] == blank &&
+							i + (c + 1) < 8 &&
+							j + (c + 1) < 8)
 						{
-							// cout << "en: " << i << j << endl;
-							// cout << "negrasRir\n";
-							// mi ficha
+							// cout << "en: " << i
+							// << j << endl; cout <<
+							// "negrasRir\n"; mi
+							// ficha
 							filas1 = i;
 							colums1 = j;
-							// ficha donde me voy a mover
+							// ficha donde me voy a
+							// mover
 							filas2 = i + (c + 1);
 							colums2 = j + (c + 1);
-							// cout << "8 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+							// cout << "8 se
+							// seleciono: " <<
+							// filas1 << "," <<
+							// colums1 << " hacia "
+							// << filas2 << ", " <<
+							// colums2 << endl;
 							// pause();
 							crownBMovement();
 							return 1;
@@ -1445,40 +1888,59 @@ bool Table::cpuBlackMovement()
 					// note listo
 					c = 1;
 					// se puede mover
-					if (T[i - c][j - c] == blank && i - c >= 0 && j - c >= 0)
+					if (T[i - c][j - c] == blank &&
+						i - c >= 0 && j - c >= 0)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "negrasRsi\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "negrasRsi\n";
 						// mi ficha
 						filas1 = i;
 						colums1 = j;
 						// donde voy
 						filas2 = i - c;
 						colums2 = j - c;
-						// cout << "9 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
-						// pause();
+						// cout << "9 se seleciono: " <<
+						// filas1 << "," << colums1 << "
+						// hacia " << filas2 << ", " <<
+						// colums2 << endl; pause();
 						crownBMovement();
 						return 1;
 					}
 					// diagonal superior izquierda
-					for (int a = j; a < absoluteValue(j - 7) && i - c >= 0 && j - c >= 0; a++)
+					for (int a = j;
+						 a < absoluteValue(j - 7) &&
+						 i - c >= 0 && j - c >= 0;
+						 a++)
 					{
 						// hasta ahi no se puede mover
-						if (T[i - c][j - c] == Black || T[i - c][j - c] == crownB)
+						if (T[i - c][j - c] == Black ||
+							T[i - c][j - c] == crownB)
 						{
 							break;
 						}
-						if ((T[i - c][j - c] == white || T[i - c][j - c] == crownW) && T[i - (c + 1)][j - (c + 1)] == blank && i - (c + 1) >= 0 && j - (c + 1) >= 0)
+						if ((T[i - c][j - c] == white ||
+							 T[i - c][j - c] ==
+								 crownW) &&
+							T[i - (c + 1)]
+							 [j - (c + 1)] == blank &&
+							i - (c + 1) >= 0 &&
+							j - (c + 1) >= 0)
 						{
-							// cout << "en: " << i << j << endl;
-							// cout << "negrasRsi\n";
-							// mi ficha
+							// cout << "en: " << i
+							// << j << endl; cout <<
+							// "negrasRsi\n"; mi
+							// ficha
 							filas1 = i;
 							colums1 = j;
 							// donde voy
 							filas2 = i - (c + 1);
 							colums2 = j - (c + 1);
-							// cout << "10 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+							// cout << "10 se
+							// seleciono: " <<
+							// filas1 << "," <<
+							// colums1 << " hacia "
+							// << filas2 << ", " <<
+							// colums2 << endl;
 							// pause();
 							crownBMovement();
 							return 1;
@@ -1488,39 +1950,60 @@ bool Table::cpuBlackMovement()
 					// note listo
 					c = 1;
 					// se puede mover
-					if (T[i + c][j - c] == blank && i + c < 8 && j - c >= 0)
+					if (T[i + c][j - c] == blank &&
+						i + c < 8 && j - c >= 0)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "negrasRii\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "negrasRii\n";
 						filas1 = i;
 						colums1 = j;
 						// donde voy
 						filas2 = i + c;
 						colums2 = j - c;
-						// cout << "11 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+						// cout << "11 se seleciono: "
+						// << filas1 << "," << colums1
+						// << " hacia " << filas2 << ",
+						// " << colums2 << endl;
 						// pause();
 						crownBMovement();
 						return 1;
 					}
 					// diagonal inferior izquierda
-					for (int a = j; a < absoluteValue(j - 7) && i + c < 8 && j - c >= 0; a++)
+					for (int a = j;
+						 a < absoluteValue(j - 7) &&
+						 i + c < 8 && j - c >= 0;
+						 a++)
 					{
 						// hasta ahi no se puede mover
-						if (T[i + c][j - c] == Black || T[i + c][j - c] == crownB)
+						if (T[i + c][j - c] == Black ||
+							T[i + c][j - c] == crownB)
 						{
 							break;
 						}
-						if ((T[i + c][j - c] == white || T[i + c][j - c] == crownW) && T[i + (c + 1)][j - (c + 1)] == blank && i + (c + 1) < 8 && j - (c + 1) >= 0)
+						if ((T[i + c][j - c] == white ||
+							 T[i + c][j - c] ==
+								 crownW) &&
+							T[i + (c + 1)]
+							 [j - (c + 1)] == blank &&
+							i + (c + 1) < 8 &&
+							j - (c + 1) >= 0)
 						{
-							// 	cout << "en: " << i << j << endl;
-							// 	cout << "negrasRii\n";
-							// mi ficha
+							// 	cout << "en: "
+							// << i << j << endl;
+							// 	cout <<
+							// "negrasRii\n"; mi
+							// ficha
 							filas1 = i;
 							colums1 = j;
 							// donde voy
 							filas2 = i + (c + 1);
 							colums2 = j - (c + 1);
-							// cout << "12 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+							// cout << "12 se
+							// seleciono: " <<
+							// filas1 << "," <<
+							// colums1 << " hacia "
+							// << filas2 << ", " <<
+							// colums2 << endl;
 							// pause();
 							crownBMovement();
 							return 1;
@@ -1553,19 +2036,44 @@ bool Table::cpuWhiteMovement()
 					// diagonal inferior izquierda
 					if (i + 1 < 8 && j - 1 >= 0)
 					{
-						if ((T[i + 1][j - 1] == blank) || ((i + 2 < 8 && j - 2 >= 0 && T[i + 1][j - 1] == Black || T[i + 1][j - 1] == crownB) && T[i + 2][j - 2] == blank))
+						if ((T[i + 1][j - 1] ==
+							 blank) ||
+							((i + 2 < 8 && j - 2 >= 0 &&
+								  T[i + 1][j - 1] ==
+									  Black ||
+							  T[i + 1][j - 1] ==
+								  crownB) &&
+							 T[i + 2][j - 2] ==
+								 blank))
 						{
-							// cout << "en1: " << i << j << endl;
-							// cout << "blancas\n";
-							if (((i + 2 < 8 && j - 2 >= 0 && T[i + 1][j - 1] == Black || T[i + 1][j - 1] == crownB) && T[i + 2][j - 2] == blank))
+							// cout << "en1: " << i
+							// << j << endl; cout <<
+							// "blancas\n";
+							if (((i + 2 < 8 &&
+									  j - 2 >= 0 &&
+									  T[i + 1]
+									   [j - 1] ==
+										  Black ||
+								  T[i + 1][j - 1] ==
+									  crownB) &&
+								 T[i + 2][j - 2] ==
+									 blank))
 							{
 								// mi ficha
 								filas1 = i;
 								colums1 = j;
-								//donde voy
+								// donde voy
 								filas2 = i + 2;
 								colums2 = j - 2;
-								// cout << "1 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+								// cout << "1 se
+								// seleciono: "
+								// << filas1 <<
+								// "," <<
+								// colums1 << "
+								// hacia " <<
+								// filas2 << ",
+								// " << colums2
+								// << endl;
 								// pause();
 								whiteMovement();
 								return 1;
@@ -1578,7 +2086,15 @@ bool Table::cpuWhiteMovement()
 								// donde voy
 								filas2 = i + 1;
 								colums2 = j - 1;
-								// cout << "2 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+								// cout << "2 se
+								// seleciono: "
+								// << filas1 <<
+								// "," <<
+								// colums1 << "
+								// hacia " <<
+								// filas2 << ",
+								// " << colums2
+								// << endl;
 								// pause();
 								whiteMovement();
 								return 1;
@@ -1586,14 +2102,32 @@ bool Table::cpuWhiteMovement()
 						}
 					}
 
-					//diagonal superior derecha
+					// diagonal superior derecha
 					if (i - 1 >= 0 && j - 1 >= 0)
 					{
-						if ((T[i - 1][j - 1] == blank) || ((i - 2 >= 0 && j - 2 >= 0 && T[i - 1][j - 1] == Black || T[i - 1][j - 1] == crownB) && T[i - 2][j - 2] == blank))
+						if ((T[i - 1][j - 1] ==
+							 blank) ||
+							((i - 2 >= 0 &&
+								  j - 2 >= 0 &&
+								  T[i - 1][j - 1] ==
+									  Black ||
+							  T[i - 1][j - 1] ==
+								  crownB) &&
+							 T[i - 2][j - 2] ==
+								 blank))
 						{
-							// cout << "en2: " << i << j << endl;
-							// cout << "blancas\n";
-							if (((i - 2 >= 0 && j - 2 >= 0 && T[i - 1][j - 1] == Black || T[i - 1][j - 1] == crownB) && T[i - 2][j - 2] == blank))
+							// cout << "en2: " << i
+							// << j << endl; cout <<
+							// "blancas\n";
+							if (((i - 2 >= 0 &&
+									  j - 2 >= 0 &&
+									  T[i - 1]
+									   [j - 1] ==
+										  Black ||
+								  T[i - 1][j - 1] ==
+									  crownB) &&
+								 T[i - 2][j - 2] ==
+									 blank))
 							{
 								// mi ficha
 								filas1 = i;
@@ -1601,7 +2135,15 @@ bool Table::cpuWhiteMovement()
 								// donde yo voy
 								filas2 = i - 2;
 								colums2 = j - 2;
-								// cout << "3 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+								// cout << "3 se
+								// seleciono: "
+								// << filas1 <<
+								// "," <<
+								// colums1 << "
+								// hacia " <<
+								// filas2 << ",
+								// " << colums2
+								// << endl;
 								// pause();
 								whiteMovement();
 								return 1;
@@ -1614,7 +2156,15 @@ bool Table::cpuWhiteMovement()
 								// donde yo voy
 								filas2 = i - 1;
 								colums2 = j - 1;
-								// cout << "4 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+								// cout << "4 se
+								// seleciono: "
+								// << filas1 <<
+								// "," <<
+								// colums1 << "
+								// hacia " <<
+								// filas2 << ",
+								// " << colums2
+								// << endl;
 								// pause();
 								whiteMovement();
 								return 1;
@@ -1627,41 +2177,60 @@ bool Table::cpuWhiteMovement()
 				if (T[i][j] == crownW)
 				{
 					int c = 1;
-					if (T[i - c][j + c] == blank && i - c >= 0 && j + c < 8)
+					if (T[i - c][j + c] == blank &&
+						i - c >= 0 && j + c < 8)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "negrasRsr\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "negrasRsr\n";
 						// mi ficha
 						filas1 = i;
 						colums1 = j;
 						// donde me voy
 						filas2 = i - c;
 						colums2 = j + c;
-						// cout << "5 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
-						// pause();
+						// cout << "5 se seleciono: " <<
+						// filas1 << "," << colums1 << "
+						// hacia " << filas2 << ", " <<
+						// colums2 << endl; pause();
 						crownWMovement();
 						return 1;
 					}
 					// diagonal superior derecha
-					for (int a = j; a < absoluteValue(j - 7) && i - c >= 0 && j + c < 8; a++)
+					for (int a = j;
+						 a < absoluteValue(j - 7) &&
+						 i - c >= 0 && j + c < 8;
+						 a++)
 					{
 						// se puede mover
 						// hasta ahi no se puede mover
-						if (T[i - c][j + c] == white || T[i - c][j + c] == crownW)
+						if (T[i - c][j + c] == white ||
+							T[i - c][j + c] == crownW)
 						{
 							break;
 						}
-						if ((T[i - c][j + c] == Black || T[i - c][j + c] == crownB) && T[i - (c + 1)][j + (c + 1)] == blank && i - (c + 1) >= 0 && j + (c + 1) < 8)
+						if ((T[i - c][j + c] == Black ||
+							 T[i - c][j + c] ==
+								 crownB) &&
+							T[i - (c + 1)]
+							 [j + (c + 1)] == blank &&
+							i - (c + 1) >= 0 &&
+							j + (c + 1) < 8)
 						{
-							// cout << "en: " << i << j << endl;
-							// cout << "negrasRsr\n";
-							// mi ficha
+							// cout << "en: " << i
+							// << j << endl; cout <<
+							// "negrasRsr\n"; mi
+							// ficha
 							filas1 = i;
 							colums1 = j;
 							// donde me voy a mover
 							filas2 = i - (c + 1);
 							colums2 = j + (c + 1);
-							// cout << "6 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+							// cout << "6 se
+							// seleciono: " <<
+							// filas1 << "," <<
+							// colums1 << " hacia "
+							// << filas2 << ", " <<
+							// colums2 << endl;
 							// pause();
 							crownWMovement();
 							return 1;
@@ -1671,40 +2240,60 @@ bool Table::cpuWhiteMovement()
 					// note: listo
 					c = 1;
 					// se puede mover
-					if (T[i + c][j + c] == blank && i + c < 8 && j + c < 8)
+					if (T[i + c][j + c] == blank &&
+						i + c < 8 && j + c < 8)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "negrasRir\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "negrasRir\n";
 						// mi ficha
 						filas1 = i;
 						colums1 = j;
-						//donde me voy a mover
+						// donde me voy a mover
 						filas2 = i + c;
 						colums2 = j + c;
-						// cout << "7 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
-						// pause();
+						// cout << "7 se seleciono: " <<
+						// filas1 << "," << colums1 << "
+						// hacia " << filas2 << ", " <<
+						// colums2 << endl; pause();
 						crownWMovement();
 						return 1;
 					}
 					// diagonal inferior derecha
-					for (int a = j; a < absoluteValue(j - 7) && i + c < 8 && j + c < 8; a++)
+					for (int a = j;
+						 a < absoluteValue(j - 7) &&
+						 i + c < 8 && j + c < 8;
+						 a++)
 					{
 						// hasta ahi no se puede mover
-						if (T[i + c][j + c] == white || T[i + c][j + c] == crownW)
+						if (T[i + c][j + c] == white ||
+							T[i + c][j + c] == crownW)
 						{
 							break;
 						}
-						if ((T[i + c][j + c] == Black || T[i + c][j + c] == crownB) && T[i + (c + 1)][j + (c + 1)] == blank && i + (c + 1) < 8 && j + (c + 1) < 8)
+						if ((T[i + c][j + c] == Black ||
+							 T[i + c][j + c] ==
+								 crownB) &&
+							T[i + (c + 1)]
+							 [j + (c + 1)] == blank &&
+							i + (c + 1) < 8 &&
+							j + (c + 1) < 8)
 						{
-							// cout << "en: " << i << j << endl;
-							// cout << "negrasRir\n";
-							// mi ficha
+							// cout << "en: " << i
+							// << j << endl; cout <<
+							// "negrasRir\n"; mi
+							// ficha
 							filas1 = i;
 							colums1 = j;
-							// ficha donde me voy a mover
+							// ficha donde me voy a
+							// mover
 							filas2 = i + (c + 1);
 							colums2 = j + (c + 1);
-							// cout << "8 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+							// cout << "8 se
+							// seleciono: " <<
+							// filas1 << "," <<
+							// colums1 << " hacia "
+							// << filas2 << ", " <<
+							// colums2 << endl;
 							// pause();
 							crownWMovement();
 							return 1;
@@ -1714,40 +2303,59 @@ bool Table::cpuWhiteMovement()
 					// note listo
 					c = 1;
 					// se puede mover
-					if (T[i - c][j - c] == blank && i - c >= 0 && j - c >= 0)
+					if (T[i - c][j - c] == blank &&
+						i - c >= 0 && j - c >= 0)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "negrasRsi\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "negrasRsi\n";
 						// mi ficha
 						filas1 = i;
 						colums1 = j;
 						// donde voy
 						filas2 = i - c;
 						colums2 = j - c;
-						// cout << "9 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
-						// pause();
+						// cout << "9 se seleciono: " <<
+						// filas1 << "," << colums1 << "
+						// hacia " << filas2 << ", " <<
+						// colums2 << endl; pause();
 						crownWMovement();
 						return 1;
 					}
 					// diagonal superior izquierda
-					for (int a = j; a < absoluteValue(j - 7) && i - c >= 0 && j - c >= 0; a++)
+					for (int a = j;
+						 a < absoluteValue(j - 7) &&
+						 i - c >= 0 && j - c >= 0;
+						 a++)
 					{
 						// hasta ahi no se puede mover
-						if (T[i - c][j - c] == white || T[i - c][j - c] == crownW)
+						if (T[i - c][j - c] == white ||
+							T[i - c][j - c] == crownW)
 						{
 							break;
 						}
-						if ((T[i - c][j - c] == Black || T[i - c][j - c] == crownB) && T[i - (c + 1)][j - (c + 1)] == blank && i - (c + 1) >= 0 && j - (c + 1) >= 0)
+						if ((T[i - c][j - c] == Black ||
+							 T[i - c][j - c] ==
+								 crownB) &&
+							T[i - (c + 1)]
+							 [j - (c + 1)] == blank &&
+							i - (c + 1) >= 0 &&
+							j - (c + 1) >= 0)
 						{
-							// cout << "en: " << i << j << endl;
-							// cout << "negrasRsi\n";
-							// mi ficha
+							// cout << "en: " << i
+							// << j << endl; cout <<
+							// "negrasRsi\n"; mi
+							// ficha
 							filas1 = i;
 							colums1 = j;
 							// donde voy
 							filas2 = i - (c + 1);
 							colums2 = j - (c + 1);
-							// cout << "10 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+							// cout << "10 se
+							// seleciono: " <<
+							// filas1 << "," <<
+							// colums1 << " hacia "
+							// << filas2 << ", " <<
+							// colums2 << endl;
 							// pause();
 							crownWMovement();
 							return 1;
@@ -1757,39 +2365,60 @@ bool Table::cpuWhiteMovement()
 					// note listo
 					c = 1;
 					// se puede mover
-					if (T[i + c][j - c] == blank && i + c < 8 && j - c >= 0)
+					if (T[i + c][j - c] == blank &&
+						i + c < 8 && j - c >= 0)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "negrasRii\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "negrasRii\n";
 						filas1 = i;
 						colums1 = j;
 						// donde voy
 						filas2 = i + c;
 						colums2 = j - c;
-						// cout << "11 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+						// cout << "11 se seleciono: "
+						// << filas1 << "," << colums1
+						// << " hacia " << filas2 << ",
+						// " << colums2 << endl;
 						// pause();
 						crownWMovement();
 						return 1;
 					}
 					// diagonal inferior izquierda
-					for (int a = j; a < absoluteValue(j - 7) && i + c < 8 && j - c >= 0; a++)
+					for (int a = j;
+						 a < absoluteValue(j - 7) &&
+						 i + c < 8 && j - c >= 0;
+						 a++)
 					{
 						// hasta ahi no se puede mover
-						if (T[i + c][j - c] == white || T[i + c][j - c] == crownW)
+						if (T[i + c][j - c] == white ||
+							T[i + c][j - c] == crownW)
 						{
 							break;
 						}
-						if ((T[i + c][j - c] == Black || T[i + c][j - c] == crownB) && T[i + (c + 1)][j - (c + 1)] == blank && i + (c + 1) < 8 && j - (c + 1) >= 0)
+						if ((T[i + c][j - c] == Black ||
+							 T[i + c][j - c] ==
+								 crownB) &&
+							T[i + (c + 1)]
+							 [j - (c + 1)] == blank &&
+							i + (c + 1) < 8 &&
+							j - (c + 1) >= 0)
 						{
-							// 	cout << "en: " << i << j << endl;
-							// 	cout << "negrasRii\n";
-							// mi ficha
+							// 	cout << "en: "
+							// << i << j << endl;
+							// 	cout <<
+							// "negrasRii\n"; mi
+							// ficha
 							filas1 = i;
 							colums1 = j;
 							// donde voy
 							filas2 = i + (c + 1);
 							colums2 = j - (c + 1);
-							// cout << "12 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+							// cout << "12 se
+							// seleciono: " <<
+							// filas1 << "," <<
+							// colums1 << " hacia "
+							// << filas2 << ", " <<
+							// colums2 << endl;
 							// pause();
 							crownWMovement();
 							return 1;
@@ -1812,19 +2441,44 @@ bool Table::cpuWhiteMovement()
 					// diagonal inferior izquierda
 					if (i + 1 < 8 && j - 1 >= 0)
 					{
-						if ((T[i + 1][j - 1] == blank) || ((i + 2 < 8 && j - 2 >= 0 && T[i + 1][j - 1] == Black || T[i + 1][j - 1] == crownB) && T[i + 2][j - 2] == blank))
+						if ((T[i + 1][j - 1] ==
+							 blank) ||
+							((i + 2 < 8 && j - 2 >= 0 &&
+								  T[i + 1][j - 1] ==
+									  Black ||
+							  T[i + 1][j - 1] ==
+								  crownB) &&
+							 T[i + 2][j - 2] ==
+								 blank))
 						{
-							// cout << "en1: " << i << j << endl;
-							// cout << "blancas\n";
-							if (((i + 2 < 8 && j - 2 >= 0 && T[i + 1][j - 1] == Black || T[i + 1][j - 1] == crownB) && T[i + 2][j - 2] == blank))
+							// cout << "en1: " << i
+							// << j << endl; cout <<
+							// "blancas\n";
+							if (((i + 2 < 8 &&
+									  j - 2 >= 0 &&
+									  T[i + 1]
+									   [j - 1] ==
+										  Black ||
+								  T[i + 1][j - 1] ==
+									  crownB) &&
+								 T[i + 2][j - 2] ==
+									 blank))
 							{
 								// mi ficha
 								filas1 = i;
 								colums1 = j;
-								//donde voy
+								// donde voy
 								filas2 = i + 2;
 								colums2 = j - 2;
-								// cout << "1 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+								// cout << "1 se
+								// seleciono: "
+								// << filas1 <<
+								// "," <<
+								// colums1 << "
+								// hacia " <<
+								// filas2 << ",
+								// " << colums2
+								// << endl;
 								// pause();
 								whiteMovement();
 								return 1;
@@ -1837,7 +2491,15 @@ bool Table::cpuWhiteMovement()
 								// donde voy
 								filas2 = i + 1;
 								colums2 = j - 1;
-								// cout << "2 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+								// cout << "2 se
+								// seleciono: "
+								// << filas1 <<
+								// "," <<
+								// colums1 << "
+								// hacia " <<
+								// filas2 << ",
+								// " << colums2
+								// << endl;
 								// pause();
 								whiteMovement();
 								return 1;
@@ -1845,14 +2507,32 @@ bool Table::cpuWhiteMovement()
 						}
 					}
 
-					//diagonal superior derecha
+					// diagonal superior derecha
 					if (i - 1 >= 0 && j - 1 >= 0)
 					{
-						if ((T[i - 1][j - 1] == blank) || ((i - 2 >= 0 && j - 2 >= 0 && T[i - 1][j - 1] == Black || T[i - 1][j - 1] == crownB) && T[i - 2][j - 2] == blank))
+						if ((T[i - 1][j - 1] ==
+							 blank) ||
+							((i - 2 >= 0 &&
+								  j - 2 >= 0 &&
+								  T[i - 1][j - 1] ==
+									  Black ||
+							  T[i - 1][j - 1] ==
+								  crownB) &&
+							 T[i - 2][j - 2] ==
+								 blank))
 						{
-							// cout << "en2: " << i << j << endl;
-							// cout << "blancas\n";
-							if (((i - 2 >= 0 && j - 2 >= 0 && T[i - 1][j - 1] == Black || T[i - 1][j - 1] == crownB) && T[i - 2][j - 2] == blank))
+							// cout << "en2: " << i
+							// << j << endl; cout <<
+							// "blancas\n";
+							if (((i - 2 >= 0 &&
+									  j - 2 >= 0 &&
+									  T[i - 1]
+									   [j - 1] ==
+										  Black ||
+								  T[i - 1][j - 1] ==
+									  crownB) &&
+								 T[i - 2][j - 2] ==
+									 blank))
 							{
 								// mi ficha
 								filas1 = i;
@@ -1860,7 +2540,15 @@ bool Table::cpuWhiteMovement()
 								// donde yo voy
 								filas2 = i - 2;
 								colums2 = j - 2;
-								// cout << "3 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+								// cout << "3 se
+								// seleciono: "
+								// << filas1 <<
+								// "," <<
+								// colums1 << "
+								// hacia " <<
+								// filas2 << ",
+								// " << colums2
+								// << endl;
 								// pause();
 								whiteMovement();
 								return 1;
@@ -1873,7 +2561,15 @@ bool Table::cpuWhiteMovement()
 								// donde yo voy
 								filas2 = i - 1;
 								colums2 = j - 1;
-								// cout << "4 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+								// cout << "4 se
+								// seleciono: "
+								// << filas1 <<
+								// "," <<
+								// colums1 << "
+								// hacia " <<
+								// filas2 << ",
+								// " << colums2
+								// << endl;
 								// pause();
 								whiteMovement();
 								return 1;
@@ -1886,41 +2582,60 @@ bool Table::cpuWhiteMovement()
 				if (T[i][j] == crownW)
 				{
 					int c = 1;
-					if (T[i - c][j + c] == blank && i - c >= 0 && j + c < 8)
+					if (T[i - c][j + c] == blank &&
+						i - c >= 0 && j + c < 8)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "negrasRsr\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "negrasRsr\n";
 						// mi ficha
 						filas1 = i;
 						colums1 = j;
 						// donde me voy
 						filas2 = i - c;
 						colums2 = j + c;
-						// cout << "5 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
-						// pause();
+						// cout << "5 se seleciono: " <<
+						// filas1 << "," << colums1 << "
+						// hacia " << filas2 << ", " <<
+						// colums2 << endl; pause();
 						crownWMovement();
 						return 1;
 					}
 					// diagonal superior derecha
-					for (int a = j; a < absoluteValue(j - 7) && i - c >= 0 && j + c < 8; a++)
+					for (int a = j;
+						 a < absoluteValue(j - 7) &&
+						 i - c >= 0 && j + c < 8;
+						 a++)
 					{
 						// se puede mover
 						// hasta ahi no se puede mover
-						if (T[i - c][j + c] == white || T[i - c][j + c] == crownW)
+						if (T[i - c][j + c] == white ||
+							T[i - c][j + c] == crownW)
 						{
 							break;
 						}
-						if ((T[i - c][j + c] == Black || T[i - c][j + c] == crownB) && T[i - (c + 1)][j + (c + 1)] == blank && i - (c + 1) >= 0 && j + (c + 1) < 8)
+						if ((T[i - c][j + c] == Black ||
+							 T[i - c][j + c] ==
+								 crownB) &&
+							T[i - (c + 1)]
+							 [j + (c + 1)] == blank &&
+							i - (c + 1) >= 0 &&
+							j + (c + 1) < 8)
 						{
-							// cout << "en: " << i << j << endl;
-							// cout << "negrasRsr\n";
-							// mi ficha
+							// cout << "en: " << i
+							// << j << endl; cout <<
+							// "negrasRsr\n"; mi
+							// ficha
 							filas1 = i;
 							colums1 = j;
 							// donde me voy a mover
 							filas2 = i - (c + 1);
 							colums2 = j + (c + 1);
-							// cout << "6 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+							// cout << "6 se
+							// seleciono: " <<
+							// filas1 << "," <<
+							// colums1 << " hacia "
+							// << filas2 << ", " <<
+							// colums2 << endl;
 							// pause();
 							crownWMovement();
 							return 1;
@@ -1930,40 +2645,60 @@ bool Table::cpuWhiteMovement()
 					// note: listo
 					c = 1;
 					// se puede mover
-					if (T[i + c][j + c] == blank && i + c < 8 && j + c < 8)
+					if (T[i + c][j + c] == blank &&
+						i + c < 8 && j + c < 8)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "negrasRir\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "negrasRir\n";
 						// mi ficha
 						filas1 = i;
 						colums1 = j;
-						//donde me voy a mover
+						// donde me voy a mover
 						filas2 = i + c;
 						colums2 = j + c;
-						// cout << "7 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
-						// pause();
+						// cout << "7 se seleciono: " <<
+						// filas1 << "," << colums1 << "
+						// hacia " << filas2 << ", " <<
+						// colums2 << endl; pause();
 						crownWMovement();
 						return 1;
 					}
 					// diagonal inferior derecha
-					for (int a = j; a < absoluteValue(j - 7) && i + c < 8 && j + c < 8; a++)
+					for (int a = j;
+						 a < absoluteValue(j - 7) &&
+						 i + c < 8 && j + c < 8;
+						 a++)
 					{
 						// hasta ahi no se puede mover
-						if (T[i + c][j + c] == white || T[i + c][j + c] == crownW)
+						if (T[i + c][j + c] == white ||
+							T[i + c][j + c] == crownW)
 						{
 							break;
 						}
-						if ((T[i + c][j + c] == Black || T[i + c][j + c] == crownB) && T[i + (c + 1)][j + (c + 1)] == blank && i + (c + 1) < 8 && j + (c + 1) < 8)
+						if ((T[i + c][j + c] == Black ||
+							 T[i + c][j + c] ==
+								 crownB) &&
+							T[i + (c + 1)]
+							 [j + (c + 1)] == blank &&
+							i + (c + 1) < 8 &&
+							j + (c + 1) < 8)
 						{
-							// cout << "en: " << i << j << endl;
-							// cout << "negrasRir\n";
-							// mi ficha
+							// cout << "en: " << i
+							// << j << endl; cout <<
+							// "negrasRir\n"; mi
+							// ficha
 							filas1 = i;
 							colums1 = j;
-							// ficha donde me voy a mover
+							// ficha donde me voy a
+							// mover
 							filas2 = i + (c + 1);
 							colums2 = j + (c + 1);
-							// cout << "8 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+							// cout << "8 se
+							// seleciono: " <<
+							// filas1 << "," <<
+							// colums1 << " hacia "
+							// << filas2 << ", " <<
+							// colums2 << endl;
 							// pause();
 							crownWMovement();
 							return 1;
@@ -1973,40 +2708,59 @@ bool Table::cpuWhiteMovement()
 					// note listo
 					c = 1;
 					// se puede mover
-					if (T[i - c][j - c] == blank && i - c >= 0 && j - c >= 0)
+					if (T[i - c][j - c] == blank &&
+						i - c >= 0 && j - c >= 0)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "negrasRsi\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "negrasRsi\n";
 						// mi ficha
 						filas1 = i;
 						colums1 = j;
 						// donde voy
 						filas2 = i - c;
 						colums2 = j - c;
-						// cout << "9 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
-						// pause();
+						// cout << "9 se seleciono: " <<
+						// filas1 << "," << colums1 << "
+						// hacia " << filas2 << ", " <<
+						// colums2 << endl; pause();
 						crownWMovement();
 						return 1;
 					}
 					// diagonal superior izquierda
-					for (int a = j; a < absoluteValue(j - 7) && i - c >= 0 && j - c >= 0; a++)
+					for (int a = j;
+						 a < absoluteValue(j - 7) &&
+						 i - c >= 0 && j - c >= 0;
+						 a++)
 					{
 						// hasta ahi no se puede mover
-						if (T[i - c][j - c] == white || T[i - c][j - c] == crownW)
+						if (T[i - c][j - c] == white ||
+							T[i - c][j - c] == crownW)
 						{
 							break;
 						}
-						if ((T[i - c][j - c] == Black || T[i - c][j - c] == crownB) && T[i - (c + 1)][j - (c + 1)] == blank && i - (c + 1) >= 0 && j - (c + 1) >= 0)
+						if ((T[i - c][j - c] == Black ||
+							 T[i - c][j - c] ==
+								 crownB) &&
+							T[i - (c + 1)]
+							 [j - (c + 1)] == blank &&
+							i - (c + 1) >= 0 &&
+							j - (c + 1) >= 0)
 						{
-							// cout << "en: " << i << j << endl;
-							// cout << "negrasRsi\n";
-							// mi ficha
+							// cout << "en: " << i
+							// << j << endl; cout <<
+							// "negrasRsi\n"; mi
+							// ficha
 							filas1 = i;
 							colums1 = j;
 							// donde voy
 							filas2 = i - (c + 1);
 							colums2 = j - (c + 1);
-							// cout << "10 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+							// cout << "10 se
+							// seleciono: " <<
+							// filas1 << "," <<
+							// colums1 << " hacia "
+							// << filas2 << ", " <<
+							// colums2 << endl;
 							// pause();
 							crownWMovement();
 							return 1;
@@ -2016,39 +2770,60 @@ bool Table::cpuWhiteMovement()
 					// note listo
 					c = 1;
 					// se puede mover
-					if (T[i + c][j - c] == blank && i + c < 8 && j - c >= 0)
+					if (T[i + c][j - c] == blank &&
+						i + c < 8 && j - c >= 0)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "negrasRii\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "negrasRii\n";
 						filas1 = i;
 						colums1 = j;
 						// donde voy
 						filas2 = i + c;
 						colums2 = j - c;
-						// cout << "11 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+						// cout << "11 se seleciono: "
+						// << filas1 << "," << colums1
+						// << " hacia " << filas2 << ",
+						// " << colums2 << endl;
 						// pause();
 						crownWMovement();
 						return 1;
 					}
 					// diagonal inferior izquierda
-					for (int a = j; a < absoluteValue(j - 7) && i + c < 8 && j - c >= 0; a++)
+					for (int a = j;
+						 a < absoluteValue(j - 7) &&
+						 i + c < 8 && j - c >= 0;
+						 a++)
 					{
 						// hasta ahi no se puede mover
-						if (T[i + c][j - c] == white || T[i + c][j - c] == crownW)
+						if (T[i + c][j - c] == white ||
+							T[i + c][j - c] == crownW)
 						{
 							break;
 						}
-						if ((T[i + c][j - c] == Black || T[i + c][j - c] == crownB) && T[i + (c + 1)][j - (c + 1)] == blank && i + (c + 1) < 8 && j - (c + 1) >= 0)
+						if ((T[i + c][j - c] == Black ||
+							 T[i + c][j - c] ==
+								 crownB) &&
+							T[i + (c + 1)]
+							 [j - (c + 1)] == blank &&
+							i + (c + 1) < 8 &&
+							j - (c + 1) >= 0)
 						{
-							// 	cout << "en: " << i << j << endl;
-							// 	cout << "negrasRii\n";
-							// mi ficha
+							// 	cout << "en: "
+							// << i << j << endl;
+							// 	cout <<
+							// "negrasRii\n"; mi
+							// ficha
 							filas1 = i;
 							colums1 = j;
 							// donde voy
 							filas2 = i + (c + 1);
 							colums2 = j - (c + 1);
-							// cout << "12 se seleciono: " << filas1 << "," << colums1 << " hacia " << filas2 << ", " << colums2 << endl;
+							// cout << "12 se
+							// seleciono: " <<
+							// filas1 << "," <<
+							// colums1 << " hacia "
+							// << filas2 << ", " <<
+							// colums2 << endl;
 							// pause();
 							crownWMovement();
 							return 1;
@@ -2067,8 +2842,9 @@ void Table::MessageToCpuWIsMovement()
 {
 	if (cpu == "blancas")
 	{
-		cout << cpuMovement << filas1 << "," << colums1 << " Hacia --> " << filas2 << "," << colums2 << endl;
-		sleep(2);
+		cout << cpuMovement << filas1 << "," << colums1 << " Hacia --> "
+			 << filas2 << "," << colums2 << endl;
+		dormir(2);
 	}
 }
 
@@ -2077,8 +2853,9 @@ void Table::MessageToCpuBIsMovement()
 {
 	if (cpu == "negras")
 	{
-		cout << cpuMovement << filas1 << "," << colums1 << " Hacia --> " << filas2 << "," << colums2 << endl;
-		sleep(2);
+		cout << cpuMovement << filas1 << "," << colums1 << " Hacia --> "
+			 << filas2 << "," << colums2 << endl;
+		dormir(2);
 	}
 }
 
@@ -2120,7 +2897,6 @@ bool Table::ValidateData(string numero)
 // ¿pueden mover las ficcha negras
 bool Table::canMoveBlack()
 {
-
 	for (int i = 0; i < 8; i++)
 	{
 		for (int j = 0; j < 8; j++)
@@ -2130,20 +2906,28 @@ bool Table::canMoveBlack()
 				// diagonal inferior derecha
 				if (i + 1 < 8 && j + 1 < 8)
 				{
-					if ((T[i + 1][j + 1] == blank) || ((i + 2 < 8 && j + 2 < 8 && T[i + 1][j + 1] == white || T[i + 1][j + 1] == crownW) && T[i + 2][j + 2] == blank))
+					if ((T[i + 1][j + 1] == blank) ||
+						((i + 2 < 8 && j + 2 < 8 &&
+							  T[i + 1][j + 1] == white ||
+						  T[i + 1][j + 1] == crownW) &&
+						 T[i + 2][j + 2] == blank))
 					{
-						// cout << "en1: " << i << j << endl;
-						// cout << "negras\n";
+						// cout << "en1: " << i << j <<
+						// endl; cout << "negras\n";
 						return true;
 					}
 				}
 				// diagonal superior derecha
 				else if (i - 1 >= 0 && j + 1 < 8)
 				{
-					if ((T[i - 1][j + 1] == blank) || ((i - 2 >= 0 && j + 2 < 8 && T[i - 1][j + 1] == white || T[i - 1][j + 1] == crownW) && T[i - 2][j + 2] == blank))
+					if ((T[i - 1][j + 1] == blank) ||
+						((i - 2 >= 0 && j + 2 < 8 &&
+							  T[i - 1][j + 1] == white ||
+						  T[i - 1][j + 1] == crownW) &&
+						 T[i - 2][j + 2] == blank))
 					{
-						// cout << "en2: " << i << j << endl;
-						// cout << "negras\n";
+						// cout << "en2: " << i << j <<
+						// endl; cout << "negras\n";
 						return true;
 					}
 				}
@@ -2153,97 +2937,134 @@ bool Table::canMoveBlack()
 			if (T[i][j] == crownB)
 			{
 				int c = 1;
-				if (T[i - c][j + c] == blank && i - c >= 0 && j + c < 8)
+				if (T[i - c][j + c] == blank && i - c >= 0 &&
+					j + c < 8)
 				{
 					// cout << "en: " << i << j << endl;
 					// cout << "negrasRsr\n";
 					return true;
 				}
 				// diagonal superior derecha
-				for (int a = j; a < absoluteValue(j - 7) && i - c >= 0 && j + c < 8; a++)
+				for (int a = j; a < absoluteValue(j - 7) &&
+								i - c >= 0 && j + c < 8;
+					 a++)
 				{
 					// se puede mover
 					// hasta ahi no se puede mover
-					if (T[i - c][j + c] == Black || T[i - c][j + c] == crownB)
+					if (T[i - c][j + c] == Black ||
+						T[i - c][j + c] == crownB)
 					{
 						break;
 					}
-					if ((T[i - c][j + c] == white || T[i - c][j + c] == crownW) && T[i - (c + 1)][j + (c + 1)] == blank && i - (c + 1) >= 0 && j + (c + 1) < 8)
+					if ((T[i - c][j + c] == white ||
+						 T[i - c][j + c] == crownW) &&
+						T[i - (c + 1)][j + (c + 1)] ==
+							blank &&
+						i - (c + 1) >= 0 &&
+						j + (c + 1) < 8)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "negrasRsr\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "negrasRsr\n";
 						return true;
 					}
 					c++;
 				}
 				c = 1;
 				// se puede mover
-				if (T[i + c][j + c] == blank && i + c < 8 && j + c < 8)
+				if (T[i + c][j + c] == blank && i + c < 8 &&
+					j + c < 8)
 				{
 					// cout << "en: " << i << j << endl;
 					// cout << "negrasRir\n";
 					return true;
 				}
 				// diagonal inferior derecha
-				for (int a = j; a < absoluteValue(j - 7) && i + c < 8 && j + c < 8; a++)
+				for (int a = j; a < absoluteValue(j - 7) &&
+								i + c < 8 && j + c < 8;
+					 a++)
 				{
 					// hasta ahi no se puede mover
-					if (T[i + c][j + c] == Black || T[i + c][j + c] == crownB)
+					if (T[i + c][j + c] == Black ||
+						T[i + c][j + c] == crownB)
 					{
 						break;
 					}
-					if ((T[i + c][j + c] == white || T[i + c][j + c] == crownW) && T[i + (c + 1)][j + (c + 1)] == blank && i + (c + 1) < 8 && j + (c + 1) < 8)
+					if ((T[i + c][j + c] == white ||
+						 T[i + c][j + c] == crownW) &&
+						T[i + (c + 1)][j + (c + 1)] ==
+							blank &&
+						i + (c + 1) < 8 &&
+						j + (c + 1) < 8)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "negrasRir\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "negrasRir\n";
 						return true;
 					}
 					c++;
 				}
 				c = 1;
 				// se puede mover
-				if (T[i - c][j - c] == blank && i - c >= 0 && j - c >= 0)
+				if (T[i - c][j - c] == blank && i - c >= 0 &&
+					j - c >= 0)
 				{
 					// cout << "en: " << i << j << endl;
 					// cout << "negrasRsi\n";
 					return true;
 				}
 				// diagonal superior izquierda
-				for (int a = j; a < absoluteValue(j - 7) && i - c >= 0 && j - c >= 0; a++)
+				for (int a = j; a < absoluteValue(j - 7) &&
+								i - c >= 0 && j - c >= 0;
+					 a++)
 				{
 					// hasta ahi no se puede mover
-					if (T[i - c][j - c] == Black || T[i - c][j - c] == crownB)
+					if (T[i - c][j - c] == Black ||
+						T[i - c][j - c] == crownB)
 					{
 						break;
 					}
-					if ((T[i - c][j - c] == white || T[i - c][j - c] == crownW) && T[i - (c + 1)][j - (c + 1)] == blank && i - (c + 1) >= 0 && j - (c + 1) >= 0)
+					if ((T[i - c][j - c] == white ||
+						 T[i - c][j - c] == crownW) &&
+						T[i - (c + 1)][j - (c + 1)] ==
+							blank &&
+						i - (c + 1) >= 0 &&
+						j - (c + 1) >= 0)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "negrasRsi\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "negrasRsi\n";
 						return true;
 					}
 					c++;
 				}
 				c = 1;
 				// se puede mover
-				if (T[i + c][j - c] == blank && i + c < 8 && j - c >= 0)
+				if (T[i + c][j - c] == blank && i + c < 8 &&
+					j - c >= 0)
 				{
 					// cout << "en: " << i << j << endl;
 					// cout << "negrasRii\n";
 					return true;
 				}
 				// diagonal inferior izquierda
-				for (int a = j; a < absoluteValue(j - 7) && i + c < 8 && j - c >= 0; a++)
+				for (int a = j; a < absoluteValue(j - 7) &&
+								i + c < 8 && j - c >= 0;
+					 a++)
 				{
 					// hasta ahi no se puede mover
-					if (T[i + c][j - c] == Black || T[i + c][j - c] == crownB)
+					if (T[i + c][j - c] == Black ||
+						T[i + c][j - c] == crownB)
 					{
 						break;
 					}
-					if ((T[i + c][j - c] == white || T[i + c][j - c] == crownW) && T[i + (c + 1)][j - (c + 1)] == blank && i + (c + 1) < 8 && j - (c + 1) >= 0)
+					if ((T[i + c][j - c] == white ||
+						 T[i + c][j - c] == crownW) &&
+						T[i + (c + 1)][j - (c + 1)] ==
+							blank &&
+						i + (c + 1) < 8 &&
+						j - (c + 1) >= 0)
 					{
-						// 	cout << "en: " << i << j << endl;
-						// 	cout << "negrasRii\n";
+						// 	cout << "en: " << i << j
+						// << endl; 	cout <<
+						// "negrasRii\n";
 						return true;
 					}
 					c++;
@@ -2257,7 +3078,6 @@ bool Table::canMoveBlack()
 // ¿ se pueden mover la fichas blancas?
 bool Table::canMoveWhite()
 {
-
 	for (int i = 0; i < 8; i++)
 	{
 		for (int j = 0; j < 8; j++)
@@ -2268,21 +3088,29 @@ bool Table::canMoveWhite()
 				// diagonal inferior izquierda
 				if (i + 1 < 8 && j - 1 >= 0)
 				{
-					if ((T[i + 1][j - 1] == blank) || ((i + 2 < 8 && j - 2 >= 0 && T[i + 1][j - 1] == Black || T[i + 1][j - 1] == crownB) && T[i + 2][j - 2] == blank))
+					if ((T[i + 1][j - 1] == blank) ||
+						((i + 2 < 8 && j - 2 >= 0 &&
+							  T[i + 1][j - 1] == Black ||
+						  T[i + 1][j - 1] == crownB) &&
+						 T[i + 2][j - 2] == blank))
 					{
-						// cout << "en1: " << i << j << endl;
-						// cout << "blancas\n";
+						// cout << "en1: " << i << j <<
+						// endl; cout << "blancas\n";
 						return true;
 					}
 				}
 
-				//diagonal superior derecha
+				// diagonal superior derecha
 				else if (i - 1 >= 0 && j - 1 >= 0)
 				{
-					if ((T[i - 1][j - 1] == blank) || ((i - 2 >= 0 && j - 2 >= 0 && T[i - 1][j - 1] == Black || T[i - 1][j - 1] == crownB) && T[i - 2][j - 2] == blank))
+					if ((T[i - 1][j - 1] == blank) ||
+						((i - 2 >= 0 && j - 2 >= 0 &&
+							  T[i - 1][j - 1] == Black ||
+						  T[i - 1][j - 1] == crownB) &&
+						 T[i - 2][j - 2] == blank))
 					{
-						// cout << "en2: " << i << j << endl;
-						// cout << "blancas\n";
+						// cout << "en2: " << i << j <<
+						// endl; cout << "blancas\n";
 						return true;
 					}
 				}
@@ -2291,96 +3119,132 @@ bool Table::canMoveWhite()
 			{
 				int c = 1;
 				// se puede mover
-				if (T[i - c][j + c] == blank && i - c >= 0 && j + c < 8)
+				if (T[i - c][j + c] == blank && i - c >= 0 &&
+					j + c < 8)
 				{
 					// cout << "en: " << i << j << endl;
 					// cout << "blancasRsr\n";
 					return true;
 				}
 				// diagonal superior derecha
-				for (int a = j; a < absoluteValue(j - 7) && i - c >= 0 && j + c < 8; a++)
+				for (int a = j; a < absoluteValue(j - 7) &&
+								i - c >= 0 && j + c < 8;
+					 a++)
 				{
 					// hasta ahi no se puede mover
-					if (T[i - c][j + c] == white || T[i - c][j + c] == crownW)
+					if (T[i - c][j + c] == white ||
+						T[i - c][j + c] == crownW)
 					{
 						break;
 					}
-					if ((T[i - c][j + c] == Black || T[i - c][j + c] == crownB) && T[i - (c + 1)][j + (c + 1)] == blank && i - (c + 1) >= 0 && j + (c + 1) < 8)
+					if ((T[i - c][j + c] == Black ||
+						 T[i - c][j + c] == crownB) &&
+						T[i - (c + 1)][j + (c + 1)] ==
+							blank &&
+						i - (c + 1) >= 0 &&
+						j + (c + 1) < 8)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "blancasRsr\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "blancasRsr\n";
 						return true;
 					}
 					c++;
 				}
 				c = 1;
 				// se puede mover
-				if (T[i + c][j + c] == blank && i + c < 8 && j + c < 8)
+				if (T[i + c][j + c] == blank && i + c < 8 &&
+					j + c < 8)
 				{
 					// cout << "en: " << i << j << endl;
 					// cout << "blancasRir\n";
 					return true;
 				}
 				// diagonal inferior derecha
-				for (int a = j; a < absoluteValue(j - 7) && i + c < 8 && j + c < 8; a++)
+				for (int a = j; a < absoluteValue(j - 7) &&
+								i + c < 8 && j + c < 8;
+					 a++)
 				{
 					// hasta ahi no se puede mover
-					if (T[i + c][j + c] == white || T[i + c][j + c] == crownW)
+					if (T[i + c][j + c] == white ||
+						T[i + c][j + c] == crownW)
 					{
 						break;
 					}
-					if ((T[i + c][j + c] == Black || T[i + c][j + c] == crownB) && T[i + (c + 1)][j + (c + 1)] == blank && i + (c + 1) < 8 && j + (c + 1) < 8)
+					if ((T[i + c][j + c] == Black ||
+						 T[i + c][j + c] == crownB) &&
+						T[i + (c + 1)][j + (c + 1)] ==
+							blank &&
+						i + (c + 1) < 8 &&
+						j + (c + 1) < 8)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "blancasRif\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "blancasRif\n";
 						return true;
 					}
 					c++;
 				}
 				c = 1;
 				// se puede mover
-				if (T[i - c][j - c] == blank && i - c >= 0 && j - c >= 0)
+				if (T[i - c][j - c] == blank && i - c >= 0 &&
+					j - c >= 0)
 				{
 					// cout << "en: " << i << j << endl;
 					// cout << "blancasRsi\n";
 					return true;
 				}
 				// diagonal superior izquierda
-				for (int a = j; a < absoluteValue(j - 7) && i - c >= 0 && j - c >= 0; a++)
+				for (int a = j; a < absoluteValue(j - 7) &&
+								i - c >= 0 && j - c >= 0;
+					 a++)
 				{
 					// hasta ahi no se puede mover
-					if (T[i - c][j - c] == white || T[i - c][j - c] == crownW)
+					if (T[i - c][j - c] == white ||
+						T[i - c][j - c] == crownW)
 					{
 						break;
 					}
-					if ((T[i - c][j - c] == Black || T[i - c][j - c] == crownB) && T[i - (c + 1)][j - (c + 1)] == blank && i - (c + 1) >= 0 && j - (c + 1) >= 0)
+					if ((T[i - c][j - c] == Black ||
+						 T[i - c][j - c] == crownB) &&
+						T[i - (c + 1)][j - (c + 1)] ==
+							blank &&
+						i - (c + 1) >= 0 &&
+						j - (c + 1) >= 0)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "blancasRsi\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "blancasRsi\n";
 						return true;
 					}
 					c++;
 				}
 				c = 1;
 				// se puede mover
-				if (T[i + c][j - c] == blank && i + c < 8 && j - c >= 0)
+				if (T[i + c][j - c] == blank && i + c < 8 &&
+					j - c >= 0)
 				{
 					// cout << "en: " << i << j << endl;
 					// cout << "blancasRii\n";
 					return true;
 				}
 				// diagonal inferior izquierda
-				for (int a = j; a < absoluteValue(j - 7) && i + c < 8 && j - c >= 0; a++)
+				for (int a = j; a < absoluteValue(j - 7) &&
+								i + c < 8 && j - c >= 0;
+					 a++)
 				{
 					// hasta ahi no se puede mover
-					if (T[i + c][j - c] == white || T[i + c][j - c] == crownW)
+					if (T[i + c][j - c] == white ||
+						T[i + c][j - c] == crownW)
 					{
 						break;
 					}
-					if ((T[i + c][j - c] == Black || T[i + c][j - c] == crownB) && T[i + (c + 1)][j - (c + 1)] == blank && i + (c + 1) < 8 && j - (c + 1) >= 0)
+					if ((T[i + c][j - c] == Black ||
+						 T[i + c][j - c] == crownB) &&
+						T[i + (c + 1)][j - (c + 1)] ==
+							blank &&
+						i + (c + 1) < 8 &&
+						j - (c + 1) >= 0)
 					{
-						// cout << "en: " << i << j << endl;
-						// cout << "blancasRii\n";
+						// cout << "en: " << i << j <<
+						// endl; cout << "blancasRii\n";
 						return true;
 					}
 					c++;
@@ -2397,7 +3261,7 @@ void Table::endOfGame()
 	if (tiee)
 	{
 		cout << isATie;
-		sleep(2);
+		dormir(2);
 	}
 
 	else if (t1 > timeOf)
@@ -2406,17 +3270,17 @@ void Table::endOfGame()
 		if (blacks == whites)
 		{
 			cout << OrdinaryTie;
-			sleep(2);
+			dormir(2);
 		}
 		else if (blacks > whites)
 		{
 			cout << blacksWin;
-			sleep(2);
+			dormir(2);
 		}
 		else
 		{
 			cout << whitesWin;
-			sleep(2);
+			dormir(2);
 		}
 	}
 
@@ -2426,17 +3290,17 @@ void Table::endOfGame()
 		if (blacks == whites)
 		{
 			cout << OrdinaryTie;
-			sleep(2);
+			dormir(2);
 		}
 		else if (blacks > whites)
 		{
 			cout << blacksWin;
-			sleep(2);
+			dormir(2);
 		}
 		else
 		{
 			cout << whitesWin;
-			sleep(2);
+			dormir(2);
 		}
 	}
 
@@ -2446,28 +3310,28 @@ void Table::endOfGame()
 		if (blacks == whites)
 		{
 			cout << OrdinaryTie;
-			sleep(2);
+			dormir(2);
 		}
 		else if (blacks > whites)
 		{
 			cout << blacksWin;
-			sleep(2);
+			dormir(2);
 		}
 		else
 		{
 			cout << whitesWin;
-			sleep(2);
+			dormir(2);
 		}
 	}
 	else if (!canMoveWhite())
 	{
 		cout << cantMoveWhite;
-		sleep(2);
+		dormir(2);
 	}
 	else if (!canMoveBlack())
 	{
 		cout << cantMoveBlack;
-		sleep(2);
+		dormir(2);
 	}
 	restore();
 }
@@ -2486,9 +3350,9 @@ void Table::restore()
 	int timeOf = (600);
 
 	// implementacion de cronometro
-	time_t t0, t1 = 0;
+	time_t t0 = 0, t1 = 0;
 
-	//horas default
+	// horas default
 	hours = 0;
 
 	// minutos default
@@ -2512,7 +3376,7 @@ void Table::restore()
 	// contador de fichas blancas
 	whites = 12;
 
-	//contador de fichas negras
+	// contador de fichas negras
 	blacks = 12;
 
 	// tiempo para moverse
@@ -2528,14 +3392,18 @@ void Table::play()
 	// hora de inicio
 	t0 = time(NULL);
 	// el juego continua mientras:
-	// puedan moverse fichas, no se acabe el tiempo, niguna ficha llegue a cero, pueda mover el otro player
-	while (ICanFollow() && t1 < timeOf && blacks > 0 && whites > 0 && movements > 0 && !tiee && tagWhite && tagBlack)
+	// puedan moverse fichas, no se acabe el tiempo, niguna ficha llegue a
+	// cero, pueda mover el otro player
+	while (ICanFollow() && t1 < timeOf && blacks > 0 && whites > 0 &&
+		   movements > 0 && !tiee && tagWhite && tagBlack)
 	{
-		// si antes de su turno el jugador no puede mover, perdera al finalizar la ronda.
+		// si antes de su turno el jugador no puede mover, perdera al
+		// finalizar la ronda.
 		tagWhite = canMoveWhite();
 		whiteTurn();
 
-		// si antes de su turno el jugador no puede mover, perdera al finalizar la ronda.
+		// si antes de su turno el jugador no puede mover, perdera al
+		// finalizar la ronda.
 		tagBlack = canMoveBlack();
 		blackTurn();
 

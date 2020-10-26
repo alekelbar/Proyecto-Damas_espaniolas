@@ -1,47 +1,54 @@
+#include <ctype.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <cctype>
 #include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <fstream>
 #include <iostream>
 #include <sstream>
-#include <stdlib.h>
-#include <stdio.h>
 #include <string>
-#include <ctype.h>
-#include <ctime>
-#include <cctype>
-#include <cstdlib>
-#include <fstream>
-#include <unistd.h>
+
 using namespace std;
 
 // macros para limpiar pantalla
 #ifdef __linux__
+// si se usa linux
 #define clean "clear"
+#include <unistd.h>
+#define dormir(n) sleep(n);
+// si se usa windows
 #elif _WIN32
 #define clean "cls"
+#include <Windows.h>
+#define dormir(n) Sleep(n);
 #endif
-//funcion valor absoluto
+
+// funcion valor absoluto
 int absoluteValue(int x)
 {
-    if (x == 0)
-        return 0;
+	if (x == 0)
+		return 0;
 
-    else if (x > 0)
-        return x;
-    else
-        return x * (-1);
+	else if (x > 0)
+		return x;
+	else
+		return x * (-1);
 }
 
 // TODO; bug perron! dar una pequeña pausa
 void myPause()
 {
-    char c = 'a';
-    while (c != 'c')
-    {
-        // cin.clear();
-        cin.ignore(256, '\n');
-        cout << endl;
-        cout << "Inserte una \"c\" para continuar (*-^) -- >";
-        c = getchar();
-    }
+	char c = 'a';
+	while (c != 'c')
+	{
+		// cin.clear();
+		cin.ignore(256, '\n');
+		cout << endl;
+		cout << "Inserte una \"c\" para continuar (*-^) -- >";
+		c = getchar();
+	}
 }
 
 // propiedades del tablero
@@ -51,389 +58,395 @@ typedef string TableroVisual[8][8];
 class Table
 {
 private:
-    // configuracion
+	// configuracion
 
-    // empate
-    bool tiee;
+	// empate
+	bool tiee;
 
-    // tiempo restante de juego en segundos
-    int timeOf = (600);
+	// tiempo restante de juego en segundos
+	int timeOf = (600);
 
-    // implementacion de cronometro
-    time_t t0, t1 = 0;
+	// implementacion de cronometro
+	time_t t0, t1 = 0;
 
-    //horas default
-    int hours = 0;
+	// horas default
+	int hours = 0;
 
-    // minutos default
-    int minutes = 10;
+	// minutos default
+	int minutes = 10;
 
-    // segundos default
-    int seconds = 0;
+	// segundos default
+	int seconds = 0;
 
-    // auxiliare temporales
-    int hAux, mAux, sAux;
+	// auxiliare temporales
+	int hAux, mAux, sAux;
 
-    // cuantos movimientos pueden realizarse default
-    int movements = 20;
+	// cuantos movimientos pueden realizarse default
+	int movements = 20;
 
-    // el jugador usa ¿blancas o negras?
-    int jugadorPlayWith; // 0|1
+	// modo con reglas
+	bool hardmode = false;
 
-    // el juego sigue?
-    int playing = 1;
+	// si existe un ficha chocando al movimiento debemos saberlo
+	bool ficha = false;
 
-    // modo con reglas
-    bool hardmode = false;
+	// multijugador
+	bool multiplayer = false;
 
-    // si existe un ficha chocando al movimiento debemos saberlo
-    bool ficha = false;
+	// bandera de guardado
+	bool bandSave;
 
-    // multijugador
-    bool multiplayer = false;
+	// contador de fichas blancas
+	int whites = 12;
 
-    // bandera de guardado
-    bool bandSave;
+	// contador de fichas negras
+	int blacks = 12;
 
-    // contador de fichas blancas
-    int whites = 12;
+	// tiempo para moverse
+	int timeToMovement = 15;
 
-    //contador de fichas negras
-    int blacks = 12;
+	// objeto de lectura
+	ifstream rea;
 
-    // tiempo para moverse
-    int timeToMovement = 15;
+	// objeto de escritura
+	ofstream wri;
 
-    // objeto de lectura
-    ifstream rea;
+	// el nombre del jugador
+	string playerName = " ";
 
-    // objeto de escritura
-    ofstream wri;
+	// restriccion de movimiento
+	string restrictedMovement = "Mueve: ";
 
-    // el nombre del jugador
-    string playerName = " ";
+	// restriccion obligatoria
+	string restrictedMovementObligatory =
+		"Es su ultima oportunidad antes de soplar su ficha.\n";
 
-    // restriccion de movimiento
-    string restrictedMovement = "Mueve: ";
+	// turno perdido
+	string lossTurn = "** TURNO PERDIDO ** \n";
 
-    // restriccion obligatoria
-    string restrictedMovementObligatory = "Es su ultima oportunidad antes de soplar su ficha.\n";
+	// la ficha negra que movera
+	string myBlack = "TURNO NEGRO: \nHORIZONTAL DE SU FICHA $=$=$> ";
 
-    // turno perdido
-    string lossTurn = "** TURNO PERDIDO ** \n";
+	// la ficha negra que movera
+	string myBlack2 = "TURNO NEGRO: \nVERTICAL DE SU FICHA $=$=$> ";
 
-    // la ficha negra que movera
-    string myBlack = "TURNO NEGRO: \nHORIZONTAL DE SU FICHA $=$=$> ";
+	// ficha blanca que movera
+	string myWhite = "TURNO BLANCO: \nHORIZONTAL DE SU FICHA $=$=$> ";
 
-    // la ficha negra que movera
-    string myBlack2 = "TURNO NEGRO: \nVERTICAL DE SU FICHA $=$=$> ";
+	// ficha blanca que movera
+	string myWhite2 = "TURNO BLANCO: \nVERTICAL DE SU FICHA $=$=$> ";
 
-    // ficha blanca que movera
-    string myWhite = "TURNO BLANCO: \nHORIZONTAL DE SU FICHA $=$=$> ";
+	// donde se movera
+	string objetive = "HORIZONTAL DE SU ESPACIO OBJETIVO $=$=$> ";
 
-    // ficha blanca que movera
-    string myWhite2 = "TURNO BLANCO: \nVERTICAL DE SU FICHA $=$=$> ";
+	// donde se movera
+	string objetive2 = "VERTICAL DE SU ESPACIO OBJETIVO $=$=$> ";
 
-    // donde se movera
-    string objetive = "HORIZONTAL DE SU ESPACIO OBJETIVO $=$=$> ";
+	// coordenada fuera del tablero.
+	string outLimits = "ESA FICHA ESTA FUERA DEL TABLERO !! U.U \n";
 
-    // donde se movera
-    string objetive2 = "VERTICAL DE SU ESPACIO OBJETIVO $=$=$> ";
+	// movimiento invalido
+	string badMovement =
+		" PERO!! SI, ESO ES UN MOVIMIENTO INVALIDO!( >.<)'\n";
 
-    // coordenada fuera del tablero.
-    string outLimits = "ESA FICHA ESTA FUERA DEL TABLERO !! U.U \n";
+	// le indica al jugador que puede mover otra ficha
+	string anotherPlay = "HEY! PUEDE CONTINUAR COMIENDO (-.-') \n";
 
-    // movimiento invalido
-    string badMovement = " PERO!! SI, ESO ES UN MOVIMIENTO INVALIDO!( >.<)'\n";
+	// titulos de stadistics.
+	string data = "+-+- ^_^ Damas Espaniolas ^_^ -+-+-\n\n";
 
-    // le indica al jugador que puede mover otra ficha
-    string anotherPlay = "HEY! PUEDE CONTINUAR COMIENDO (-.-') \n";
+	// texto de "presione 'x' para continuar"
+	string contin = "TOCA ENTER PARA CONTINUAR !! (^_^)\n";
 
-    //titulos de stadistics.
-    string data = "+-+- ^_^ Damas Espaniolas ^_^ -+-+-\n\n";
+	// sistema de intercambio y marcado
+	string aux1, aux2;
 
-    // texto de "presione 'x' para continuar"
-    string contin = "TOCA ENTER PARA CONTINUAR !! (^_^)\n";
+	// mensaje para una ficha equivocada
+	string wrongTab = " UY! >.<! pero, SI ESA NO ES TU FICHA! ";
 
-    // sistema de intercambio y marcado
-    string aux1, aux2;
+	// mensaje de Hardmode
+	string hardmodeMsj =
+		"MODO CON REGLAS: **activo** ¿lo usara? (1/0) -- > ";
 
-    //mensaje para una ficha equivocada
-    string wrongTab = " UY! >.<! pero, SI ESA NO ES TU FICHA! ";
+	// mensaje para cuando no se usa el automatico en hard-mode
+	string penalty = "Hemos soplado su ficha (>.<)\n";
 
-    //mensaje de Hardmode
-    string hardmodeMsj = "MODO CON REGLAS: **activo** ¿lo usara? (1/0) -- > ";
+	// mensaje de desea comer otra
+	string wantToEatAnother = "¿Desea comer otra? (1/0) ---> ";
 
-    //mensaje para cuando no se usa el automatico en hard-mode
-    string penalty = "Hemos soplado su ficha (>.<)\n";
+	// mensaje cuando las alternativas a comer son identicas
+	string identicalOptions =
+		"TUS OPCIONES SON IDENTICAS, vamos!! Elige tu :D \n";
 
-    // mensaje de desea comer otra
-    string wantToEatAnother = "¿Desea comer otra? (1/0) ---> ";
+	// mensaje de existe una ficha en medio!
+	string tabinthemiddle = "Oye, Oye! hay fichas en el camino\n";
 
-    //mensaje cuando las alternativas a comer son identicas
-    string identicalOptions = "TUS OPCIONES SON IDENTICAS, vamos!! Elige tu :D \n";
+	// mensaje para un obstaculo
+	string blocking =
+		"Oye, Oye! hay fichas en el camino Mirala, esta ahi -> ";
 
-    // mensaje de existe una ficha en medio!
-    string tabinthemiddle = "Oye, Oye! hay fichas en el camino\n";
+	// error al configurar
+	string configureError =
+		"OYE! eso no es valido! vamos, intentalo de nuevo\n";
 
-    //mensaje para un obstaculo
-    string blocking = "Oye, Oye! hay fichas en el camino Mirala, esta ahi -> ";
+	// el CPU  esta moviendo
+	string cpuMovement = "\n El CPU esta moviendo en: ";
 
-    // error al configurar
-    string configureError = "OYE! eso no es valido! vamos, intentalo de nuevo\n";
+	// con lo que juega el cpu
+	string cpu;
 
-    // el CPU  esta moviendo
-    string cpuMovement = "\n El CPU esta moviendo en: ";
+	// nombre del segundo jugador
+	string playerName2 = "";
 
-    //con lo que juega el cpu
-    string cpu;
-    // TODO: cambiar
+	// opciones identicas jugando con negras
+	string youDecide = "superior(1) o inferior(2) : ";
 
-    // nombre del segundo jugador
-    string playerName2 = "";
+	// error de datos
+	string coorError =
+		"\nESE DATO ES INVALIDO (O.O) El tiempo corre amiguito!! \n";
 
-    // opciones identicas jugando con negras
-    string youDecide = "superior(1) o inferior(2) : ";
+	// se acordo un empate manual
+	string isATie = "\(^-^)/ se acordo un empate manual!\n";
 
-    // error de datos
-    string coorError = "\nESE DATO ES INVALIDO (O.O) El tiempo corre amiguito!! \n";
+	// se acabo el tiempo
+	string timeEnd = "SE ACABO EL TIEMPO! U.U!\n";
 
-    // se acordo un empate manual
-    string isATie = "\(^-^)/ se acordo un empate manual!\n";
+	// empate ordinario
+	string OrdinaryTie = "Es un empate! 7.7 !\n";
 
-    // se acabo el tiempo
-    string timeEnd = "SE ACABO EL TIEMPO! U.U!\n";
+	// fichas blancas ganan
+	string whitesWin = "FICHAS BLANCAS GANAN!! ;D\n";
 
-    // empate ordinario
-    string OrdinaryTie = "Es un empate! 7.7 !\n";
+	// fichas negras ganan
+	string blacksWin = "FICHAS NEGRAS GANAN!! ;D\n";
 
-    // fichas blancas ganan
-    string whitesWin = "FICHAS BLANCAS GANAN!! ;D\n";
+	// imposible seguir moviendo fichas
+	string imposibleMove = "Ya no se puede seguir *-*\n";
 
-    // fichas negras ganan
-    string blacksWin = "FICHAS NEGRAS GANAN!! ;D\n";
+	// se acabaron los movimientos
+	string noMoreMovements = "Se agotaron los movimientos *-^\n";
 
-    // imposible seguir moviendo fichas
-    string imposibleMove = "Ya no se puede seguir *-*\n";
+	// el tiempo se agoto
+	string timeIsUp = "el tiempo se agoto, pierdes turno\n";
 
-    // se acabaron los movimientos
-    string noMoreMovements = "Se agotaron los movimientos *-^\n";
+	// no pueden mover blancas
+	string cantMoveWhite =
+		"Las blancas no pueden mover, FICHAS negras ganan! \n";
 
-    // el tiempo se agoto
-    string timeIsUp = "el tiempo se agoto, pierdes turno\n";
+	// no pueden mover las negras
+	string cantMoveBlack =
+		"Las negras no pueden mover, FICHAS blancas ganan! \n";
 
-    // no pueden mover blancas
-    string cantMoveWhite = "Las blancas no pueden mover, FICHAS negras ganan! \n";
+	// note: juegue con esto!
 
-    // no pueden mover las negras
-    string cantMoveBlack = "Las negras no pueden mover, FICHAS blancas ganan! \n";
+	// fichas
+	string white = "( B )";
+	string Black = "( N )";
+	string blank = "( ˙ )";
+	string crownW = "(#B#)";
+	string crownB = "($N$)";
 
-    // note: juegue con esto!
+	// tablero de juego
+	Tablero T = {{Black, blank, Black, blank, blank, blank, white, blank},
+				 {blank, Black, blank, blank, blank, white, blank, white},
+				 {Black, blank, Black, blank, blank, blank, white, blank},
+				 {blank, Black, blank, blank, blank, white, blank, white},
+				 {Black, blank, Black, blank, blank, blank, white, blank},
+				 {blank, Black, blank, blank, blank, white, blank, white},
+				 {Black, blank, Black, blank, blank, blank, white, blank},
+				 {blank, Black, blank, blank, blank, white, blank, white}};
+	// coordenadas (horizontal(filas) y verticales(columnas))
 
-    // fichas
-    string white = "[ B ]";
-    string Black = "[ N ]";
-    string blank = "( ˙ )";
-    string crownW = "[#B#]";
-    string crownB = "[$N$]";
+	Tablero Aux = {
+		{Black, blank, Black, blank, blank, blank, white, blank},
+		{blank, Black, blank, blank, blank, white, blank, white},
+		{Black, blank, Black, blank, blank, blank, white, blank},
+		{blank, Black, blank, blank, blank, white, blank, white},
+		{Black, blank, Black, blank, blank, blank, white, blank},
+		{blank, Black, blank, blank, blank, white, blank, white},
+		{Black, blank, Black, blank, blank, blank, white, blank},
+		{blank, Black, blank, blank, blank, white, blank, white}};
 
-    // tablero de juego
-    Tablero T = {{Black, blank, Black, blank, blank, blank, white, blank},
-                 {blank, Black, blank, blank, blank, white, blank, white},
-                 {Black, blank, Black, blank, blank, blank, white, blank},
-                 {blank, Black, blank, blank, blank, white, blank, white},
-                 {Black, blank, Black, blank, blank, blank, white, blank},
-                 {blank, Black, blank, blank, blank, white, blank, white},
-                 {Black, blank, Black, blank, blank, blank, white, blank},
-                 {blank, Black, blank, blank, blank, white, blank, white}};
+	int filas1, colums1, filas2, colums2, filaIa, columIa;
 
-    // coordenadas (horizontal(filas) y verticales(columnas))
-
-    Tablero Aux = {{Black, blank, Black, blank, blank, blank, white, blank},
-                   {blank, Black, blank, blank, blank, white, blank, white},
-                   {Black, blank, Black, blank, blank, blank, white, blank},
-                   {blank, Black, blank, blank, blank, white, blank, white},
-                   {Black, blank, Black, blank, blank, blank, white, blank},
-                   {blank, Black, blank, blank, blank, white, blank, white},
-                   {Black, blank, Black, blank, blank, blank, white, blank},
-                   {blank, Black, blank, blank, blank, white, blank, white}};
-
-    int filas1, colums1, filas2, colums2, filaIa, columIa;
-
-    // logica del juego
+	// logica del juego
 public:
-    //generar el fichero
-    Table()
-    {
-        wri.open("guardado.txt", ios::out);
-        wri.close();
-    }
+	// generar el fichero
+	Table()
+	{
+		wri.open("guardado.txt", ios::out | ios::app);
+		wri.close();
+	}
 
-    // mostrar los tableros de juego
-    void toShow();
+	// mostrar los tableros de juego
+	void toShow();
 
-    // false menu
-    void falseMenu();
+	// false menu
+	void falseMenu();
 
-    // revisa constantemente si existe una dama y en caso de exitir la corona
-    void toCrown();
+	// revisa constantemente si existe una dama y en caso de exitir la
+	// corona
+	void toCrown();
 
-    // logica de movimiento de fichas negras
-    bool blackMovement();
+	// logica de movimiento de fichas negras
+	bool blackMovement();
 
-    // administra el turno negra.
-    void blackTurn();
+	// administra el turno negra.
+	void blackTurn();
 
-    // logica de movimiento de fichas blancas
-    bool whiteMovement();
+	// logica de movimiento de fichas blancas
+	bool whiteMovement();
 
-    // administra el turno de fichas blancas
-    void whiteTurn();
+	// administra el turno de fichas blancas
+	void whiteTurn();
 
-    // logica del movimiento de una reina negra
-    bool crownBMovement();
+	// logica del movimiento de una reina negra
+	bool crownBMovement();
 
-    // logica del movimiento de una reina blanca
-    bool crownWMovement();
+	// logica del movimiento de una reina blanca
+	bool crownWMovement();
 
-    // valida los limites del arreglo
-    bool validateLimitsX();
+	// valida los limites del arreglo
+	bool validateLimitsX();
 
-    // valida los limites de la coordenada X
-    bool validateLimitsY();
+	// valida los limites de la coordenada X
+	bool validateLimitsY();
 
-    // se encarga de comer fichas negras y si se puede comer otra repetir
-    void canEatBlacks();
+	// se encarga de comer fichas negras y si se puede comer otra repetir
+	void canEatBlacks();
 
-    // se encarga de el movimiento automatico de las fichas blancas
-    bool AutomaticPlayWhite();
+	// se encarga de el movimiento automatico de las fichas blancas
+	bool AutomaticPlayWhite();
 
-    // se encarga de comer fichas blancas y si es posible comer otra repetir
-    void canEatWhites();
+	// se encarga de comer fichas blancas y si es posible comer otra repetir
+	void canEatWhites();
 
-    // juego automatico en blancas
-    bool AutomaticPlayBlack();
+	// juego automatico en blancas
+	bool AutomaticPlayBlack();
 
-    // se encarga de comer fichas blancas y de administrar una posible repeticion de turno
-    void cronwCanEatWhites();
+	// se encarga de comer fichas blancas y de administrar una posible
+	// repeticion de turno
+	void cronwCanEatWhites();
 
-    // se encarga de comer fichas blancas y de administrar una posible repeticion de turno
-    void cronwCanEatBlacks();
+	// se encarga de comer fichas blancas y de administrar una posible
+	// repeticion de turno
+	void cronwCanEatBlacks();
 
-    // se encarga de el movimiento automatica de las reinas negras
-    void AutomaticPlayCronwB();
+	// se encarga de el movimiento automatica de las reinas negras
+	void AutomaticPlayCronwB();
 
-    // limpia la consola, informa de la perdida de turno, y requiere confirmacion para continuar
-    void MessageIsABadMovement();
+	// limpia la consola, informa de la perdida de turno, y requiere
+	// confirmacion para continuar
+	void MessageIsABadMovement();
 
-    // informa que se esta fuera de los limites
-    void MessageIsOutLimits();
+	// informa que se esta fuera de los limites
+	void MessageIsOutLimits();
 
-    //limpiar y mostrar
-    void cleanToShow();
+	// limpiar y mostrar
+	void cleanToShow();
 
-    // mensaje para continuar
-    void MessageToContinue();
+	// mensaje para continuar
+	void MessageToContinue();
 
-    // ficha equivocada
-    void MessageWrongTab();
+	// ficha equivocada
+	void MessageWrongTab();
 
-    // mensaje de existe una ficha en medio
-    void MessageTabInTheMiddle();
+	// mensaje de existe una ficha en medio
+	void MessageTabInTheMiddle();
 
-    // mensaje para un obstaculo
-    void MessageToBlocking(int, int); // coordenadas del bloqueo
+	// mensaje para un obstaculo
+	void MessageToBlocking(int, int); // coordenadas del bloqueo
 
-    // mensaje para cuando el CPU esta moviendo blancas
-    void MessageToCpuWIsMovement();
+	// mensaje para cuando el CPU esta moviendo blancas
+	void MessageToCpuWIsMovement();
 
-    // mensaje para cuando el cpu negro mueva
-    void MessageToCpuBIsMovement();
+	// mensaje para cuando el cpu negro mueva
+	void MessageToCpuBIsMovement();
 
-    //bucle principal del juego
-    void play();
+	// bucle principal del juego
+	void play();
 
-    // movimiento automatico de las reinas negras
-    bool automaticPlayCronwBMovement();
+	// movimiento automatico de las reinas negras
+	bool automaticPlayCronwBMovement();
 
-    // movimiento automatico de las reinas blancas
-    bool automaticPlayCronwWMovement();
+	// movimiento automatico de las reinas blancas
+	bool automaticPlayCronwWMovement();
 
-    // pantalla de acerca de
-    void aboutItscreen();
+	// pantalla de acerca de
+	void aboutItscreen();
 
-    // verfica si las fichas pueden continuar
-    bool ICanFollow();
+	// verfica si las fichas pueden continuar
+	bool ICanFollow();
 
-    // tranforma el tiempo dado en horas, minutos y segundos a solo segundos
-    void ToSeconds();
+	// tranforma el tiempo dado en horas, minutos y segundos a solo segundos
+	void ToSeconds();
 
-    // transforma segundos a horas, minutos y segundos
-    void ToHours();
+	// transforma segundos a horas, minutos y segundos
+	void ToHours();
 
-    // pantalla de configuracion del juego
-    void screenConfig();
+	// pantalla de configuracion del juego
+	void screenConfig();
 
-    // seleccion de ficha
-    void tagSelecction();
+	// seleccion de ficha
+	void tagSelecction();
 
-    // menu de seleccion
-    void Menu();
+	// menu de seleccion
+	void Menu();
 
-    // limpiar y mostrar el menu
-    void cleanToShowMenu();
+	// limpiar y mostrar el menu
+	void cleanToShowMenu();
 
-    // configuracion del juego
-    void configure();
+	// configuracion del juego
+	void configure();
 
-    // validar datos
-    bool ValidateData(string);
+	// validar datos
+	bool ValidateData(string);
 
-    // movimiento de fichas negras generado por el CPU
-    bool cpuBlackMovement();
+	// movimiento de fichas negras generado por el CPU
+	bool cpuBlackMovement();
 
-    //movimiento de fichas blancas generadas por el CPU
-    bool cpuWhiteMovement();
+	// movimiento de fichas blancas generadas por el CPU
+	bool cpuWhiteMovement();
 
-    // metodo de validacion numerico embebido
-    int validateANumber(string, string);
+	// metodo de validacion numerico embebido
+	int validateANumber(string, string);
 
-    // empate y guardado!
-    void tieAndSave();
+	// empate y guardado!
+	void tieAndSave();
 
-    // guardar partda
-    void save();
+	// guardar partda
+	void save();
 
-    // ¿pueden mover las negras?
-    bool canMoveBlack();
+	// ¿pueden mover las negras?
+	bool canMoveBlack();
 
-    // ¿pueden mover las fichas blancas?
-    bool canMoveWhite();
+	// ¿pueden mover las fichas blancas?
+	bool canMoveWhite();
 
-    // restaura la partida default luego de guardar
-    void restore();
+	// restaura la partida default luego de guardar
+	void restore();
 
-    // carga la partida seleccionada
-    void chargingSave();
+	// carga la partida seleccionada
+	void chargingSave();
 
-    // cargar la partida en el tablero
-    bool validateSave(string);
+	// cargar la partida en el tablero
+	bool validateSave(string);
 
-    // muestra las partidas guardadas
-    bool seeSaveGame();
+	// muestra las partidas guardadas
+	bool seeSaveGame();
 
-    // jugar con la partida cargada
-    void playChargin();
+	// jugar con la partida cargada
+	void playChargin();
 
-    // restablecer una partida guardada
-    void restoreSave(string, bool band);
+	// restablecer una partida guardada
+	void restoreSave(string, bool band);
 
-    // restriccion de comida fichas negras
-    bool eatRestricctionBlack();
+	// restriccion de comida fichas negras
+	bool eatRestricctionBlack();
 
-    // restriccion de comida fichas blancas
-    bool eatRestricctionWhite();
+	// restriccion de comida fichas blancas
+	bool eatRestricctionWhite();
 
-    // validaciones de fin de juego
-    void endOfGame();
+	// validaciones de fin de juego
+	void endOfGame();
 };

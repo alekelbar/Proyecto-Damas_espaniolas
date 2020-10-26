@@ -28,7 +28,7 @@ void Table::cronwCanEatBlacks()
                 if (T[filas1 - c][colums1 + c] != blank)
                 {
                     MessageToBlocking((filas1 - c), (colums1 + c));
-                    sleep(2);
+                    dormir(2);
                     cleanToShow();
                     ficha = true;
                 }
@@ -54,7 +54,7 @@ void Table::cronwCanEatBlacks()
                 if (T[filas1 - c][colums1 + c] != blank)
                 {
                     MessageToBlocking((filas1 - c), (colums1 + c));
-                    sleep(2);
+                    dormir(2);
                     cleanToShow();
                     ficha = true;
                 }
@@ -83,7 +83,7 @@ void Table::cronwCanEatBlacks()
                 if (T[filas1 + c][colums1 + c] != blank)
                 {
                     MessageToBlocking((filas1 + c), (colums1 + c));
-                    sleep(2);
+                    dormir(2);
                     cleanToShow();
                     ficha = true;
                 }
@@ -109,7 +109,7 @@ void Table::cronwCanEatBlacks()
                 if (T[filas1 + c][colums1 + c] != blank)
                 {
                     MessageToBlocking((filas1 + c), (colums1 + c));
-                    sleep(2);
+                    dormir(2);
                     cleanToShow();
                     ficha = true;
                 }
@@ -138,7 +138,7 @@ void Table::cronwCanEatBlacks()
                 if (T[filas1 - c][colums1 - c] != blank)
                 {
                     MessageToBlocking((filas1 - c), (colums1 - c));
-                    sleep(2);
+                    dormir(2);
                     cleanToShow();
                     ficha = true;
                 }
@@ -164,7 +164,7 @@ void Table::cronwCanEatBlacks()
                 if (T[filas1 - c][colums1 - c] != blank)
                 {
                     MessageToBlocking((filas1 - c), (colums1 - c));
-                    sleep(2);
+                    dormir(2);
                     cleanToShow();
                     ficha = true;
                 }
@@ -193,7 +193,7 @@ void Table::cronwCanEatBlacks()
                 if (T[filas1 + c][colums1 - c] != blank)
                 {
                     MessageToBlocking((filas1 + c), (colums1 - c));
-                    sleep(2);
+                    dormir(2);
                     cleanToShow();
                     ficha = true;
                 }
@@ -219,7 +219,7 @@ void Table::cronwCanEatBlacks()
                 if (T[filas1 + c][colums1 - c] != blank)
                 {
                     MessageToBlocking((filas1 + c), (colums1 - c));
-                    sleep(2);
+                    dormir(2);
                     cleanToShow();
                     ficha = true;
                 }
@@ -367,6 +367,17 @@ bool Table::automaticPlayCronwWMovement()
     // en este punto tenemos el valor de mayor magnitud, o al menos a quien le represente en caso de haber dos iguales
     if (diagonalSuperiorDerecha != 0 || diagonalInferiorDerecha != 0 || diagonalSuperiorIzquierda != 0 || diagonalInferiorIzquierda != 0)
     {
+        if (!hardmode && cpu == "blancas")
+        {
+            int opc;
+            cout << "Puede comer otra ficha!" << endl;
+            opc = validateANumber("repite turno(0/1) --> ", configureError);
+            if (opc)
+            {
+                whiteTurn();
+            }
+            return 1;
+        }
         if (cpu != "blancas")
         {
             movements--;
@@ -583,8 +594,7 @@ void Table::canEatBlacks()
                 blacks--;
                 cleanToShow();
 
-                if (!AutomaticPlayWhite())
-                    return;
+                AutomaticPlayWhite();
             }
             // si esta bajando
         }
@@ -601,15 +611,14 @@ void Table::canEatBlacks()
                 blacks--;
                 cleanToShow();
 
-                if (!AutomaticPlayWhite())
-                    return;
+                AutomaticPlayWhite();
             }
         }
         if (!band)
         {
             movements--;
             MessageIsABadMovement();
-            sleep(2);
+            dormir(2);
             cleanToShow();
             return;
         }
@@ -625,7 +634,7 @@ void Table::canEatBlacks()
     {
         movements--;
         MessageIsABadMovement();
-        sleep(2);
+        dormir(2);
         cleanToShow();
     }
 }
@@ -646,6 +655,17 @@ bool Table::AutomaticPlayWhite()
              T[filas2 + 2][colums2 - 2] == blank))
     {
         cout << anotherPlay;
+        if (!hardmode && cpu == "negras")
+        {
+            int opc;
+            cout << "Puedes repetir turno! " << endl;
+            opc = validateANumber("repite turno(0/1) --> ", configureError);
+            if (opc)
+            {
+                whiteTurn();
+            }
+            return 1;
+        }
 
         if (hardmode || cpu == "blancas")
         {
@@ -748,7 +768,7 @@ bool Table::AutomaticPlayWhite()
                     T[filas1][colums1] = blank;
                     whites--;
                     cleanToShow();
-                    sleep(2);
+                    dormir(2);
                     return 0;
                 }
             }
@@ -859,7 +879,7 @@ bool Table::crownWMovement()
     {
         movements--;
         MessageIsABadMovement();
-        sleep(2);
+        dormir(2);
         cleanToShow();
     }
 
@@ -906,7 +926,7 @@ void Table::whiteTurn()
             catch (string e)
             {
                 cout << coorError;
-                sleep(2);
+                dormir(2);
                 cleanToShow();
             }
         }
@@ -934,7 +954,7 @@ void Table::whiteTurn()
             catch (string e)
             {
                 cout << coorError;
-                sleep(2);
+                dormir(2);
                 cleanToShow();
             }
         }
@@ -945,14 +965,24 @@ void Table::whiteTurn()
         // verificamos que este dentro del tablero
         if (validateLimitsY())
         {
-            aux1 = T[filas1][colums1];
-            T[filas1][colums1] = "[i'm]";
+            if (T[filas1][colums1] == white || T[filas1][colums1] == crownW)
+            {
+                aux1 = T[filas1][colums1];
+                T[filas1][colums1] = "[i'm]";
+            }
+            else
+            {
+                MessageWrongTab();
+                movements--;
+                dormir(2);
+                return;
+            }
         }
         // si no esta dentro del tablero
         else
         {
             MessageIsOutLimits();
-            sleep(2);
+            dormir(2);
             return;
         }
 
@@ -978,7 +1008,7 @@ void Table::whiteTurn()
             catch (string e)
             {
                 cout << coorError;
-                sleep(2);
+                dormir(2);
                 cleanToShow();
             }
         }
@@ -1004,7 +1034,7 @@ void Table::whiteTurn()
             catch (string e)
             {
                 cout << coorError;
-                sleep(2);
+                dormir(2);
                 cleanToShow();
             }
         }
@@ -1015,12 +1045,21 @@ void Table::whiteTurn()
         // verificamos limites del tablero
         if (validateLimitsX())
         {
+            if (T[filas2][colums2] != blank)
+            {
+                cout << "Su espacio objetivo no esta vacio! *-* " << endl;
+                T[filas1][colums1] = aux1;
+                movements--;
+                dormir(2);
+                return;
+            }
             // en caso de que quiera moverse donde esta
             if (filas1 == filas2 && colums1 == colums2)
             {
                 T[filas1][colums1] = aux1;
-                MessageIsABadMovement();
-                sleep(2);
+                cout << "Se esta moviendo hacia su propia ficha +_+" << endl;
+                movements--;
+                dormir(2);
                 return;
             }
             //else simbolico
@@ -1030,7 +1069,9 @@ void Table::whiteTurn()
         else
         {
             MessageIsOutLimits();
-            sleep(2);
+            T[filas1][colums1] = aux1;
+            movements--;
+            dormir(2);
             return;
         }
 
@@ -1056,19 +1097,13 @@ void Table::whiteTurn()
                 crownWMovement();
             }
             // ficha incorrecta
-            else
-            {
-                movements--;
-                MessageWrongTab();
-                sleep(2);
-            }
         }
         else
         {
             movements--;
             cleanToShow();
             cout << timeIsUp;
-            sleep(2);
+            dormir(2);
         }
     }
 }
@@ -1094,7 +1129,7 @@ bool Table::whiteMovement()
     {
         movements--;
         MessageIsABadMovement();
-        sleep(2);
+        dormir(2);
         cleanToShow();
     }
     return true;
@@ -1230,6 +1265,7 @@ bool Table::eatRestricctionWhite()
 
                 if (((i + 2 < 8 && j - 2 >= 0 && T[i + 1][j - 1] == Black || T[i + 1][j - 1] == crownB) && T[i + 2][j - 2] == blank))
                 {
+
                     // cout << "en1: " << i << j << endl;
                     // cout << "blancas\n";
                     count++;
@@ -1255,7 +1291,7 @@ bool Table::eatRestricctionWhite()
                             if ((restricted - restricted2) > timeToMovement)
                             {
                                 cout << timeIsUp;
-                                sleep(2);
+                                dormir(2);
                                 cleanToShow();
                                 movements--;
                                 return true;
@@ -1263,7 +1299,7 @@ bool Table::eatRestricctionWhite()
                             else if (count == posibles)
                             {
                                 cout << penalty;
-                                sleep(2);
+                                dormir(2);
                                 T[i][j] = blank;
                                 whites--;
                                 return true;
@@ -1276,6 +1312,18 @@ bool Table::eatRestricctionWhite()
 
                 if (((i - 2 >= 0 && j - 2 >= 0 && T[i - 1][j - 1] == Black || T[i - 1][j - 1] == crownB) && T[i - 2][j - 2] == blank))
                 {
+                    if (cpu == "blancas")
+                    {
+                        filas1 = i;
+                        colums1 = j;
+                        filas2 = i - 2;
+                        colums2 = j - 2;
+                        cleanToShow();
+                        MessageToCpuWIsMovement();
+                        whiteMovement();
+                        cleanToShow();
+                        return true;
+                    }
                     // cout << "en2: " << i << j << endl;
                     // cout << "blancas\n";
                     count++;
@@ -1301,7 +1349,7 @@ bool Table::eatRestricctionWhite()
                             if ((restricted - restricted2) > timeToMovement)
                             {
                                 cout << timeIsUp;
-                                sleep(2);
+                                dormir(2);
                                 cleanToShow();
                                 movements--;
                                 return true;
@@ -1309,7 +1357,7 @@ bool Table::eatRestricctionWhite()
                             else if (count == posibles)
                             {
                                 cout << penalty;
-                                sleep(2);
+                                dormir(2);
                                 T[i][j] = blank;
                                 whites--;
                                 return true;
@@ -1333,6 +1381,18 @@ bool Table::eatRestricctionWhite()
                     }
                     if ((T[i - c][j + c] == Black || T[i - c][j + c] == crownB) && T[i - (c + 1)][j + (c + 1)] == blank && i - (c + 1) >= 0 && j + (c + 1) < 8)
                     {
+                        if (cpu == "blanca")
+                        {
+                            filas1 = i;
+                            colums1 = j;
+                            filas2 = i - 2;
+                            colums2 = j + 2;
+                            cleanToShow();
+                            MessageToCpuWIsMovement();
+                            crownWMovement();
+                            cleanToShow();
+                            return true;
+                        }
                         // cout << "en: " << i << j << endl;
                         // cout << "blancasRsr\n";
                         count++;
@@ -1358,7 +1418,7 @@ bool Table::eatRestricctionWhite()
                                 if ((restricted - restricted2) > timeToMovement)
                                 {
                                     cout << timeIsUp;
-                                    sleep(2);
+                                    dormir(2);
                                     cleanToShow();
                                     movements--;
                                     return true;
@@ -1366,7 +1426,7 @@ bool Table::eatRestricctionWhite()
                                 else if (count == posibles)
                                 {
                                     cout << penalty;
-                                    sleep(2);
+                                    dormir(2);
                                     T[i][j] = blank;
                                     whites--;
                                     return true;
@@ -1389,6 +1449,18 @@ bool Table::eatRestricctionWhite()
                     }
                     if ((T[i + c][j + c] == Black || T[i + c][j + c] == crownB) && T[i + (c + 1)][j + (c + 1)] == blank && i + (c + 1) < 8 && j + (c + 1) < 8)
                     {
+                        if (cpu == "blanca")
+                        {
+                            filas1 = i;
+                            colums1 = j;
+                            filas2 = i + 2;
+                            colums2 = j + 2;
+                            cleanToShow();
+                            MessageToCpuWIsMovement();
+                            crownWMovement();
+                            cleanToShow();
+                            return true;
+                        }
                         // cout << "en: " << i << j << endl;
                         // cout << "blancasRif\n";
                         count++;
@@ -1414,7 +1486,7 @@ bool Table::eatRestricctionWhite()
                                 if ((restricted - restricted2) > timeToMovement)
                                 {
                                     cout << timeIsUp;
-                                    sleep(2);
+                                    dormir(2);
                                     cleanToShow();
                                     movements--;
                                     return true;
@@ -1422,7 +1494,7 @@ bool Table::eatRestricctionWhite()
                                 else if (count == posibles)
                                 {
                                     cout << penalty;
-                                    sleep(2);
+                                    dormir(2);
                                     T[i][j] = blank;
                                     whites--;
                                     return true;
@@ -1445,6 +1517,18 @@ bool Table::eatRestricctionWhite()
                     }
                     if ((T[i - c][j - c] == Black || T[i - c][j - c] == crownB) && T[i - (c + 1)][j - (c + 1)] == blank && i - (c + 1) >= 0 && j - (c + 1) >= 0)
                     {
+                        if (cpu == "blanca")
+                        {
+                            filas1 = i;
+                            colums1 = j;
+                            filas2 = i - 2;
+                            colums2 = j - 2;
+                            cleanToShow();
+                            MessageToCpuWIsMovement();
+                            crownWMovement();
+                            cleanToShow();
+                            return true;
+                        }
                         // cout << "en: " << i << j << endl;
                         // cout << "blancasRsi\n";
                         count++;
@@ -1470,7 +1554,7 @@ bool Table::eatRestricctionWhite()
                                 if ((restricted - restricted2) > timeToMovement)
                                 {
                                     cout << timeIsUp;
-                                    sleep(2);
+                                    dormir(2);
                                     cleanToShow();
                                     movements--;
                                     return true;
@@ -1478,7 +1562,7 @@ bool Table::eatRestricctionWhite()
                                 else if (count == posibles)
                                 {
                                     cout << penalty;
-                                    sleep(2);
+                                    dormir(2);
                                     T[i][j] = blank;
                                     whites--;
                                     return true;
@@ -1502,6 +1586,18 @@ bool Table::eatRestricctionWhite()
                     }
                     if ((T[i + c][j - c] == Black || T[i + c][j - c] == crownB) && T[i + (c + 1)][j - (c + 1)] == blank && i + (c + 1) < 8 && j - (c + 1) >= 0)
                     {
+                        if (cpu == "blanca")
+                        {
+                            filas1 = i;
+                            colums1 = j;
+                            filas2 = i + 2;
+                            colums2 = j - 2;
+                            cleanToShow();
+                            MessageToCpuWIsMovement();
+                            crownWMovement();
+                            cleanToShow();
+                            return true;
+                        }
                         // cout << "en: " << i << j << endl;
                         // cout << "blancasRii\n";
                         count++;
@@ -1527,7 +1623,7 @@ bool Table::eatRestricctionWhite()
                                 if ((restricted - restricted2) > timeToMovement)
                                 {
                                     cout << timeIsUp;
-                                    sleep(2);
+                                    dormir(2);
                                     cleanToShow();
                                     movements--;
                                     return true;
@@ -1535,7 +1631,7 @@ bool Table::eatRestricctionWhite()
                                 else if (count == posibles)
                                 {
                                     cout << penalty;
-                                    sleep(2);
+                                    dormir(2);
                                     T[i][j] = blank;
                                     whites--;
                                     return true;
